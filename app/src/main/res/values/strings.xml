@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">scopoday</string>
+    <string name="userName">exampleName</string>
+    <string name="contactName">emptyName</string>
+</resources>
