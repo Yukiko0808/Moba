@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,18 +18,19 @@ import android.widget.Toast;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private static int SPLASCH_TIME_OUT = 3500;
-
 
     TextView contactText;
     String contactInfo;
     public static Contact transmittedContact;
+
+    Button addContactButton;
 
 
 
@@ -41,16 +43,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
        // createContactButtons();
-        Log.d(TAG, "onCreate: Started.");
         setContentView(R.layout.activity_main);
 
-        ListView contactListView = findViewById(R.id.ContantList_ID);
 
+
+        ListView contactListView = findViewById(R.id.ContantList_ID);
 
         Contact john = new Contact("John", new Date(1999,05,03));
         Contact lisa = new Contact("Lisa", new Date(2000,04,04));
         Contact markus = new Contact("Markus", new Date(1990,03,03));
         Contact lukas = new Contact("Lukas", new Date(2001,07,24));
+        Log.d("Date of John", Integer.toString(john.getBirthdate().getDate()));
+
+
 
         final ArrayList<Contact> contactArrayList = new ArrayList<>();
         contactArrayList.add(john);
@@ -74,6 +79,17 @@ public class MainActivity extends AppCompatActivity {
 
         contactText = findViewById(R.id.textView_ID);
         contactText.setText("Alle Kontakte:");
+
+
+        addContactButton = (Button) findViewById(R.id.AddContactButton_ID);
+
+
+        addContactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Neuen Kontakt hinzufügen", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //contactList.add(new Contact("Beispiel Name", new Date(2000,04,04)));
 

@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class ContactListAdapter extends ArrayAdapter<Contact> {
@@ -37,14 +39,33 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        TextView tvName = (TextView) convertView.findViewById(R.id.textView1);
-        TextView tvBirthdate = (TextView) convertView.findViewById(R.id.textView2);
+        TextView tvName = (TextView) convertView.findViewById(R.id.textViewName);
+        TextView tvBirthdate = (TextView) convertView.findViewById(R.id.textViewDate);
+        TextView tvCountdown = (TextView) convertView.findViewById(R.id.textViewDays);
 
         tvName.setText(name);
-        //tvBirthdate.setText(birthdate.toString());
-        tvBirthdate.setText(theFormat.format(birthdate));
+        tvBirthdate.setText(Integer.toString(birthdate.getDate()) + "." +Integer.toString(birthdate.getMonth()) + "." + Integer.toString(birthdate.getYear()));
+        tvCountdown.setText(Long.toString(CalculateDaysTillBD(birthdate)));
 
         return convertView;
 
     }
+
+    private long CalculateDaysTillBD (Date bd){
+
+        Calendar today = Calendar.getInstance();
+        Date futureBD = new Date(today.get(Calendar.YEAR),bd.getMonth(), bd.getDate());
+
+        if(futureBD.getMonth() <= today.get(Calendar.MONTH)){
+            futureBD.setYear(Calendar.YEAR + 1);
+        }
+
+
+        final long mills = futureBD.getTime() - today.getTimeInMillis();
+
+        final long days = (int )mills/86400000; //24*60*60*1000
+
+        return  days;
+    }
+
 }
