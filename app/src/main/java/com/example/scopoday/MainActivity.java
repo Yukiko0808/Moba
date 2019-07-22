@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button addContactButton;
 
+    public ArrayList<Contact> contactList = new ArrayList<>();
+
 
 
     //ArrayAdapter adapter;
@@ -63,16 +65,17 @@ public class MainActivity extends AppCompatActivity {
         contactArrayList.add(markus);
         contactArrayList.add(lukas);
 
+        contactList = contactArrayList;
 
-        ContactListAdapter adapter = new ContactListAdapter(this, R.layout.adapter_view_layout, contactArrayList);
+        ContactListAdapter adapter = new ContactListAdapter(this, R.layout.adapter_view_layout, contactList);
         contactListView.setAdapter(adapter);
 
 
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, ""+ contactArrayList.get(i).getName(), Toast.LENGTH_SHORT).show();
-                transmittedContact = contactArrayList.get(i);
+                Toast.makeText(MainActivity.this, ""+ contactList.get(i).getName(), Toast.LENGTH_SHORT).show();
+                transmittedContact = contactList.get(i);
                 openContactActivity();
             }
         });
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Neuen Kontakt hinzufügen", Toast.LENGTH_SHORT).show();
+                AddContact();
             }
         });
 
@@ -123,9 +127,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void AddContact() {
+        //this.contactList;
+        //Contact timo = new Contact("Timo", new Date(1995,12,9));
+        //contactList.add(timo);
+
+        //irgendwie nicht direkt ändern sondern mit sowas da ->notifyDataSetChanged()
+
+    }
+
+    /*
     public void AddContact(Contact contact){
 
-        /*
+
         boolean insertData = db.addContact(contact);
 
         if(insertData){
@@ -138,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //db.addContact(contact); //new Contact(name,Date(Jahr,monat,tag))
 
-        */
+
 
         //inserting contacts
         //db. addContact(new Contact("TestName", new Date(2000,03,03)));
@@ -146,11 +160,6 @@ public class MainActivity extends AppCompatActivity {
        // db. addContact(new Contact("TestMan",new Date(2000,05,05)));
 
 
-    }
+    }*/
 
-    private void createContactButtons(){
-        /*Button userButton = findViewById(R.id.bt_contact_ID);
-        userButton.setText(getResources().getString(R.string.userName));*/
-
-    }
 }
