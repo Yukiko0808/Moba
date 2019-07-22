@@ -3,6 +3,7 @@ package com.example.scopoday;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.Format;
@@ -26,22 +27,23 @@ public class ContactActivity extends AppCompatActivity {
         contactNameText.setText(MainActivity.transmittedContact.getName());
 
         contactBirthday = findViewById(R.id.ContactBirthday_TV_ID);
-        contactBirthday.setText(sdf.format(MainActivity.transmittedContact.getBirthdate()));
+        contactBirthday.setText(Integer.toString(MainActivity.transmittedContact.getBirthdate().getDate()) + "."
+                                + Integer.toString(MainActivity.transmittedContact.getBirthdate().getMonth()) + "."
+                                + Integer.toString(MainActivity.transmittedContact.getBirthdate().getYear())
+        );
 
         contactAge = findViewById(R.id.ContactAlter_TV_ID);
         String ageString = Integer.toString(CalculateAge());
         contactAge.setText(ageString);
 
-
-
      }
 
      private int CalculateAge(){
 
-        Date today = Calendar.getInstance().getTime();
+        Log.d("Date of Contact", Integer.toString(MainActivity.transmittedContact.getBirthdate().getYear()));
 
-        int age =  today.getYear() - MainActivity.transmittedContact.getBirthdate().getYear();
-
+        //hier müsste eigentlich noch das genaue datum berüchsichtigt werden
+         int age =  Calendar.getInstance().get(Calendar.YEAR) - MainActivity.transmittedContact.getBirthdate().getYear();
 
         return age;
      }
