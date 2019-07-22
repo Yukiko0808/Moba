@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         ListView contactListView = findViewById(R.id.ContantList_ID);
 
         Contact john = new Contact("John", new Date(1999,05,03));
-        Contact lisa = new Contact("Lisa", new Date(2000,04,04));
+        Contact lisa = new Contact("Lisa", new Date(2000,8,04));
         Contact markus = new Contact("Markus", new Date(1990,03,03));
         Contact lukas = new Contact("Lukas", new Date(2001,07,24));
         Log.d("Date of John", Integer.toString(john.getBirthdate().getDate()));
