@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +23,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private static int SPLASCH_TIME_OUT = 3500;
+
+
     TextView contactText;
     String contactInfo;
     public static Contact transmittedContact;
@@ -38,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
        // createContactButtons();
         Log.d(TAG, "onCreate: Started.");
+        setContentView(R.layout.activity_main);
+
         ListView contactListView = findViewById(R.id.ContantList_ID);
 
 
