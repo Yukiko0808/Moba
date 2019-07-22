@@ -1,6 +1,8 @@
 package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
@@ -22,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     TextView contactText;
     String contactInfo;
+    public static Contact transmittedContact;
+
+
 
     //ArrayAdapter adapter;
 
@@ -36,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         ListView contactListView = findViewById(R.id.ContantList_ID);
 
 
-        Contact john = new Contact("John", new Date(2000,05,05));
+        Contact john = new Contact("John", new Date(1999,05,03));
         Contact lisa = new Contact("Lisa", new Date(2000,04,04));
         Contact markus = new Contact("Markus", new Date(1990,03,03));
         Contact lukas = new Contact("Lukas", new Date(2001,07,24));
@@ -56,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(MainActivity.this, ""+ contactArrayList.get(i).getName(), Toast.LENGTH_SHORT).show();
+                transmittedContact = contactArrayList.get(i);
+                openContactActivity();
             }
         });
 
@@ -89,9 +96,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void openContactActivity(){
+        Intent intent = new Intent(this, ContactActivity.class);
+        startActivity(intent);
+    }
+
     public void AddContact(Contact contact){
-
-
 
         /*
         boolean insertData = db.addContact(contact);
