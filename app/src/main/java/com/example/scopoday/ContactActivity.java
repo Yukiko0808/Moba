@@ -15,7 +15,7 @@ public class ContactActivity extends AppCompatActivity {
     TextView contactNameText;
     TextView contactBirthday;
     TextView contactAge;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy hh:mm:ss");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

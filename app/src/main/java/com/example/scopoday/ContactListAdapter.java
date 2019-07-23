@@ -19,7 +19,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
     private Context mContext;
     int mResource;
     private int lastPosition = -1;
-    DateFormat theFormat = new SimpleDateFormat("dd-mm-yyyy");
+    DateFormat theFormat = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
 
     public ContactListAdapter(Context context, int resource, ArrayList<Contact> objects) {
         super(context, resource, objects);
