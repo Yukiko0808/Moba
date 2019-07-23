@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,28 +9,43 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="56dp"
         android:layout_weight="5"
-        android:orientation="horizontal">
+        android:gravity="center">
 
         <TextView
-            android:id="@+id/textView1"
-            android:layout_width="160dp"
+            android:id="@+id/textViewDays"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_weight="66.66"
+            android:background="@drawable/countdown_cricle"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="00"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="141dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_weight="66.6"
             android:gravity="center"
             android:text="TextView1"
-            android:textAlignment="center" />
+            android:textAlignment="textStart" />
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="251dp"
-            android:layout_height="29dp"
+            android:id="@+id/textViewDate"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="TextView2"
             android:textAlignment="viewEnd" />
 
 
     </LinearLayout>
+
 
 </LinearLayout>

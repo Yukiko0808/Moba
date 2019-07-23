@@ -35,8 +35,8 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        TextView tvName = (TextView) convertView.findViewById(R.id.textView1);
-        TextView tvBirthdate = (TextView) convertView.findViewById(R.id.textView2);
+        TextView tvName = (TextView) convertView.findViewById(R.id.textViewName);
+        TextView tvBirthdate = (TextView) convertView.findViewById(R.id.textViewDate);
 
         tvName.setText(name);
         tvBirthdate.setText(birthdate.toString());

@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,18 +19,22 @@ import android.widget.Toast;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    //private static int SPLASCH_TIME_OUT = 3500;
-
 
     TextView contactText;
     String contactInfo;
     public static Contact transmittedContact;
+
+    Button addContactButton;
+    ImageButton addProfileButton;
+
+    public ArrayList<Contact> contactList = new ArrayList<>();
 
 
 
@@ -41,16 +47,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
        // createContactButtons();
-        Log.d(TAG, "onCreate: Started.");
         setContentView(R.layout.activity_main);
+
+
 
         ListView contactListView = findViewById(R.id.ContantList_ID);
 
-
         Contact john = new Contact("John", new Date(1999,05,03));
-        Contact lisa = new Contact("Lisa", new Date(2000,04,04));
+        Contact lisa = new Contact("Lisa", new Date(2000,8,04));
         Contact markus = new Contact("Markus", new Date(1990,03,03));
         Contact lukas = new Contact("Lukas", new Date(2001,07,24));
+        Log.d("Date of John", Integer.toString(john.getBirthdate().getDate()));
+
+
 
         final ArrayList<Contact> contactArrayList = new ArrayList<>();
         contactArrayList.add(john);
@@ -58,16 +67,17 @@ public class MainActivity extends AppCompatActivity {
         contactArrayList.add(markus);
         contactArrayList.add(lukas);
 
+        contactList = contactArrayList;
 
-        ContactListAdapter adapter = new ContactListAdapter(this, R.layout.adapter_view_layout, contactArrayList);
+        ContactListAdapter adapter = new ContactListAdapter(this, R.layout.adapter_view_layout, contactList);
         contactListView.setAdapter(adapter);
 
 
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, ""+ contactArrayList.get(i).getName(), Toast.LENGTH_SHORT).show();
-                transmittedContact = contactArrayList.get(i);
+                Toast.makeText(MainActivity.this, ""+ contactList.get(i).getName(), Toast.LENGTH_SHORT).show();
+                transmittedContact = contactList.get(i);
                 openContactActivity();
             }
         });
@@ -75,6 +85,27 @@ public class MainActivity extends AppCompatActivity {
         contactText = findViewById(R.id.textView_ID);
         contactText.setText("Alle Kontakte:");
 
+
+        addContactButton = (Button) findViewById(R.id.AddContactButton_ID);
+
+
+        addContactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Neuen Kontakt hinzufügen", Toast.LENGTH_SHORT).show();
+                AddContact();
+            }
+        });
+
+        addProfileButton = (ImageButton) findViewById(R.id.ProfileButton_ID);
+
+        addProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Zum Profil", Toast.LENGTH_SHORT).show();
+                openProfile();
+            }
+        });
         //contactList.add(new Contact("Beispiel Name", new Date(2000,04,04)));
 
         //AddContact(new Contact("Tester", new Date(2000,04,04)));
@@ -100,6 +131,12 @@ public class MainActivity extends AppCompatActivity {
             Log.d("test", "ausgabe");
         }*/
 
+
+    }
+
+    public void openProfile(){
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
     }
 
     public void openContactActivity(){
@@ -107,9 +144,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void AddContact() {
+        //this.contactList;
+        //Contact timo = new Contact("Timo", new Date(1995,12,9));
+        //contactList.add(timo);
+
+        //irgendwie nicht direkt ändern sondern mit sowas da ->notifyDataSetChanged()
+
+    }
+
+    /*
     public void AddContact(Contact contact){
 
-        /*
+
         boolean insertData = db.addContact(contact);
 
         if(insertData){
@@ -122,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //db.addContact(contact); //new Contact(name,Date(Jahr,monat,tag))
 
-        */
+
 
         //inserting contacts
         //db. addContact(new Contact("TestName", new Date(2000,03,03)));
@@ -130,11 +177,6 @@ public class MainActivity extends AppCompatActivity {
        // db. addContact(new Contact("TestMan",new Date(2000,05,05)));
 
 
-    }
+    }*/
 
-    private void createContactButtons(){
-        /*Button userButton = findViewById(R.id.bt_contact_ID);
-        userButton.setText(getResources().getString(R.string.userName));*/
-
-    }
 }
