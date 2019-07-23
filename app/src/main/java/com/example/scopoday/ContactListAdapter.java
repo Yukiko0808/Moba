@@ -14,13 +14,18 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import android.os.Handler;
+
 
 public class ContactListAdapter extends ArrayAdapter<Contact> {
 
     private static final String TAG = "ContactListAdapter";
 
     private Context mContext;
+    private Handler handler;
+    private Runnable runnable;
     int mResource;
+    long daysuntilbirthday;
     private int lastPosition = -1;
     DateFormat theFormat = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
 
@@ -46,13 +51,57 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
 
         tvName.setText(name);
         tvBirthdate.setText(Integer.toString(birthdate.getDate()) + "." +Integer.toString(birthdate.getMonth()) + "." + Integer.toString(birthdate.getYear()));
-        tvCountdown.setText(Integer.toString(CalculateDaysTillBD(birthdate)));
-
+        tvCountdown.setText((Long.toString(countDownStart(birthdate))));
         return convertView;
 
     }
 
-    private int CalculateDaysTillBD (Date bd){
+    public long countDownStart(Date BD) {
+        handler = new Handler();
+        final Date futureBDate = BD;
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                try {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat(
+                            "yyyy-MM-dd");
+                    // Please here set your event date//YYYY-MM-DD
+                    Date futureDate = futureBDate;
+                    Date currentDate = new Date();
+                    if (currentDate.after(futureDate)) {
+                        long diff = futureDate.getTime()
+                                - currentDate.getTime();
+
+                        Log.d("Current Date: ", Integer.toString(currentDate.getDate())) ;
+
+                        long days = diff / (24 * 60 * 60 * 1000);
+                        diff -= days * (24 * 60 * 60 * 1000);
+                        long hours = diff / (60 * 60 * 1000);
+                        diff -= hours * (60 * 60 * 1000);
+                        long minutes = diff / (60 * 1000);
+                        diff -= minutes * (60 * 1000);
+                        long seconds = diff / 1000;
+
+                        daysuntilbirthday = days;
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 1 * 1000);
+
+        Log.d("Tage: ", Long.toString(daysuntilbirthday)) ;
+
+        return daysuntilbirthday;
+
+    }
+
+
+
+    /*private int CalculateDaysTillBD (Date bd){
 
         int days = 0;
 
@@ -60,15 +109,27 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         Date fromToday = calendar.getTime();
         Date toFutureBD = new Date(fromToday.getYear(), bd.getMonth(), bd.getDate());
 
-        if(toFutureBD.getMonth() <= fromToday.getMonth()){
+
+        if(toFutureBD.getMonth() < fromToday.getMonth()){
             toFutureBD = new Date(fromToday.getYear() + 1, bd.getMonth(), bd.getDate());
+
+        }
+        else if(toFutureBD.getMonth() == fromToday.getMonth()){
+
+
+            if(toFutureBD.getDate() <= fromToday.getDate()){
+                toFutureBD = new Date (fromToday.getYear() + 1, bd.getMonth(), bd.getDate());
+            }
+
         }
 
-        calendar.setTimeInMillis(toFutureBD.getTime());
+
+        calendar.setTime(toFutureBD);
         //calendar.setTime(toFutureBD);             //set calender auf Geburtstag
-        int toYear = calendar.get(Calendar.YEAR); // toYear =  GeburtstagsJahr
+        int toYear = toFutureBD.getYear(); // toYear =  GeburtstagsJahr
         days += calendar.get(Calendar.DAY_OF_YEAR); // tage + Tage des Jahres
-                                                    // tage = anfang Jahr bis Geburtstag im Geburtstasjahr
+
+                             Log.d("Tage: ", Integer.toString(days)) ;                      // tage = anfang Jahr bis Geburtstag im Geburtstasjahr
 
         calendar.setTimeInMillis(fromToday.getTime()); //set calender auf  heute
         days -= calendar.get(Calendar.DAY_OF_YEAR);     // tage - Tage des Jahres
@@ -77,10 +138,16 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
             days += calendar.getActualMaximum(Calendar.DAY_OF_YEAR);
             calendar.add(Calendar.YEAR, 1);
         }
-        return  days;
-    }
 
-    public static int numDaysBetween(final Calendar c, final long fromTime, final long toTime) {
+        Log.d("Tage: ", Integer.toString(days)) ;                      // tage = anfang Jahr bis Geburtstag im Geburtstasjahr
+
+        return  days;
+
+    } */
+
+
+
+    /*public static int numDaysBetween(final Calendar c, final long fromTime, final long toTime) {
         int result = 0;
         if (toTime <= fromTime) return result;
 
@@ -97,7 +164,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         }
 
         return result;
-    }
+    }*/
 
 
 

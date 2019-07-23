@@ -2,12 +2,14 @@ package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton addProfileButton;
 
     public ArrayList<Contact> contactList = new ArrayList<>();
+    ContactListAdapter mainAdapter;
 
 
 
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         ContactListAdapter adapter = new ContactListAdapter(this, R.layout.adapter_view_layout, contactList);
         contactListView.setAdapter(adapter);
+        mainAdapter = adapter;
 
 
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -145,9 +149,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void AddContact() {
-        //this.contactList;
-        //Contact timo = new Contact("Timo", new Date(1995,12,9));
-        //contactList.add(timo);
+        Contact timo = new Contact("Timo", new Date(1995,06,9));
+        mainAdapter.add(timo);
+        Log.d("Geburtsjahr", Integer.toString(timo.getBirthdate().getYear()));
 
         //irgendwie nicht direkt ändern sondern mit sowas da ->notifyDataSetChanged()
 
