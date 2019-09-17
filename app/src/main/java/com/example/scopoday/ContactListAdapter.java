@@ -64,8 +64,8 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
             toFutureBD = new Date(fromToday.getYear() + 1, bd.getMonth(), bd.getDate());
         }
 
-        calendar.setTimeInMillis(toFutureBD.getTime());
-        //calendar.setTime(toFutureBD);             //set calender auf Geburtstag
+        //calendar.setTimeInMillis(toFutureBD.getTime());
+        calendar.setTime(toFutureBD);             //set calender auf Geburtstag
         int toYear = calendar.get(Calendar.YEAR); // toYear =  GeburtstagsJahr
         days += calendar.get(Calendar.DAY_OF_YEAR); // tage + Tage des Jahres
                                                     // tage = anfang Jahr bis Geburtstag im Geburtstasjahr
