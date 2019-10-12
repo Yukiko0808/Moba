@@ -31,8 +31,13 @@ public class Contact {
         }
     }*/
 
-    public Contact(String contactName, Date bd){
+    public Contact(int id, String contactName, Date bd){
+        this.id = id;
+        this.name = contactName;
+        this.birthdate = bd;
+    }
 
+    public Contact(String contactName, Date bd){
         this.name = contactName;
         this.birthdate = bd;
     }

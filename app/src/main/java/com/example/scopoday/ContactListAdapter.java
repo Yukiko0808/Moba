@@ -1,6 +1,7 @@
 package com.example.scopoday;
 
 import android.content.Context;
+import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.io.Console;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import android.os.Handler;
 
 public class ContactListAdapter extends ArrayAdapter<Contact> {
 
@@ -23,6 +27,11 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
     int mResource;
     private int lastPosition = -1;
     DateFormat theFormat = new SimpleDateFormat("dd-mm-yyyy");
+
+
+    TextView txtDaysTillBD;
+    private Handler handler;
+    private Runnable runnable;
 
     public ContactListAdapter(Context context, int resource, ArrayList<Contact> objects) {
         super(context, resource, objects);
@@ -45,60 +54,33 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         TextView tvCountdown = (TextView) convertView.findViewById(R.id.textViewDays);
 
         tvName.setText(name);
-        tvBirthdate.setText(Integer.toString(birthdate.getDate()) + "." +Integer.toString(birthdate.getMonth()) + "." + Integer.toString(birthdate.getYear()));
-        tvCountdown.setText(Integer.toString(CalculateDaysTillBD(birthdate)));
-
+        tvBirthdate.setText(Integer.toString(birthdate.getDate()) + "." +Integer.toString(birthdate.getMonth()+1) + "." + Integer.toString(birthdate.getYear()));
+        tvCountdown.setText(Long.toString(CalculateDaysTillBD(birthdate)));
         return convertView;
 
     }
 
-    private int CalculateDaysTillBD (Date bd){
-
-        int days = 0;
+    private long CalculateDaysTillBD (Date bd){
 
         Calendar calendar = Calendar.getInstance();
-        Date fromToday = calendar.getTime();
-        Date toFutureBD = new Date(fromToday.getYear(), bd.getMonth(), bd.getDate());
+        Date today = calendar.getTime();
 
-        if(toFutureBD.getMonth() <= fromToday.getMonth()){
-            toFutureBD = new Date(fromToday.getYear() + 1, bd.getMonth(), bd.getDate());
+        Date birthDate = new Date(0000, bd.getMonth(), bd.getDate());
+        Date todayDate = new Date(0000, today.getMonth(), today.getDate());
+
+        if(birthDate.getTime()<todayDate.getTime()){
+            birthDate = new Date(1, birthDate.getMonth(), birthDate.getDate());
         }
 
-        //calendar.setTimeInMillis(toFutureBD.getTime());
-        calendar.setTime(toFutureBD);             //set calender auf Geburtstag
-        int toYear = calendar.get(Calendar.YEAR); // toYear =  GeburtstagsJahr
-        days += calendar.get(Calendar.DAY_OF_YEAR); // tage + Tage des Jahres
-                                                    // tage = anfang Jahr bis Geburtstag im Geburtstasjahr
+        long days = birthDate.getTime() - todayDate.getTime();
+        days = days / (24 * 60 * 60 * 1000);
+        /*
+        Log.d("First date", birthDate.toString());
+        Log.d("Second Date", todayDate.toString());
+        Log.d("Days?" , Long.toString(days));*/
 
-        calendar.setTimeInMillis(fromToday.getTime()); //set calender auf  heute
-        days -= calendar.get(Calendar.DAY_OF_YEAR);     // tage - Tage des Jahres
-
-        while (calendar.get(Calendar.YEAR) < toYear) {
-            days += calendar.getActualMaximum(Calendar.DAY_OF_YEAR);
-            calendar.add(Calendar.YEAR, 1);
-        }
         return  days;
     }
-
-    public static int numDaysBetween(final Calendar c, final long fromTime, final long toTime) {
-        int result = 0;
-        if (toTime <= fromTime) return result;
-
-        c.setTimeInMillis(toTime);
-        final int toYear = c.get(Calendar.YEAR);
-        result += c.get(Calendar.DAY_OF_YEAR);
-
-        c.setTimeInMillis(fromTime);
-        result -= c.get(Calendar.DAY_OF_YEAR);
-
-        while (c.get(Calendar.YEAR) < toYear) {
-            result += c.getActualMaximum(Calendar.DAY_OF_YEAR);
-            c.add(Calendar.YEAR, 1);
-        }
-
-        return result;
-    }
-
 
 
 }
