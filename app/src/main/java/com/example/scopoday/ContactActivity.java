@@ -4,10 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
-import android.widget.Button;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,16 +16,16 @@ import android.view.View;
 import android.app.DatePickerDialog;
 import android.widget.DatePicker;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import android.view.inputmethod.InputMethodManager;
 
 public class ContactActivity extends AppCompatActivity {
 
     EditText contactNameText;
     TextView contactAge;
-    TextView tvDatepicker;
+    TextView contactBirthdayTV;
 
     //SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy hh:mm:ss");
     private DatePickerDialog.OnDateSetListener mdateSetListener;
@@ -39,9 +40,24 @@ public class ContactActivity extends AppCompatActivity {
         contactNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                contactNameText.selectAll();
             }
         });
+        contactNameText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                boolean handled = false;
+                if (i == EditorInfo.IME_ACTION_DONE){
+                    Log.d("CONTACT_CHANGE_NAME", "neuer name:" + contactNameText.getText().toString());
+                    SetNameInMain(contactNameText.getText().toString());
+                    handled = true;
+                    InputMethodManager imm = (InputMethodManager)getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(contactNameText.getWindowToken(), 0);
+                }
+                return handled;
+            }
+        });
+
         contactNameText.setText(MainActivity.transmittedContact.getName());
 
         contactAge = findViewById(R.id.ContactAlter_TV_ID);
@@ -50,20 +66,23 @@ public class ContactActivity extends AppCompatActivity {
 
         //Datepicker
 
-        tvDatepicker = (TextView) findViewById(R.id.contactDatepicker_TV_ID);
+        contactBirthdayTV = (TextView) findViewById(R.id.contactDatepicker_TV_ID);
 
-        tvDatepicker.setText(Integer.toString(MainActivity.transmittedContact.getBirthdate().getDate()) + "."
+        contactBirthdayTV.setText(Integer.toString(MainActivity.transmittedContact.getBirthdate().getDate()) + "."
                 + Integer.toString(MainActivity.transmittedContact.getBirthdate().getMonth()+1) + "."
                 + Integer.toString(MainActivity.transmittedContact.getBirthdate().getYear())
         );
 
-        tvDatepicker.setOnClickListener(new View.OnClickListener() {
+        contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
+                //int year = cal.get(Calendar.YEAR);
+                int year = MainActivity.transmittedContact.birthdate.getYear();
+                int month = MainActivity.transmittedContact.birthdate.getMonth();
+                int day = MainActivity.transmittedContact.birthdate.getDate();
+               // int month = cal.get(Calendar.MONTH);
+                //int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
                         ContactActivity.this,
@@ -80,7 +99,7 @@ public class ContactActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month+1;
                 String date = day +"."+ month +"."+ year;
-                tvDatepicker.setText(date);
+                contactBirthdayTV.setText(date);
                 SetBirthdateInMain(new Date(year,month-1,day));
             }
         };
@@ -104,5 +123,16 @@ public class ContactActivity extends AppCompatActivity {
         contactAge.setText(ageString);
         Log.d("CONTACT", "changed contact:" + MainActivity.transmittedContact.name);
     }
+
+    private void SetNameInMain(String n){
+        Contact newContact = MainActivity.transmittedContact;
+        newContact.setName(n);
+        MainActivity.contactList.set(MainActivity.transmittedContactPosition, newContact);
+
+    }
+
+
+
+
 
 }

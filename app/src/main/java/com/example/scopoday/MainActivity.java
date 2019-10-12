@@ -150,16 +150,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void AddContact() {
-        Contact timo = new Contact("Timo", new Date(1995,06,9));
-        mainAdapter.add(timo);
-        Log.d("Geburtsjahr", Integer.toString(timo.getBirthdate().getYear()));
-
-        //irgendwie nicht direkt ändern sondern mit sowas da ->notifyDataSetChanged()
+        Contact sampleContact = new Contact(contactList.size(),"Name", new Date(2000,00,01));
+        contactList.add(sampleContact);
+        transmittedContact = sampleContact;
+        transmittedContactPosition = contactList.size()-1;
+        Log.d("TransmittedContactPostition", Integer.toString(contactList.size()));
+        openContactActivity();
     }
 
     /*
     public void AddContact(Contact contact){
-
 
         boolean insertData = db.addContact(contact);
 
@@ -173,13 +173,10 @@ public class MainActivity extends AppCompatActivity {
         }
         //db.addContact(contact); //new Contact(name,Date(Jahr,monat,tag))
 
-
-
         //inserting contacts
         //db. addContact(new Contact("TestName", new Date(2000,03,03)));
        //db. addContact(new Contact("Tester", new Date(2000,04,04)));
        // db. addContact(new Contact("TestMan",new Date(2000,05,05)));
-
 
     }*/
 
