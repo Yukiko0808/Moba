@@ -95,4 +95,5 @@ public class Contact {
     public void setStarSign(String starSign) {
         this.starSign = starSign;
     }
+
 }
