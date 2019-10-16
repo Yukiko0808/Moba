@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.Console;
@@ -52,6 +54,14 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
+        ImageButton deleteBtn = (ImageButton) convertView.findViewById(R.id.delete_contact);
+        deleteBtn.setOnClickListener( new AdapterView.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("contact deleted", "1");
+            }
+        });
+
+
         TextView tvName = (TextView) convertView.findViewById(R.id.textViewName);
         TextView tvBirthdate = (TextView) convertView.findViewById(R.id.textViewDate);
         TextView tvCountdown = (TextView) convertView.findViewById(R.id.textViewDays);
@@ -60,6 +70,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         tvBirthdate.setText(Integer.toString(birthdate.getDate()) + "." +Integer.toString(birthdate.getMonth()+1) + "." + Integer.toString(birthdate.getYear()));
         tvCountdown.setText(Long.toString(CalculateDaysTillBD(birthdate)));
         return convertView;
+
 
     }
 

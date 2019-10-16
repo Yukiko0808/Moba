@@ -104,6 +104,19 @@ public class MainActivity extends AppCompatActivity {
                 openProfile();
             }
         });
+
+
+        /*contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(MainActivity.this, ""+ contactList.get(i).getName(), Toast.LENGTH_SHORT).show();
+                transmittedContact = contactList.get(i);
+                transmittedContactPosition = i;
+                openContactActivity();
+            }
+        });*/
+
+
         //contactList.add(new Contact("Beispiel Name", new Date(2000,04,04)));
 
         //AddContact(new Contact("Tester", new Date(2000,04,04)));
@@ -158,6 +171,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("TransmittedContactPostition", Integer.toString(contactList.size()));
         openContactActivity();
     }
+
+
 
     /*
     public void AddContact(Contact contact){
