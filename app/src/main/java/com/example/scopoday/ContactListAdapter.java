@@ -1,6 +1,7 @@
 package com.example.scopoday;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +39,8 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         this.mContext = context;
         this.mResource = resource;
     }
+
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         contactListView.setAdapter(adapter);
         mainAdapter = adapter;
 
-
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -81,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 openContactActivity();
             }
         });
+
 
         contactText = findViewById(R.id.textView_ID);
         contactText.setText("Alle Kontakte:");
