@@ -6,15 +6,11 @@
     android:layout_height="match_parent"
     android:weightSum="100">
 
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_weight="5"
         android:gravity="center">
-
 
         <TextView
             android:id="@+id/textViewDays"
@@ -27,7 +23,6 @@
             android:text="00"
             android:textAlignment="center"
             android:textColor="#FFFFFF" />
-
 
         <TextView
             android:id="@+id/textViewName"
@@ -55,8 +50,6 @@
             android:layout_weight="5"
             android:scaleType="fitEnd"
             app:srcCompat="@android:drawable/ic_delete" />
-
-
 
     </LinearLayout>
 

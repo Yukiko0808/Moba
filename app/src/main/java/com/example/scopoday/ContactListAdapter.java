@@ -1,6 +1,7 @@
 package com.example.scopoday;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
@@ -21,6 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.os.Handler;
+import android.widget.Toast;
 
 public class ContactListAdapter extends ArrayAdapter<Contact> {
 
@@ -30,7 +32,6 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
     int mResource;
     private int lastPosition = -1;
     DateFormat theFormat = new SimpleDateFormat("dd-mm-yyyy");
-
 
     TextView txtDaysTillBD;
     private Handler handler;
@@ -42,8 +43,6 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         this.mResource = resource;
     }
 
-
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         String name = getItem(position).getName();
@@ -54,13 +53,13 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
+        /*
         ImageButton deleteBtn = (ImageButton) convertView.findViewById(R.id.delete_contact);
         deleteBtn.setOnClickListener( new AdapterView.OnClickListener() {
             public void onClick(View v) {
-                Log.d("contact deleted", "1");
+                Log.d("contact deleted", Integer.toString(v.getId()));
             }
-        });
-
+        });*/
 
         TextView tvName = (TextView) convertView.findViewById(R.id.textViewName);
         TextView tvBirthdate = (TextView) convertView.findViewById(R.id.textViewDate);
@@ -70,7 +69,6 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         tvBirthdate.setText(Integer.toString(birthdate.getDate()) + "." +Integer.toString(birthdate.getMonth()+1) + "." + Integer.toString(birthdate.getYear()));
         tvCountdown.setText(Long.toString(CalculateDaysTillBD(birthdate)));
         return convertView;
-
 
     }
 
