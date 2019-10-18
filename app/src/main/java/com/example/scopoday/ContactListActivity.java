@@ -50,6 +50,14 @@ public class ContactListActivity extends AppCompatActivity {
             }
         };
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MainActivity.transmittedContact = contactList.get(i);
+                openContactActivity();
+            }
+        });
+
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -87,7 +95,6 @@ public class ContactListActivity extends AppCompatActivity {
         contactList.add(sampleContact);
         MainActivity.transmittedContact = sampleContact;
         MainActivity.transmittedContactPosition = contactList.size()-1;
-        Log.d("TransmittedContactPostition", Integer.toString(contactList.size()));
         openContactActivity();
     }
 
