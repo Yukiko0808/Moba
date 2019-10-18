@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
         contactList = contactArrayList;
 
-        ContactListAdapter adapter = new ContactListAdapter(this, R.layout.adapter_view_layout, contactList);
+        //ContactListAdapter adapter = new ContactListAdapter(this, R.layout.adapter_view_layout, contactList);
+        ContactListAdapter adapter = new ContactListAdapter(this, contactList);
         contactListView.setAdapter(adapter);
         mainAdapter = adapter;
 
@@ -80,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         contactText = findViewById(R.id.textView_ID);
         contactText.setText("Alle Kontakte:");
 
@@ -89,8 +89,9 @@ public class MainActivity extends AppCompatActivity {
         addContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Neuen Kontakt hinzufügen", Toast.LENGTH_SHORT).show();
-                AddContact();
+                Toast.makeText(MainActivity.this, "Open Contact list", Toast.LENGTH_SHORT).show();
+                openContactListActivity();
+                //AddContact();
             }
         });
 
@@ -104,42 +105,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        /*contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, ""+ contactList.get(i).getName(), Toast.LENGTH_SHORT).show();
-                transmittedContact = contactList.get(i);
-                transmittedContactPosition = i;
-                openContactActivity();
-            }
-        });*/
-
-
-        //contactList.add(new Contact("Beispiel Name", new Date(2000,04,04)));
-
-        //AddContact(new Contact("Tester", new Date(2000,04,04)));
-
-       // List<Contact> contactList = db.getAllContacts();
-
-           // Log.d("mip", contactList.toString());
-
-        //contactInfo = contactList.get(0).getName();
-        //contactText.setText(contactInfo);
-
-
-        //String nameOfContact = contactList.get(1).getName();
-        //Toast.makeText(getApplicationContext(), nameOfContact, Toast.LENGTH_LONG).show();
-
-        //Foreach
-        //??? irgend ein fehler mit api veraltet oder so @.@
-        /*
-        for(Contact c : contactList){
-            String log = "NAME: " + c.getName() + "\n";
-
-            contactInfo = contactInfo + log;
-            Log.d("test", "ausgabe");
-        }*/
     }
 
     @Override
@@ -169,26 +134,10 @@ public class MainActivity extends AppCompatActivity {
         openContactActivity();
     }
 
-    /*
-    public void AddContact(Contact contact){
-
-        boolean insertData = db.addContact(contact);
-
-        if(insertData){
-            Toast.makeText(getApplicationContext(),
-                    "Contact added - in theory", Toast.LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(getApplicationContext(),
-                    "Contact added FAILED", Toast.LENGTH_LONG).show();
-        }
-        //db.addContact(contact); //new Contact(name,Date(Jahr,monat,tag))
-
-        //inserting contacts
-        //db. addContact(new Contact("TestName", new Date(2000,03,03)));
-       //db. addContact(new Contact("Tester", new Date(2000,04,04)));
-       // db. addContact(new Contact("TestMan",new Date(2000,05,05)));
-
-    }*/
+    public void openContactListActivity(){
+        Intent intent = new Intent(this, ContactListActivity.class);
+        startActivity(intent);
+        //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
 
 }
