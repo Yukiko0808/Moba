@@ -140,4 +140,11 @@ public class MainActivity extends AppCompatActivity {
         //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
+    private void OrderContactsByBirthday(){
+        for(int i=0; i<=contactList.size(); i++){
+
+        }
+    }
+
+
 }

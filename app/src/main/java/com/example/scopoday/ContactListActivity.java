@@ -12,7 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
+import android.widget.PopupMenu;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +30,8 @@ public class ContactListActivity extends AppCompatActivity {
     Button addButton;
 
     ListView lv;
+
+    int tempPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,7 @@ public class ContactListActivity extends AppCompatActivity {
             }
         });
 
+
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -73,7 +80,10 @@ public class ContactListActivity extends AppCompatActivity {
                 }
                 positionchecker.clear(); */
 
-                contactAdapter.remove(contactList.get(position));
+                tempPos = position;
+                registerForContextMenu(lv);
+
+                //contactAdapter.remove(contactList.get(position));
 
                 contactAdapter.notifyDataSetChanged();
                 return false;
@@ -82,6 +92,25 @@ public class ContactListActivity extends AppCompatActivity {
 
         addButton.setOnClickListener(addListener);
         lv.setAdapter(contactAdapter);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Context Menu");
+        menu.add(0, v.getId(), 0, "Delete");
+        menu.add(1, v.getId(), 0, "Cancel");
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        Toast.makeText(this, "Selected Item: " +item.getTitle() + item.getGroupId(), Toast.LENGTH_SHORT).show();
+        if(item.getGroupId() == 0){
+            contactAdapter.remove(contactList.get(tempPos));
+        }
+        if(item.getGroupId() == 1){
+            return true;
+        }
+        return true;
     }
 
     protected void onStart() {

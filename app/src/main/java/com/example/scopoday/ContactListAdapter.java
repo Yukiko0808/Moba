@@ -75,7 +75,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
 
     }
 
-    private long CalculateDaysTillBD (Date bd){
+    public long CalculateDaysTillBD (Date bd){
 
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
@@ -96,6 +96,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
 
         return  days;
     }
+
 
 
 }
