@@ -53,11 +53,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-       // createContactButtons();
         setContentView(R.layout.activity_main);
+        // createContactButtons();
 
-        ListView contactListView = findViewById(R.id.ContantList_ID);
+        final ListView contactListView = findViewById(R.id.ContantList_ID);
 
         final ArrayList<Contact> contactArrayList = new ArrayList<>();
         contactArrayList.add(john);
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         contactListView.setAdapter(adapter);
         mainAdapter = adapter;
 
-
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -81,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 openContactActivity();
             }
         });
+
 
         contactText = findViewById(R.id.textView_ID);
         contactText.setText("Alle Kontakte:");
@@ -141,8 +140,6 @@ public class MainActivity extends AppCompatActivity {
             contactInfo = contactInfo + log;
             Log.d("test", "ausgabe");
         }*/
-
-
     }
 
     @Override
@@ -171,8 +168,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("TransmittedContactPostition", Integer.toString(contactList.size()));
         openContactActivity();
     }
-
-
 
     /*
     public void AddContact(Contact contact){
