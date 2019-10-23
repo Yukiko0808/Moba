@@ -36,30 +36,33 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
     TextView txtDaysTillBD;
     private Handler handler;
     private Runnable runnable;
-
-    public ContactListAdapter(Context context, int resource, ArrayList<Contact> objects) {
-        super(context, resource, objects);
+/*
+    public ContactListAdapter(Context context, int resource, ArrayList<Contact> contacts) {
+        super(context, resource, contacts);
         this.mContext = context;
         this.mResource = resource;
+    }*/
+
+    public ContactListAdapter(Context context, ArrayList<Contact> contacts) {
+        super(context, 0, contacts);
+        this.mContext = context;
+        //this.mResource = resource;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Contact contact = getItem(position);
         String name = getItem(position).getName();
         Date birthdate = getItem(position).getBirthdate();
 
-        Contact contact = new Contact(name, birthdate);
-
+        //Contact contact = new Contact(name, birthdate);
+/*
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
-
-        /*
-        ImageButton deleteBtn = (ImageButton) convertView.findViewById(R.id.delete_contact);
-        deleteBtn.setOnClickListener( new AdapterView.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("contact deleted", Integer.toString(v.getId()));
-            }
-        });*/
+*/
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.adapter_view_layout, parent, false);
+        }
 
         TextView tvName = (TextView) convertView.findViewById(R.id.textViewName);
         TextView tvBirthdate = (TextView) convertView.findViewById(R.id.textViewDate);
@@ -72,7 +75,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
 
     }
 
-    private long CalculateDaysTillBD (Date bd){
+    public long CalculateDaysTillBD (Date bd){
 
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
@@ -93,6 +96,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
 
         return  days;
     }
+
 
 
 }
