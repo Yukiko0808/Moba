@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Contact> contactList = new ArrayList<>();
     ContactListAdapter mainAdapter;
 
-    Contact john = new Contact(1,"John", new Date(1999,8,17));
+    Contact john = new Contact(1,"John", new Date(1999,0,17));
     Contact lisa = new Contact(2,"Lisa", new Date(2000,8,25));
     Contact markus = new Contact(3,"Markus", new Date(1990,9,01));
     Contact lukas = new Contact(4,"Lukas", new Date(2001,01,1));

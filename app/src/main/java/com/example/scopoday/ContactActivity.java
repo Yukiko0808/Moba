@@ -2,6 +2,7 @@ package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.inputmethodservice.Keyboard;
@@ -26,6 +27,7 @@ public class ContactActivity extends AppCompatActivity {
     EditText contactNameText;
     TextView contactAge;
     TextView contactBirthdayTV;
+    TextView starSignText;
 
     //SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy hh:mm:ss");
     private DatePickerDialog.OnDateSetListener mdateSetListener;
@@ -59,6 +61,10 @@ public class ContactActivity extends AppCompatActivity {
         });
 
         contactNameText.setText(MainActivity.transmittedContact.getName());
+
+        starSignText =  findViewById(R.id.starSign_TV_ID);
+        starSignText.setText(CalculateStarSign());
+
 
         contactAge = findViewById(R.id.ContactAlter_TV_ID);
         String ageString = Integer.toString(CalculateAge());
@@ -115,12 +121,45 @@ public class ContactActivity extends AppCompatActivity {
         return age;
     }
 
+    private String CalculateStarSign(){
+        String starSign = "NoStarsignFound";
+        Contact actualContact = MainActivity.transmittedContact;
+        if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),11,21))
+                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),0, 21))) {
+            // Steinbock - capricorn
+            starSign = "capricorn";
+            return starSign;
+        }
+        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),0,20))
+                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),1, 20))){
+            //Wassermann - aquarius
+            starSign = "aquarius";
+            return starSign;
+        }
+        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),1,19))
+                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),2, 21))){
+            //fish
+            starSign = "fish";
+            return starSign;
+        }
+        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),2,20))
+                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),3, 21))){
+            //widder - aries
+            starSign = "aries";
+            return starSign;
+        }
+        else {
+            return starSign;
+        }
+    }
+
     private void SetBirthdateInMain(Date d){
         Contact newContact = MainActivity.transmittedContact;
         newContact.setBirthdate(d);
         MainActivity.contactList.set(MainActivity.transmittedContactPosition, newContact);
         String ageString = Integer.toString(CalculateAge());
         contactAge.setText(ageString);
+        starSignText.setText(CalculateStarSign());
         Log.d("CONTACT", "changed contact:" + MainActivity.transmittedContact.name);
     }
 

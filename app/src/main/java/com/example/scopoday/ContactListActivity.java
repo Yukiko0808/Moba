@@ -3,6 +3,7 @@ package com.example.scopoday;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 import android.widget.PopupMenu;
 import android.view.ContextMenu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,12 +34,25 @@ public class ContactListActivity extends AppCompatActivity {
 
     ListView lv;
 
+
     int tempPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
+
+        Window window = this.getWindow();
+
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        // finally change the color
+        window.setStatusBarColor(this.getResources().getColor(R.color.cardview_shadow_end_color));
+
 
         lv = (ListView) findViewById(R.id.contactListView_ID);
 
@@ -131,5 +147,6 @@ public class ContactListActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
 
 }
