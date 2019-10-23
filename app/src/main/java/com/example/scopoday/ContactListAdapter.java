@@ -51,10 +51,12 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        ImageButton deleteBtn = (ImageButton) convertView.findViewById(R.id.delete_contact);
+        final ImageButton deleteBtn = (ImageButton) convertView.findViewById(R.id.delete_contact);
         deleteBtn.setOnClickListener( new AdapterView.OnClickListener() {
             public void onClick(View v) {
-                Log.d("contact deleted", "1");
+                //MainActivity.contactList.remove(ContactListAdapter.this.hashCode());
+                Log.d("contact deleted", this.toString());
+                v.setBackgroundColor(9);
             }
         });
 
