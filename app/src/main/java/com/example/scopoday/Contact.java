@@ -89,7 +89,7 @@ public class Contact {
     }
 
     public String getStarSign() {
-        return starSign;
+            return starSign;
     }
 
     public void setStarSign(String starSign) {

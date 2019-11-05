@@ -6,13 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ContactActivity">
 
+
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="412dp"
-        android:layout_height="190dp"
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/header_contact"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/header_contact" />
+
 
     <EditText
         android:id="@+id/ContactName_TV_ID"
@@ -45,7 +53,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_semibold"
         android:hint="Select Date"
-        android:textColor="#00000000"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -56,10 +64,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:foregroundTint="#00DFC2C2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/textView2"
@@ -78,10 +87,27 @@
         android:id="@+id/textView3"
         android:layout_width="234dp"
         android:layout_height="25dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
         android:text="Geburtsdatum"
-        app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID"
-        tools:layout_editor_absoluteX="24dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID" />
+
+    <TextView
+        android:id="@+id/starSign_TV_ID"
+        android:layout_width="361dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
+        app:layout_constraintVertical_bias="0.072" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
