@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.view.View;
@@ -28,6 +29,7 @@ public class ContactActivity extends AppCompatActivity {
     TextView contactAge;
     TextView contactBirthdayTV;
     TextView starSignText;
+    ImageView zodiacsign;
 
     //SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy hh:mm:ss");
     private DatePickerDialog.OnDateSetListener mdateSetListener;
@@ -45,6 +47,11 @@ public class ContactActivity extends AppCompatActivity {
                 contactNameText.selectAll();
             }
         });
+
+
+        zodiacsign = findViewById(R.id.zodiacsign);
+
+
         contactNameText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -127,6 +134,7 @@ public class ContactActivity extends AppCompatActivity {
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),11, 32))) {
             // Steinbock - capricorn
             starSign = "capricorn";
+            zodiacsign.setImageResource(R.drawable.capricorn_black);
             return starSign;
         }
 
@@ -134,24 +142,28 @@ public class ContactActivity extends AppCompatActivity {
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),0, 21))) {
             // Steinbock - capricorn
             starSign = "capricorn";
+            zodiacsign.setImageResource(R.drawable.capricorn_black);
             return starSign;
         }
         else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),0,20))
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),1, 20))){
             //Wassermann - aquarius
             starSign = "aquarius";
+            zodiacsign.setImageResource(R.drawable.aquarius_black);
             return starSign;
         }
         else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),1,19))
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),2, 21))){
             //fish
             starSign = "pisces";
+            zodiacsign.setImageResource(R.drawable.pisces_black);
             return starSign;
         }
         else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),2,20))
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),3, 21))){
             //widder - aries
             starSign = "aries";
+            zodiacsign.setImageResource(R.drawable.aries_black);
             return starSign;
 
         }
@@ -160,6 +172,7 @@ public class ContactActivity extends AppCompatActivity {
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),4, 21))){
             //fish
             starSign = "taurus";
+            zodiacsign.setImageResource(R.drawable.taurus_black);
             return starSign;
         }
 
@@ -168,6 +181,7 @@ public class ContactActivity extends AppCompatActivity {
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),5, 22))){
             //fish
             starSign = "gemini";
+            zodiacsign.setImageResource(R.drawable.gemini_black);
             return starSign;
         }
 
@@ -175,6 +189,7 @@ public class ContactActivity extends AppCompatActivity {
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),6, 23))){
             //fish
             starSign = "cancer";
+            zodiacsign.setImageResource(R.drawable.cancer_black);
             return starSign;
         }
 
@@ -183,6 +198,7 @@ public class ContactActivity extends AppCompatActivity {
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),7, 24))){
             //fish
             starSign = "lio";
+            zodiacsign.setImageResource(R.drawable.leo_black);
             return starSign;
         }
 
@@ -190,6 +206,7 @@ public class ContactActivity extends AppCompatActivity {
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),8, 24))){
             //fish
             starSign = "virgo";
+            zodiacsign.setImageResource(R.drawable.virgo_black);
             return starSign;
         }
 
@@ -197,6 +214,7 @@ public class ContactActivity extends AppCompatActivity {
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),9, 24))){
             //fish
             starSign = "libra";
+            zodiacsign.setImageResource(R.drawable.libra_black);
             return starSign;
         }
 
@@ -205,6 +223,7 @@ public class ContactActivity extends AppCompatActivity {
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),10, 23))){
             //fish
             starSign = "scorpio";
+            zodiacsign.setImageResource(R.drawable.scorpio_black);
             return starSign;
         }
 
@@ -212,6 +231,7 @@ public class ContactActivity extends AppCompatActivity {
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),11, 22))){
             //fish
             starSign = "sagittarius";
+            zodiacsign.setImageResource(R.drawable.sagittarius_black);
             return starSign;
         }
         else {

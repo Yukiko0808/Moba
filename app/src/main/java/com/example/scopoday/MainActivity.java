@@ -104,13 +104,13 @@ public class MainActivity extends AppCompatActivity {
 
         addProfileButton = (ImageButton) findViewById(R.id.ProfileButton_ID);
 
-        addProfileButton.setOnClickListener(new View.OnClickListener() {
+       /* addProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Zum Profil", Toast.LENGTH_SHORT).show();
                 openProfile();
             }
-        });
+        });*/
 
     }
 
@@ -128,6 +128,16 @@ public class MainActivity extends AppCompatActivity {
         }
         if(id == R.id.profil_settings){
             Toast.makeText(MainActivity.this, "Profil", Toast.LENGTH_SHORT).show();
+            openProfile();
+        }
+
+        if(id == R.id.contact_settings){
+            Toast.makeText(MainActivity.this, "Kontakte", Toast.LENGTH_SHORT).show();
+            openContactListActivity();
+        }
+
+        if(id == R.id.calendar_settings){
+            Toast.makeText(MainActivity.this, "Kalender", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -11,5 +11,14 @@
         android:orderInCategory="102"
         android:title="Profil" />
 
+    <item
+        android:id="@+id/contact_settings"
+        android:orderInCategory="102"
+        android:title="Kontakte" />
+
+    <item
+        android:id="@+id/calendar_settings"
+        android:orderInCategory="102"
+        android:title="Kalender" />
 
 </menu>

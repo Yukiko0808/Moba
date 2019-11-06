@@ -22,45 +22,10 @@
         app:srcCompat="@drawable/header_contact" />
 
 
-    <EditText
-        android:id="@+id/ContactName_TV_ID"
-        android:layout_width="355dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:imeOptions="actionDone"
-        android:inputType="text"
-        android:text="Beispiel Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/ContactAlter_TV_ID"
-        android:layout_width="49dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="108dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="Alter"
-        app:layout_constraintStart_toEndOf="@+id/contactDatepicker_TV_ID"
-        app:layout_constraintTop_toTopOf="@+id/contactDatepicker_TV_ID" />
-
-    <TextView
-        android:id="@+id/contactDatepicker_TV_ID"
-        android:layout_width="197dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:hint="Select Date"
-        android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="101dp"
-        android:layout_height="110dp"
+        android:id="@+id/zodiacsign"
+        android:layout_width="83dp"
+        android:layout_height="76dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
@@ -75,23 +40,48 @@
         android:layout_width="234dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/zodiacsign" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="234dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="4dp"
-        android:text="Geburtsdatum"
+        android:id="@+id/ContactAlter_TV_ID"
+        android:layout_width="49dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="112dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="Alter"
+        app:layout_constraintStart_toEndOf="@+id/contactDatepicker_TV_ID"
+        app:layout_constraintTop_toTopOf="@+id/contactDatepicker_TV_ID" />
+
+    <EditText
+        android:id="@+id/ContactName_TV_ID"
+        android:layout_width="355dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:text="Beispiel Name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/contactDatepicker_TV_ID"
+        android:layout_width="197dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:hint="Select Date"
+        android:textColor="@android:color/background_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/starSign_TV_ID"
@@ -105,9 +95,20 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
-        app:layout_constraintVertical_bias="0.072" />
+        app:layout_constraintVertical_bias="0.007" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="234dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Geburtsdatum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
