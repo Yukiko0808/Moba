@@ -65,7 +65,6 @@ public class ContactActivity extends AppCompatActivity {
         starSignText =  findViewById(R.id.starSign_TV_ID);
         starSignText.setText(CalculateStarSign());
 
-
         contactAge = findViewById(R.id.ContactAlter_TV_ID);
         String ageString = Integer.toString(CalculateAge());
         contactAge.setText(ageString);
