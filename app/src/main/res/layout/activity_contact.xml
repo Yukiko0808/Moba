@@ -85,8 +85,8 @@
 
     <TextView
         android:id="@+id/starSign_TV_ID"
-        android:layout_width="361dp"
-        android:layout_height="98dp"
+        android:layout_width="362dp"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -95,10 +95,10 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintHorizontal_bias="0.235"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
-        app:layout_constraintVertical_bias="0.007" />
+        app:layout_constraintVertical_bias="0.027" />
 
     <TextView
         android:id="@+id/textView3"
@@ -109,6 +109,17 @@
         android:text="Geburtsdatum"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID" />
+
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChartLove"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/starSign_TV_ID"></com.github.mikephil.charting.charts.PieChart>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

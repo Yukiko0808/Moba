@@ -102,9 +102,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        addProfileButton = (ImageButton) findViewById(R.id.ProfileButton_ID);
+        /*addProfileButton = (ImageButton) findViewById(R.id.ProfileButton_ID);
 
-       /* addProfileButton.setOnClickListener(new View.OnClickListener() {
+        addProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Zum Profil", Toast.LENGTH_SHORT).show();
