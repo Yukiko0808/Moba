@@ -29,13 +29,6 @@ import java.util.Random;
 
 import android.view.inputmethod.InputMethodManager;
 
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
-
 public class ContactActivity extends AppCompatActivity {
 
     EditText contactNameText;
