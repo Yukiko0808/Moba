@@ -8,11 +8,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import android.view.View;
@@ -129,27 +131,25 @@ public class ContactActivity extends AppCompatActivity {
             }
         };
 
-        PieChart lovePieChart = findViewById(R.id.pieChartLove);
-        lovePieChart.setUsePercentValues(true);
-        List<PieEntry> value = new ArrayList<>();
-        value.add(new PieEntry(40f,""));
-        value.add(new PieEntry(60f,""));
+        CalculateHoroskopValues();
 
-        PieDataSet pieLoveDataSet = new PieDataSet(value, "");
-        PieData pieLoveDate = new PieData(pieLoveDataSet);
-        lovePieChart.setData(pieLoveDate);
+        //LOVE
+        ProgressBar pieChart_love = findViewById(R.id.pieChart_Love_ID).findViewById(R.id.progressBar);
+        pieChart_love.setProgress(todayLove);
+        TextView txt_love = (TextView) findViewById(R.id.pieChart_Love_ID).findViewById(R.id.percentText);
+        txt_love.setText(todayLove + "%");
 
-        lovePieChart.setNoDataText("true");
+        //JOB
+        ProgressBar pieChart_job = findViewById(R.id.pieChart_Job_ID).findViewById(R.id.progressBar);
+        pieChart_job.setProgress(todayJob);
+        TextView txt_job = (TextView) findViewById(R.id.pieChart_Job_ID).findViewById(R.id.percentText);
+        txt_job.setText(todayJob + "%");
 
-        lovePieChart.setHoleRadius(50f);
-        lovePieChart.setTransparentCircleRadius(50f);
-
-        pieLoveDataSet.setColors(ColorTemplate.LIBERTY_COLORS);
-
-        Description desc = new Description();
-        desc.setText("");
-        lovePieChart.setDescription(desc);
-
+        //LUCK
+        ProgressBar pieChart_luck = findViewById(R.id.pieChart_Luck_ID).findViewById(R.id.progressBar);
+        pieChart_luck.setProgress(todayLuck);
+        TextView txt_luck = (TextView) findViewById(R.id.pieChart_Luck_ID).findViewById(R.id.percentText);
+        txt_luck.setText(todayLuck + "%");
      }
 
 
@@ -170,6 +170,9 @@ public class ContactActivity extends AppCompatActivity {
         todayJob = 10 + horoskopValue.nextInt(100) * MainActivity.transmittedContact.getJob();
         todayLove = 10 + horoskopValue.nextInt(100) * MainActivity.transmittedContact.getLove();
         todayLuck = 10 + horoskopValue.nextInt(100) * MainActivity.transmittedContact.getLove();
+
+        Double ndsek = Math.random()*(91)+10;
+        todayJob = ndsek.intValue();
 
         if (todayJob > 100){
             todayJob = todayJob / 10;
