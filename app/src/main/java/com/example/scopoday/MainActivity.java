@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-       /* addProfileButton = (ImageButton) findViewById(R.id.ProfileButton_ID);
+        /*addProfileButton = (ImageButton) findViewById(R.id.ProfileButton_ID);
 
         addProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,9 +123,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if(id == R.id.action_settings){
-            Toast.makeText(MainActivity.this, "Action", Toast.LENGTH_SHORT).show();
-        }
+
         if(id == R.id.profil_settings){
             Toast.makeText(MainActivity.this, "Profil", Toast.LENGTH_SHORT).show();
             openProfile();

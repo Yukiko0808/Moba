@@ -12,7 +12,7 @@
     <style name="MyDatePickerSpinnerStyle" parent="@android:style/Widget.Material.DatePicker">
         <item name="android:datePickerMode">spinner</item>
         <item name="android:calendarViewShown">false</item>
-        <item name="colorControlNormal">#00D50B</item>
+        <item name="android:datePickerStyle">@color/colorAccent</item>
     </style>
     
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">

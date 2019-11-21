@@ -3,4 +3,7 @@
     <string name="userName">exampleName</string>
     <string name="contactName">emptyName</string>
     <string name="action_settings">menu</string>
+
+    <string name="pisces">pisces are really intelligent, like to learn a lot.</string>
+
 </resources>
