@@ -48,16 +48,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/zodiacsign" />
 
-    <TextView
-        android:id="@+id/ContactAlter_TV_ID"
-        android:layout_width="49dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="112dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="Alter"
-        app:layout_constraintStart_toEndOf="@+id/contactDatepicker_TV_ID"
-        app:layout_constraintTop_toTopOf="@+id/contactDatepicker_TV_ID" />
-
     <EditText
         android:id="@+id/ContactName_TV_ID"
         android:layout_width="355dp"
@@ -100,6 +90,24 @@
         app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
         app:layout_constraintVertical_bias="0.007" />
 
+
+    <Starsigntext
+        android:id="@+id/starSigntext"
+        android:layout_width="361dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
+        app:layout_constraintVertical_bias="0.439" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="234dp"
@@ -109,6 +117,12 @@
         android:text="Geburtsdatum"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

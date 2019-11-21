@@ -136,6 +136,7 @@ public class ContactActivity extends AppCompatActivity {
             starSign = "capricorn";
             zodiacsign.setImageResource(R.drawable.capricorn_black);
             return starSign;
+
         }
 
         if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),0,0))
@@ -238,6 +239,8 @@ public class ContactActivity extends AppCompatActivity {
             return starSign;
         }
     }
+
+
 
     private void SetBirthdateInMain(Date d){
         Contact newContact = MainActivity.transmittedContact;
