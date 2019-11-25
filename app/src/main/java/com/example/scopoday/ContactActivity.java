@@ -203,7 +203,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setJob(5);
             actualContact.setLuck(4);
             actualContact.setLove(8);
-            zodiacsign.setImageResource(R.drawable.capricorn_black);#TextView pisces = findViewById(R.id.horoskoptext);
+            zodiacsign.setImageResource(R.drawable.capricorn_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.capricorn);
             return starSign;
         }
