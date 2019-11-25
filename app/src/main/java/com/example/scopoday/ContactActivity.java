@@ -190,6 +190,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(2);
             actualContact.setLove(9);
             zodiacsign.setImageResource(R.drawable.capricorn_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.capricorn);
             return starSign;
 
         }
@@ -201,7 +203,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setJob(5);
             actualContact.setLuck(4);
             actualContact.setLove(8);
-            zodiacsign.setImageResource(R.drawable.capricorn_black);
+            zodiacsign.setImageResource(R.drawable.capricorn_black);#TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.capricorn);
             return starSign;
         }
         else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),0,20))
@@ -212,6 +215,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(4);
             actualContact.setLove(3);
             zodiacsign.setImageResource(R.drawable.aquarius_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.aquarius);
             return starSign;
         }
         else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),1,19))
@@ -234,6 +239,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(6);
             actualContact.setLove(3);
             zodiacsign.setImageResource(R.drawable.aries_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.aries);
             return starSign;
 
         }
@@ -245,6 +252,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(8);
             actualContact.setLove(3);
             zodiacsign.setImageResource(R.drawable.taurus_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.taurus);
             return starSign;
         }
 
@@ -256,6 +265,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(8);
             actualContact.setLove(2);
             zodiacsign.setImageResource(R.drawable.gemini_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.gemini);
             return starSign;
         }
 
@@ -267,6 +278,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(8);
             actualContact.setLove(1);
             zodiacsign.setImageResource(R.drawable.cancer_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.cancer);
             return starSign;
         }
 
@@ -278,6 +291,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(10);
             actualContact.setLove(4);
             zodiacsign.setImageResource(R.drawable.leo_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.leo);
             return starSign;
         }
 
@@ -288,6 +303,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(8);
             actualContact.setLove(3);
             zodiacsign.setImageResource(R.drawable.virgo_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.virgo);
             return starSign;
         }
 
@@ -299,6 +316,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(8);
             actualContact.setLove(2);
             zodiacsign.setImageResource(R.drawable.libra_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.libra);
             return starSign;
         }
 
@@ -311,6 +330,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(8);
             actualContact.setLove(2);
             zodiacsign.setImageResource(R.drawable.scorpio_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.scorpio);
             return starSign;
         }
 
@@ -322,6 +343,8 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(2);
             actualContact.setLove(8);
             zodiacsign.setImageResource(R.drawable.sagittarius_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.sagittarius);
             return starSign;
         }
         else {
