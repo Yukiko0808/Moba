@@ -19,12 +19,9 @@ public class Contact {
     String planet;
     String starSign;
 
-
-
     int luck;
     int job;
     int love;
-
 
 /*
     public  Contact(String contactName, String bd){
