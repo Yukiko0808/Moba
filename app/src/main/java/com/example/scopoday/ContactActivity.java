@@ -191,6 +191,7 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLove(9);
             zodiacsign.setImageResource(R.drawable.capricorn_black);
             return starSign;
+
         }
 
         if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),0,0))
@@ -220,7 +221,10 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(9);
             actualContact.setLove(2);
             zodiacsign.setImageResource(R.drawable.pisces_black);
+            TextView pisces = findViewById(R.id.horoskoptext);
+            pisces.setText(R.string.pisces);
             return starSign;
+
         }
         else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),2,20))
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),3, 21))){
@@ -324,6 +328,8 @@ public class ContactActivity extends AppCompatActivity {
             return starSign;
         }
     }
+
+
 
     private void SetBirthdateInMain(Date d){
         Contact newContact = MainActivity.transmittedContact;
