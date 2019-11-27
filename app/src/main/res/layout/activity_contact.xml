@@ -36,6 +36,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="234dp"

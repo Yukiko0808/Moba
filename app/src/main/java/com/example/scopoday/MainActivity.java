@@ -89,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         contactText = findViewById(R.id.textView_ID);
-        contactText.setText("Alle Kontakte:");
-
         addContactButton = (Button) findViewById(R.id.AddContactButton_ID);
 
         addContactButton.setOnClickListener(new View.OnClickListener() {
