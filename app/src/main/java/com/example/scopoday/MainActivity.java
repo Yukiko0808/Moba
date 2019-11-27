@@ -2,12 +2,16 @@ package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     Button addContactButton;
     ImageButton addProfileButton;
 
+    ListView contactListView;
     public static ArrayList<Contact> contactList = new ArrayList<>();
     ContactListAdapter mainAdapter;
 
@@ -49,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
     Contact markus = new Contact(3,"Markus", new Date(1990,9,01));
     Contact lukas = new Contact(4,"Lukas", new Date(2001,01,1));
 
-
     //ArrayAdapter adapter;
 
     //DatabaseHelper db = new DatabaseHelper(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        final ListView contactListView = findViewById(R.id.ContantList_ID);
+        contactListView = findViewById(R.id.ContantList_ID);
 
         final ArrayList<Contact> contactArrayList = new ArrayList<>();
         contactArrayList.add(john);
@@ -96,9 +101,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Open Contact list", Toast.LENGTH_SHORT).show();
                 openContactListActivity();
-                //AddContact();
             }
         });
+
+        //getContactsListFromMobildephone();
 
         /*addProfileButton = (ImageButton) findViewById(R.id.ProfileButton_ID);
 
@@ -110,6 +116,55 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
+    }
+
+
+    //wollte hier die Kontakte aus dem Telefon Holen :/ bahhh
+    public void getContactsListFromMobildephone(){
+        /*Cursor cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+        startManagingCursor(cursor);
+
+        String[] from = {ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone._ID};
+
+        int[] to = (R.id.textView, );
+
+        SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.list_content, cursor, from, to);
+
+        contactListView.setAdapter(simpleCursorAdapter);
+        contactListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);*/
+
+        /*
+        ContentResolver cr = getContentResolver();
+        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
+
+        if ((cur != null ? cur.getCount() : 0) > 0) {
+            while (cur != null && cur.moveToNext()) {
+                String id = cur.getString(
+                        cur.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cur.getString(cur.getColumnIndex(
+                        ContactsContract.Contacts.DISPLAY_NAME));
+
+                if (cur.getInt(cur.getColumnIndex(
+                        ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                    Cursor pCur = cr.query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                            new String[]{id}, null);
+                    while (pCur.moveToNext()) {
+                        String phoneNo = pCur.getString(pCur.getColumnIndex(
+                                ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        Log.i(TAG, "Name: " + name);
+                        Log.i(TAG, "Phone Number: " + phoneNo);
+                    }
+                    pCur.close();
+                }
+            }
+        }
+        if(cur!=null){
+            cur.close();
+        }*/
     }
 
     @Override
