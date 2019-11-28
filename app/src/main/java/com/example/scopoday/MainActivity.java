@@ -2,11 +2,16 @@ package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Debug;
@@ -41,18 +46,16 @@ public class MainActivity extends AppCompatActivity {
     String contactInfo;
     public static Contact transmittedContact;
     public static int transmittedContactPosition;
+    public static MainActivity mainActivity;
 
     Button addContactButton;
     ImageButton addProfileButton;
 
     ListView contactListView;
-    public static ArrayList<Contact> contactList = new ArrayList<>();
+    public static ArrayList<Contact> contactList;
     ContactListAdapter mainAdapter;
 
-    Contact john = new Contact(1,"John", new Date(1999,0,17));
-    Contact lisa = new Contact(2,"Lisa", new Date(2000,8,25));
-    Contact markus = new Contact(3,"Markus", new Date(1990,9,01));
-    Contact lukas = new Contact(4,"Lukas", new Date(2001,01,1));
+
 
     //ArrayAdapter adapter;
 
@@ -62,21 +65,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainActivity = this;
+
         setContentView(R.layout.activity_main);
         // createContactButtons();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 10);
+
+        }
 
         contactListView = findViewById(R.id.ContantList_ID);
 
-        final ArrayList<Contact> contactArrayList = new ArrayList<>();
-        contactArrayList.add(john);
-        contactArrayList.add(lisa);
-        contactArrayList.add(markus);
-        contactArrayList.add(lukas);
-
-        contactList = contactArrayList;
+        if(contactList == null) contactList = new ArrayList<>();    //Falls Permissions abgelehnt wurden, eine leere Liste erstellen.
 
         //ContactListAdapter adapter = new ContactListAdapter(this, R.layout.adapter_view_layout, contactList);
         ContactListAdapter adapter = new ContactListAdapter(this, contactList);
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //getContactsListFromMobildephone();
+
 
         /*addProfileButton = (ImageButton) findViewById(R.id.ProfileButton_ID);
 
@@ -118,54 +122,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    //wollte hier die Kontakte aus dem Telefon Holen :/ bahhh
-    public void getContactsListFromMobildephone(){
-        /*Cursor cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
-        startManagingCursor(cursor);
-
-        String[] from = {ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone._ID};
-
-        int[] to = (R.id.textView, );
-
-        SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(this, android.R.layout.list_content, cursor, from, to);
-
-        contactListView.setAdapter(simpleCursorAdapter);
-        contactListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);*/
-
-        /*
-        ContentResolver cr = getContentResolver();
-        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
-                null, null, null, null);
-
-        if ((cur != null ? cur.getCount() : 0) > 0) {
-            while (cur != null && cur.moveToNext()) {
-                String id = cur.getString(
-                        cur.getColumnIndex(ContactsContract.Contacts._ID));
-                String name = cur.getString(cur.getColumnIndex(
-                        ContactsContract.Contacts.DISPLAY_NAME));
-
-                if (cur.getInt(cur.getColumnIndex(
-                        ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
-                    Cursor pCur = cr.query(
-                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                            null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
-                            new String[]{id}, null);
-                    while (pCur.moveToNext()) {
-                        String phoneNo = pCur.getString(pCur.getColumnIndex(
-                                ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        Log.i(TAG, "Name: " + name);
-                        Log.i(TAG, "Phone Number: " + phoneNo);
-                    }
-                    pCur.close();
-                }
-            }
-        }
-        if(cur!=null){
-            cur.close();
-        }*/
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -211,14 +167,6 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
-    public void AddContact() {
-        Contact sampleContact = new Contact(contactList.size(),"Name", new Date(2000,00,01));
-        contactList.add(sampleContact);
-        transmittedContact = sampleContact;
-        transmittedContactPosition = contactList.size()-1;
-        Log.d("TransmittedContactPostition", Integer.toString(contactList.size()));
-        openContactActivity();
-    }
 
     public void openContactListActivity(){
         Intent intent = new Intent(this, ContactListActivity.class);
@@ -232,5 +180,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 10: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
 
 }

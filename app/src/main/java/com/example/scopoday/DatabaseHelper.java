@@ -91,9 +91,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
         Contact contact = new Contact();
         try {
-            contact = new Contact(cursor.getString(1), theFormat.parse(cursor.getString(2)) );
+            contact = new Contact();
 
-        }catch (ParseException e){
+        }catch (Exception e){
             e.printStackTrace();
         }
         return contact;
@@ -112,7 +112,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         if(cursor.moveToFirst()){
             do{
                 Contact contact = new Contact();
-                contact.setId(Integer.parseInt(cursor.getString(0)));
+                contact.setId(cursor.getString(0));
                 contact.setName(cursor.getString(1));
                 try{
                     contact.setBirthdate(theFormat.parse(cursor.getString(2)));
