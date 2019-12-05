@@ -12,6 +12,10 @@ public class Contactdata {
 
         }
 
+        public Contactdata(String _name){
+            name = _name;
+        }
+
         public Contactdata(String _name, String _birthday, String _zodiacsign) {
             name = _name;
             birthday = _birthday;

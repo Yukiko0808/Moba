@@ -196,6 +196,14 @@ public class MainActivity extends AppCompatActivity {
         openContactActivity();
     }*/
 
+    public void addContactToDatabase (Contactdata Contact){
+        db.addContact(Contact);
+    }
+
+    public  List  getAllContactsFromDatabase(){
+        return  db.getAllContacts();
+    }
+
     public void openContactListActivity(){
         Intent intent = new Intent(this, ContactListActivity.class);
         startActivity(intent);

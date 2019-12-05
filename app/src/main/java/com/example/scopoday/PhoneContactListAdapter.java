@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PhoneContactListAdapter extends ArrayAdapter<PhoneContacts> {
+public class PhoneContactListAdapter extends  ArrayAdapter<PhoneContacts> {
 
 
     public PhoneContactListAdapter(Context context, ArrayList<PhoneContacts> objects) {

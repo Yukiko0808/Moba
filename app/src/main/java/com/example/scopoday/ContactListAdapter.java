@@ -36,11 +36,12 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
     TextView txtDaysTillBD;
     private Handler handler;
     private Runnable runnable;
+
 /*
-    public ContactListAdapter(Context context, int resource, ArrayList<Contact> contacts) {
-        super(context, resource, contacts);
+    public ContactListAdapter(Context context, ArrayList<Contact> contacts) {
+        super(context, 0, contacts);
         this.mContext = context;
-        this.mResource = resource;
+        //this.mResource = resource;
     }*/
 
     public ContactListAdapter(Context context, ArrayList<Contact> contacts) {
@@ -48,6 +49,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         this.mContext = context;
         //this.mResource = resource;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
