@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
     //DatabaseHelper db = new DatabaseHelper(this);
 
+    private MySQLHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +72,24 @@ public class MainActivity extends AppCompatActivity {
         contactArrayList.add(lisa);
         contactArrayList.add(markus);
         contactArrayList.add(lukas);
+
+
+        // wenn man sich in einem Fragment befindet, wird nicht "this" übergeben sondern "getContext()"
+        db = new MySQLHelper(this);
+
+        // Kontakte in die Tabelle schreiben
+        // Wenn man beim Eintragen auf den Haken in der Tastatur geht, muss eine Funktion aufgerufen werden, die folgendes aufruft:
+        // (natürlich mit Variablen statt Strings)
+        // db.addContact(new Contactdata("Nala", "20.07.1990", "Lio"));
+        // db.addContact(new Contactdata("Ben", "22.09.1999", "Libra"));
+
+        // Kontakte aus der Tabelle holen und in eine Liste speichern
+        // List<Contactdata> contactdataList = db.getAllContacts();
+
+        // Wenn man die Liste sehen will, folgendes machen:
+        // 1. Breakpoint setzen (an Stelle der Liste oder eins weiter)
+        // 2. "Run" -> "Debug 'app'. Compiler wird am Breakpoint anhalten. Unter Variables kann man die Liste anschauen.
+
 
         contactList = contactArrayList;
 
