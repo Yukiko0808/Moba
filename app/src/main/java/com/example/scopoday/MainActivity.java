@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     //DatabaseHelper db = new DatabaseHelper(this);
 
+    private MySQLHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,25 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+
+        // wenn man sich in einem Fragment befindet, wird nicht "this" übergeben sondern "getContext()"
+        db = new MySQLHelper(this);
+
+        // Kontakte in die Tabelle schreiben
+        // Wenn man beim Eintragen auf den Haken in der Tastatur geht, muss eine Funktion aufgerufen werden, die folgendes aufruft:
+        // (natürlich mit Variablen statt Strings)
+        // db.addContact(new Contactdata("Nala", "20.07.1990", "Lio"));
+        // db.addContact(new Contactdata("Ben", "22.09.1999", "Libra"));
+
+        // Kontakte aus der Tabelle holen und in eine Liste speichern
+        // List<Contactdata> contactdataList = db.getAllContacts();
+
+        // Wenn man die Liste sehen will, folgendes machen:
+        // 1. Breakpoint setzen (an Stelle der Liste oder eins weiter)
+        // 2. "Run" -> "Debug 'app'. Compiler wird am Breakpoint anhalten. Unter Variables kann man die Liste anschauen.
+
+
+       // contactList = null;
         contactListView = findViewById(R.id.ContantList_ID);
 
         if(contactList == null) contactList = new ArrayList<>();    //Falls Permissions abgelehnt wurden, eine leere Liste erstellen.
@@ -98,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         contactText = findViewById(R.id.textView_ID);
+
+
         addContactButton = (Button) findViewById(R.id.AddContactButton_ID);
 
         addContactButton.setOnClickListener(new View.OnClickListener() {
@@ -105,10 +127,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Open Contact list", Toast.LENGTH_SHORT).show();
                 openContactListActivity();
+                //AddContact();
             }
         });
-
-
 
         /*addProfileButton = (ImageButton) findViewById(R.id.ProfileButton_ID);
 
@@ -121,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -166,7 +186,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
-
+/*
+    public void AddContact() {
+        Contact sampleContact = new Contact(contactList.size(),"Name", new Date(2000,00,01));
+        contactList.add(sampleContact);
+        transmittedContact = sampleContact;
+        transmittedContactPosition = contactList.size()-1;
+        Log.d("TransmittedContactPostition", Integer.toString(contactList.size()));
+        openContactActivity();
+    }*/
 
     public void openContactListActivity(){
         Intent intent = new Intent(this, ContactListActivity.class);
