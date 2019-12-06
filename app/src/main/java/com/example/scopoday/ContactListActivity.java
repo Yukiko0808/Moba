@@ -35,7 +35,7 @@ import java.util.List;
 
 public class ContactListActivity extends AppCompatActivity {
 
-    ArrayList<Contact> contactList;
+    ArrayList<Contactdata> contactList;
 
     ContactListAdapter contactAdapter;
 
@@ -67,7 +67,7 @@ public class ContactListActivity extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.contactListView_ID);
 
-       // contactList = MainActivity.mainActivity.getAllContactsFromDatabase();
+        contactList = MainActivity.mainActivity.getAllContactsFromDatabase();
 
         contactAdapter = new ContactListAdapter( ContactListActivity.this, contactList);
 

@@ -24,7 +24,7 @@ import java.util.Date;
 import android.os.Handler;
 import android.widget.Toast;
 
-public class ContactListAdapter extends ArrayAdapter<Contact> {
+public class ContactListAdapter extends ArrayAdapter<Contactdata> {
 
     private static final String TAG = "ContactListAdapter";
 
@@ -44,7 +44,7 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
         //this.mResource = resource;
     }*/
 
-    public ContactListAdapter(Context context, ArrayList<Contact> contacts) {
+    public ContactListAdapter(Context context, ArrayList<Contactdata> contacts) {
         super(context, 0, contacts);
         this.mContext = context;
         //this.mResource = resource;
@@ -53,9 +53,9 @@ public class ContactListAdapter extends ArrayAdapter<Contact> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Contact contact = getItem(position);
+        Contactdata contact = getItem(position);
         String name = getItem(position).getName();
-        Date birthdate = getItem(position).getBirthdate();
+        Date birthdate = getItem(position).birthdayDate;
 
         //Contact contact = new Contact(name, birthdate);
 /*

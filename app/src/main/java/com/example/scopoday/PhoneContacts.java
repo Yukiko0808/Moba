@@ -8,4 +8,8 @@ public class PhoneContacts {
         this.id = id;
         this.name = name;
     }
+
+    public PhoneContacts(String name){
+        this.name = name;
+    }
 }
