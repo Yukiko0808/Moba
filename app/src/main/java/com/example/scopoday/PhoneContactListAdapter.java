@@ -15,9 +15,11 @@ import java.util.ArrayList;
 
 public class PhoneContactListAdapter extends  ArrayAdapter<PhoneContacts> {
 
+    private Context mContext;
 
     public PhoneContactListAdapter(Context context, ArrayList<PhoneContacts> objects) {
         super(context, 0, objects);
+        mContext = context;
     }
 
     @Override

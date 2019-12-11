@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -19,11 +20,13 @@ import java.util.ArrayList;
 
 public class PhoneContactListActivity extends AppCompatActivity {
 
+    ArrayList<PhoneContacts> phoneContacts = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_contact_list);
-        ArrayList<PhoneContacts> phoneContacts = null;
+
 
         if(ContextCompat.checkSelfPermission(MainActivity.mainActivity, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
             Log.i("Error", "Hat keine  Permissions");
@@ -31,7 +34,7 @@ public class PhoneContactListActivity extends AppCompatActivity {
         }
         else{
             //Weiter zu Kontakt anlegen
-            Log.i("Error", "Hat Permissions boi");
+            Log.i("Error", "Hat Permissions");
             phoneContacts = getContactsListFromMobilePhone();
         }
 
@@ -47,15 +50,21 @@ public class PhoneContactListActivity extends AppCompatActivity {
 
         ListView listView = (ListView)findViewById(R.id.phoneContactListID);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Contactdata con = new Contactdata(phoneContacts.get(i).name);
+                MainActivity.mainActivity.addContactToDatabase(con);
+                Log.d("!!! Contact Liste Database", MainActivity.mainActivity.getAllContactsFromDatabase().get(i).toString());
+
+            }
+        });
+
         PhoneContactListAdapter adapter;
         adapter = new PhoneContactListAdapter(this, phoneContacts);
         listView.setAdapter(adapter);
 
-
-
     }
-
-
 
     public ArrayList<PhoneContacts> getContactsListFromMobilePhone(){
         ContentResolver cr = getContentResolver();
@@ -71,9 +80,9 @@ public class PhoneContactListActivity extends AppCompatActivity {
             while (cur.moveToNext()) {
                 String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
                 String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                //contacts.add(new Contact())
+                /*
                 Log.i("Contact ID", id);
-                Log.i("Contact name", name);
+                Log.i("Contact name", name);*/
 
                 contacts.add(new PhoneContacts(id, name));
             }

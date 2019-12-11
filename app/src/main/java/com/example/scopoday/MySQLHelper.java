@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class MySQLHelper extends SQLiteOpenHelper {
     private static final String KEY_NAME = "name";
     private static final String KEY_BIRTHDAY = "birthday";
     private static final String KEY_ZODIACSIGN = "zodiacsign";
+
 
     private static final String[] COLUMNS = {KEY_ID, KEY_NAME, KEY_BIRTHDAY, KEY_ZODIACSIGN};
 

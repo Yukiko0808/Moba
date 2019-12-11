@@ -37,6 +37,8 @@ public class ContactActivity extends AppCompatActivity {
     TextView starSignText;
     ImageView zodiacsign;
 
+    Contactdata tempContact;
+
     int todayLuck;
     int todayLove;
     int todayJob;
@@ -88,10 +90,16 @@ public class ContactActivity extends AppCompatActivity {
 
         contactBirthdayTV = (TextView) findViewById(R.id.contactDatepicker_TV_ID);
 
-        contactBirthdayTV.setText(Integer.toString(MainActivity.transmittedContact.birthdayDate.getDate()) + "."
-                + Integer.toString(MainActivity.transmittedContact.birthdayDate.getMonth()+1) + "."
-                + Integer.toString(MainActivity.transmittedContact.birthdayDate.getYear())
-        );
+        if(MainActivity.transmittedContact.birthdayDate != null){
+            contactBirthdayTV.setText(Integer.toString(MainActivity.transmittedContact.birthdayDate.getDate()) + "."
+                    + Integer.toString(MainActivity.transmittedContact.birthdayDate.getMonth()+1) + "."
+                    + Integer.toString(MainActivity.transmittedContact.birthdayDate.getYear())
+            );
+        }
+        else{
+            contactBirthdayTV.setText("Please select Date");
+        }
+
 
         contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,9 +187,14 @@ public class ContactActivity extends AppCompatActivity {
 
     }
 
+    public void setTempContact(Contactdata tempContact) {
+        this.tempContact = tempContact;
+    }
+
     private String CalculateStarSign(){
         String starSign = "NoStarsignFound";
         Contactdata actualContact = MainActivity.transmittedContact;
+
         if(actualContact.birthdayDate.after(new Date(actualContact.birthdayDate.getYear(),11,21))
                 && actualContact.birthdayDate.before(new Date(actualContact.birthdayDate.getYear(),11, 32))) {
             // Steinbock - capricorn
@@ -354,8 +367,6 @@ public class ContactActivity extends AppCompatActivity {
             return starSign;
         }
     }
-
-
 
     private void SetBirthdateInMain(Date d){
         Contactdata newContact = MainActivity.transmittedContact;

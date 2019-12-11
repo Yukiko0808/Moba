@@ -21,12 +21,12 @@
             android:layout_marginBottom="18dp"
             android:layout_weight="66.66"
             android:background="@drawable/btn_rounded_corners"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="#FFFFFF"
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
             android:text="00"
             android:textAlignment="center"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/textViewDate"

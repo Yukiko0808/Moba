@@ -163,13 +163,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(id == R.id.contact_settings){
-            Toast.makeText(MainActivity.this, "Kontakte", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "contacts", Toast.LENGTH_SHORT).show();
             openContactListActivity();
+        }
+
+        if(id == R.id.zodiacsign_settings){
+            Toast.makeText(MainActivity.this, "zodiacsigns", Toast.LENGTH_SHORT).show();
+            openZodiacsigns();
         }
 
 
         if(id == R.id.calendar_settings){
-            Toast.makeText(MainActivity.this, "Kalender", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "calendar", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -216,6 +221,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
+
+    public void openZodiacsigns(){
+        Intent intent = new Intent(this, ZodiacsignsActivity.class);
+        startActivity(intent);
+        //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
 
     private void OrderContactsByBirthday(){
         for(int i=0; i<=contactList.size(); i++){
