@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+
     >
 
         <item
@@ -10,12 +11,18 @@
         <item
             android:id="@+id/contact_settings"
             android:orderInCategory="102"
-            android:title="Kontakte" />
+            android:title="contacts" />
 
         <item
             android:id="@+id/calendar_settings"
             android:orderInCategory="102"
-            android:title="Kalender" />
+            android:title="calendar" />
+
+        <item
+            android:id="@+id/zodiacsign_settings"
+            android:orderInCategory="102"
+            android:title="zodiacsigns" />
+
 
 
 

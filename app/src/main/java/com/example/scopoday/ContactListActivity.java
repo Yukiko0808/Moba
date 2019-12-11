@@ -1,10 +1,17 @@
 package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
@@ -55,6 +62,8 @@ public class ContactListActivity extends AppCompatActivity {
 
 
         lv = (ListView) findViewById(R.id.contactListView_ID);
+
+
 
         addButton = findViewById(R.id.addContact_Btn_ID);
 
@@ -135,11 +144,8 @@ public class ContactListActivity extends AppCompatActivity {
     }
 
     public void AddContact() {
-        Contact sampleContact = new Contact(contactList.size(),"Name", new Date(2000,00,01));
-        contactList.add(sampleContact);
-        MainActivity.transmittedContact = sampleContact;
-        MainActivity.transmittedContactPosition = contactList.size()-1;
-        openContactActivity();
+        Intent intent = new Intent(this, PhoneContactListActivity.class);
+        startActivity(intent);
     }
 
     public void openContactActivity(){
@@ -147,6 +153,8 @@ public class ContactListActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
+
 
 
 }

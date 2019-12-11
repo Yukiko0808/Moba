@@ -2,12 +2,21 @@ package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,17 +46,15 @@ public class MainActivity extends AppCompatActivity {
     String contactInfo;
     public static Contact transmittedContact;
     public static int transmittedContactPosition;
+    public static MainActivity mainActivity;
 
     Button addContactButton;
     ImageButton addProfileButton;
 
-    public static ArrayList<Contact> contactList = new ArrayList<>();
+    ListView contactListView;
+    public static ArrayList<Contact> contactList;
     ContactListAdapter mainAdapter;
 
-    Contact john = new Contact(1,"John", new Date(1999,0,17));
-    Contact lisa = new Contact(2,"Lisa", new Date(2000,8,25));
-    Contact markus = new Contact(3,"Markus", new Date(1990,9,01));
-    Contact lukas = new Contact(4,"Lukas", new Date(2001,01,1));
 
 
     //ArrayAdapter adapter;
@@ -59,19 +66,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainActivity = this;
+
         setContentView(R.layout.activity_main);
         // createContactButtons();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
 
-        final ListView contactListView = findViewById(R.id.ContantList_ID);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 10);
 
-        final ArrayList<Contact> contactArrayList = new ArrayList<>();
-        contactArrayList.add(john);
-        contactArrayList.add(lisa);
-        contactArrayList.add(markus);
-        contactArrayList.add(lukas);
+        }
 
 
         // wenn man sich in einem Fragment befindet, wird nicht "this" übergeben sondern "getContext()"
@@ -91,7 +97,10 @@ public class MainActivity extends AppCompatActivity {
         // 2. "Run" -> "Debug 'app'. Compiler wird am Breakpoint anhalten. Unter Variables kann man die Liste anschauen.
 
 
-        contactList = contactArrayList;
+       // contactList = null;
+        contactListView = findViewById(R.id.ContantList_ID);
+
+        if(contactList == null) contactList = new ArrayList<>();    //Falls Permissions abgelehnt wurden, eine leere Liste erstellen.
 
         //ContactListAdapter adapter = new ContactListAdapter(this, R.layout.adapter_view_layout, contactList);
         ContactListAdapter adapter = new ContactListAdapter(this, contactList);
@@ -109,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         contactText = findViewById(R.id.textView_ID);
-        contactText.setText("Alle Kontakte:");
+
 
         addContactButton = (Button) findViewById(R.id.AddContactButton_ID);
 
@@ -134,6 +143,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void addContacttoDatabase (Contactdata Contact){
+        db.addContact(Contact);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -153,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Kontakte", Toast.LENGTH_SHORT).show();
             openContactListActivity();
         }
+
 
         if(id == R.id.calendar_settings){
             Toast.makeText(MainActivity.this, "Kalender", Toast.LENGTH_SHORT).show();
@@ -177,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
-
+/*
     public void AddContact() {
         Contact sampleContact = new Contact(contactList.size(),"Name", new Date(2000,00,01));
         contactList.add(sampleContact);
@@ -185,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         transmittedContactPosition = contactList.size()-1;
         Log.d("TransmittedContactPostition", Integer.toString(contactList.size()));
         openContactActivity();
-    }
+    }*/
 
     public void openContactListActivity(){
         Intent intent = new Intent(this, ContactListActivity.class);
@@ -199,5 +213,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 10: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
 
 }

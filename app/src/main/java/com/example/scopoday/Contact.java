@@ -10,7 +10,7 @@ import java.util.Calendar;
 
 public class Contact {
 
-    int id;
+    String id;
     String name;
     DateFormat theFormat = new SimpleDateFormat("yyyy-mm-dd");
     Date birthdate;
@@ -34,16 +34,12 @@ public class Contact {
         }
     }*/
 
-    public Contact(int id, String contactName, Date bd){
-        this.id = id;
+    public Contact(String contactID, String contactName){
+        this.id = contactID;
         this.name = contactName;
-        this.birthdate = bd;
     }
 
-    public Contact(String contactName, Date bd){
-        this.name = contactName;
-        this.birthdate = bd;
-    }
+
 
     public Contact(){
         //Error Meldung Bitte Name und Geburtsdatum eintragen
@@ -152,11 +148,11 @@ public class Contact {
         }
     }
 */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
