@@ -143,6 +143,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void addContacttoDatabase (Contactdata Contact){
+        db.addContact(Contact);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -162,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Kontakte", Toast.LENGTH_SHORT).show();
             openContactListActivity();
         }
+
 
         if(id == R.id.calendar_settings){
             Toast.makeText(MainActivity.this, "Kalender", Toast.LENGTH_SHORT).show();
