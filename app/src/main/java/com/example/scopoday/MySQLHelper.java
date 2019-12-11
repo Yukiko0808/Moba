@@ -45,6 +45,7 @@ public class MySQLHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String dropIfEx = "DROP TABLE IF EXISTS " + TABLE_CONTACTDATA;
         db.execSQL((dropIfEx));
+
         this.onCreate((db));
     }
 
@@ -60,10 +61,8 @@ public class MySQLHelper extends SQLiteOpenHelper {
         db.insert(TABLE_CONTACTDATA,
                 null,
                 values);
-
         db.close();
     }
-
 
     public List<Contactdata> getAllContacts() {
         List<Contactdata> contacts = new LinkedList<>();

@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -30,10 +31,11 @@ import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ContactListActivity extends AppCompatActivity {
 
-    ArrayList<Contact> contactList;
+    ArrayList<Contactdata> contactList;
 
     ContactListAdapter contactAdapter;
 
@@ -60,14 +62,12 @@ public class ContactListActivity extends AppCompatActivity {
         // finally change the color
         window.setStatusBarColor(this.getResources().getColor(R.color.cardview_shadow_end_color));
 
+        addButton = findViewById(R.id.addContact_Btn_ID);
+
 
         lv = (ListView) findViewById(R.id.contactListView_ID);
 
-
-
-        addButton = findViewById(R.id.addContact_Btn_ID);
-
-        contactList = MainActivity.contactList;
+        contactList = MainActivity.mainActivity.getAllContactsFromDatabase();
 
         contactAdapter = new ContactListAdapter( ContactListActivity.this, contactList);
 
@@ -93,17 +93,6 @@ public class ContactListActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                /*SparseBooleanArray positionchecker = lv.getCheckedItemPositions();
-                int count = lv.getCount();
-                for(int item = count-1;item>=0;item--){
-                    if(positionchecker.get(item)){
-                        Log.d("Deleted Item", Integer.toString(item));
-                        contactAdapter.remove(contactList.get(item));
-                        Toast.makeText(ContactListActivity.this, "Item delete Successfully", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                positionchecker.clear(); */
-
                 tempPos = position;
                 registerForContextMenu(lv);
 
@@ -117,6 +106,8 @@ public class ContactListActivity extends AppCompatActivity {
         addButton.setOnClickListener(addListener);
         lv.setAdapter(contactAdapter);
     }
+
+
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {

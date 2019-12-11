@@ -18,17 +18,37 @@
 
         <TextView
             android:id="@+id/textViewName"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="300dp"
+            android:layout_height="33dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="21dp"
             android:layout_weight="66.6"
             android:fontFamily="@font/poppins_semibold"
             android:text="TextView1"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
             android:textSize="16sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="57dp"
+            android:layout_height="43dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="19dp"
+            android:layout_toEndOf="@+id/textViewName"
+            android:background="#00584242"
+            android:foregroundTint="#AD5372"
+            android:src="@android:drawable/ic_input_add"
+            android:tint="#EDBD67B1" />
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

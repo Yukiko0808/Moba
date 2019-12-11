@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView contactText;
     String contactInfo;
-    public static Contact transmittedContact;
+    public static Contactdata transmittedContact;
     public static int transmittedContactPosition;
     public static MainActivity mainActivity;
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton addProfileButton;
 
     ListView contactListView;
-    public static ArrayList<Contact> contactList;
+    public static ArrayList<Contactdata> contactList;
     ContactListAdapter mainAdapter;
 
 
@@ -200,6 +200,16 @@ public class MainActivity extends AppCompatActivity {
         Log.d("TransmittedContactPostition", Integer.toString(contactList.size()));
         openContactActivity();
     }*/
+
+    public void addContactToDatabase (Contactdata contact){
+        db.addContact(contact);
+    }
+
+    public  ArrayList  getAllContactsFromDatabase(){
+        ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
+        listOfContacts.addAll(db.getAllContacts());
+        return  listOfContacts;
+    }
 
     public void openContactListActivity(){
         Intent intent = new Intent(this, ContactListActivity.class);

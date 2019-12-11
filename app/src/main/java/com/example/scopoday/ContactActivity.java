@@ -88,9 +88,9 @@ public class ContactActivity extends AppCompatActivity {
 
         contactBirthdayTV = (TextView) findViewById(R.id.contactDatepicker_TV_ID);
 
-        contactBirthdayTV.setText(Integer.toString(MainActivity.transmittedContact.getBirthdate().getDate()) + "."
-                + Integer.toString(MainActivity.transmittedContact.getBirthdate().getMonth()+1) + "."
-                + Integer.toString(MainActivity.transmittedContact.getBirthdate().getYear())
+        contactBirthdayTV.setText(Integer.toString(MainActivity.transmittedContact.birthdayDate.getDate()) + "."
+                + Integer.toString(MainActivity.transmittedContact.birthdayDate.getMonth()+1) + "."
+                + Integer.toString(MainActivity.transmittedContact.birthdayDate.getYear())
         );
 
         contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
@@ -98,9 +98,9 @@ public class ContactActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Calendar cal = Calendar.getInstance();
                 //int year = cal.get(Calendar.YEAR);
-                int year = MainActivity.transmittedContact.birthdate.getYear();
-                int month = MainActivity.transmittedContact.birthdate.getMonth();
-                int day = MainActivity.transmittedContact.birthdate.getDate();
+                int year = MainActivity.transmittedContact.birthdayDate.getYear();
+                int month = MainActivity.transmittedContact.birthdayDate.getMonth();
+                int day = MainActivity.transmittedContact.birthdayDate.getDate();
                // int month = cal.get(Calendar.MONTH);
                 //int day = cal.get(Calendar.DAY_OF_MONTH);
 
@@ -148,10 +148,10 @@ public class ContactActivity extends AppCompatActivity {
 
      private int CalculateAge(){
 
-        Log.d("Date of Contact", Integer.toString(MainActivity.transmittedContact.getBirthdate().getYear()));
+        Log.d("Date of Contact", Integer.toString(MainActivity.transmittedContact.birthdayDate.getYear()));
 
         //hier müsste eigentlich noch das genaue datum berüchsichtigt werden
-         int age =  Calendar.getInstance().get(Calendar.YEAR) - MainActivity.transmittedContact.getBirthdate().getYear();
+         int age =  Calendar.getInstance().get(Calendar.YEAR) - MainActivity.transmittedContact.birthdayDate.getYear();
 
         return age;
     }
@@ -159,11 +159,11 @@ public class ContactActivity extends AppCompatActivity {
     private void CalculateHoroskopValues(){
 
         Random horoskopValue = new Random();
-
+/*
         todayJob = 10 + horoskopValue.nextInt(100) * MainActivity.transmittedContact.getJob();
         todayLove = 10 + horoskopValue.nextInt(100) * MainActivity.transmittedContact.getLove();
         todayLuck = 10 + horoskopValue.nextInt(100) * MainActivity.transmittedContact.getLove();
-
+*/
         Double ndsek = Math.random()*(91)+10;
         todayJob = ndsek.intValue();
 
@@ -181,14 +181,15 @@ public class ContactActivity extends AppCompatActivity {
 
     private String CalculateStarSign(){
         String starSign = "NoStarsignFound";
-        Contact actualContact = MainActivity.transmittedContact;
-        if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),11,21))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),11, 32))) {
+        Contactdata actualContact = MainActivity.transmittedContact;
+        if(actualContact.birthdayDate.after(new Date(actualContact.birthdayDate.getYear(),11,21))
+                && actualContact.birthdayDate.before(new Date(actualContact.birthdayDate.getYear(),11, 32))) {
             // Steinbock - capricorn
             starSign = "capricorn";
+            /*
             actualContact.setJob(10);
             actualContact.setLuck(2);
-            actualContact.setLove(9);
+            actualContact.setLove(9);*/
             zodiacsign.setImageResource(R.drawable.capricorn_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.capricorn);
@@ -196,18 +197,19 @@ public class ContactActivity extends AppCompatActivity {
 
         }
 
-        if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),0,0))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),0, 21))) {
+        if(actualContact.birthdayDate.after(new Date(actualContact.birthdayDate.getYear(),0,0))
+                && actualContact.birthdayDate.before(new Date(actualContact.birthdayDate.getYear(),0, 21))) {
             // Steinbock - capricorn
             starSign = "capricorn";
+            /*
             actualContact.setJob(5);
             actualContact.setLuck(4);
-            actualContact.setLove(8);
+            actualContact.setLove(8);*/
             zodiacsign.setImageResource(R.drawable.capricorn_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.capricorn);
             return starSign;
-        }
+        }/*
         else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),0,20))
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),1, 20))){
             //Wassermann - aquarius
@@ -347,7 +349,7 @@ public class ContactActivity extends AppCompatActivity {
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.sagittarius);
             return starSign;
-        }
+        }*/
         else {
             return starSign;
         }
@@ -356,8 +358,8 @@ public class ContactActivity extends AppCompatActivity {
 
 
     private void SetBirthdateInMain(Date d){
-        Contact newContact = MainActivity.transmittedContact;
-        newContact.setBirthdate(d);
+        Contactdata newContact = MainActivity.transmittedContact;
+        newContact.setBirthdayDate(d);
         MainActivity.contactList.set(MainActivity.transmittedContactPosition, newContact);
         String ageString = Integer.toString(CalculateAge());
         contactAge.setText(ageString);
@@ -366,7 +368,7 @@ public class ContactActivity extends AppCompatActivity {
     }
 
     private void SetNameInMain(String n){
-        Contact newContact = MainActivity.transmittedContact;
+        Contactdata newContact = MainActivity.transmittedContact;
         newContact.setName(n);
         MainActivity.contactList.set(MainActivity.transmittedContactPosition, newContact);
 
