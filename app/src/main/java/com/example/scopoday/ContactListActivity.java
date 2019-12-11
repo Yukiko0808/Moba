@@ -1,37 +1,20 @@
 package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.Toast;
-import android.widget.PopupMenu;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class ContactListActivity extends AppCompatActivity {
 
@@ -43,7 +26,6 @@ public class ContactListActivity extends AppCompatActivity {
 
     ListView lv;
 
-
     int tempPos;
 
     @Override
@@ -52,6 +34,8 @@ public class ContactListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_list);
 
         Window window = this.getWindow();
+
+        // Anzeigeleiste Oben ändern
 
         // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -62,8 +46,23 @@ public class ContactListActivity extends AppCompatActivity {
         // finally change the color
         window.setStatusBarColor(this.getResources().getColor(R.color.cardview_shadow_end_color));
 
+
+        //Kontakte hinzufügen mit Add Button
+
         addButton = findViewById(R.id.addContact_Btn_ID);
 
+        View.OnClickListener addListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //Kontakt mit Telefon Kontakten hinzufügen
+                // AddContact();
+
+                // Popup window das Kontakt hinzufügt
+                openAddContactPopupWindow(v);
+            }
+        };
+
+        //Kontakt liste anzeigen
 
         lv = (ListView) findViewById(R.id.contactListView_ID);
 
@@ -72,14 +71,6 @@ public class ContactListActivity extends AppCompatActivity {
         contactAdapter = new ContactListAdapter( ContactListActivity.this, contactList);
 
         lv.setAdapter(contactAdapter);
-
-        View.OnClickListener addListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-               // contactList.add()
-                AddContact();
-            }
-        };
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -144,6 +135,14 @@ public class ContactListActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
+    public void openAddContactPopupWindow(View view){
+
+        AddContactDialog addContactDialog = new AddContactDialog();
+        addContactDialog.show(getSupportFragmentManager(), "Add Contact");
+
+    }
+
 
 
 
