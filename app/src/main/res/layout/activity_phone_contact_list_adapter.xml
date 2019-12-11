@@ -34,21 +34,6 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="57dp"
-            android:layout_height="43dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="19dp"
-            android:layout_toEndOf="@+id/textViewName"
-            android:background="#00584242"
-            android:foregroundTint="#AD5372"
-            android:src="@android:drawable/ic_input_add"
-            android:tint="#EDBD67B1" />
-
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
