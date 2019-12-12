@@ -1,8 +1,9 @@
 package com.example.scopoday;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Contactdata {
+public class Contactdata implements Serializable {
 
         private int id;
         protected String name;

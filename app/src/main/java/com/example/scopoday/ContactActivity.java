@@ -4,6 +4,7 @@ import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.inputmethodservice.Keyboard;
@@ -37,21 +38,31 @@ public class ContactActivity extends AppCompatActivity {
     TextView starSignText;
     ImageView zodiacsign;
 
-    Contactdata tempContact;
+    Contactdata displayedContact;
 
     int todayLuck;
     int todayLove;
     int todayJob;
 
-    //SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy hh:mm:ss");
     private DatePickerDialog.OnDateSetListener mdateSetListener;
 
+    MySQLHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
+        db = MainActivity.db;
+
+        //Kontaktdaten aus intent holen
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        displayedContact =(Contactdata) bundle.getSerializable("CONTACTDATA");
+
+        Log.d("Displayed Kontakt id: ", String.valueOf(displayedContact.getId()) + "Name: " + displayedContact.getName());
+
+        //Kontakt Namenfeld einrichten
         contactNameText = findViewById(R.id.ContactName_TV_ID);
         contactNameText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,16 +70,18 @@ public class ContactActivity extends AppCompatActivity {
                 contactNameText.selectAll();
             }
         });
-
-        zodiacsign = findViewById(R.id.zodiacsign);
-
+        //Neuen Kontakt Namen eingeben
         contactNameText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 boolean handled = false;
                 if (i == EditorInfo.IME_ACTION_DONE){
+
                     Log.d("CONTACT_CHANGE_NAME", "neuer name:" + contactNameText.getText().toString());
-                    SetNameInMain(contactNameText.getText().toString());
+                    //SetNameInMain(contactNameText.getText().toString());
+                    // Namen in der datenbank setzen
+                    db.updateContactName(displayedContact, contactNameText.getText().toString());
+
                     handled = true;
                     InputMethodManager imm = (InputMethodManager)getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(contactNameText.getWindowToken(), 0);
@@ -77,58 +90,51 @@ public class ContactActivity extends AppCompatActivity {
             }
         });
 
-        contactNameText.setText(MainActivity.transmittedContact.getName());
+        //Kontakt Name anzeigen
+        contactNameText.setText(displayedContact.getName());
+/*
+        //Sternzeichen Bild anzeigen
+        zodiacsign = findViewById(R.id.zodiacsign);
 
+        //Sternzeichen Text anzeigen
         starSignText =  findViewById(R.id.starSign_TV_ID);
         starSignText.setText(CalculateStarSign());
 
+        //Kontakt Alter anzeigen
         contactAge = findViewById(R.id.ContactAlter_TV_ID);
-        String ageString = Integer.toString(CalculateAge());
+        String ageString = Integer.toString(CalculateAge(displayedContact.getBirthdayDate()));
         contactAge.setText(ageString);
 
-        //Datepicker
 
+        //Geburtsdatum anzeigen
         contactBirthdayTV = (TextView) findViewById(R.id.contactDatepicker_TV_ID);
+        contactBirthdayTV.setText(displayedContact.birthday);
 
-        if(MainActivity.transmittedContact.birthdayDate != null){
-            contactBirthdayTV.setText(Integer.toString(MainActivity.transmittedContact.birthdayDate.getDate()) + "."
-                    + Integer.toString(MainActivity.transmittedContact.birthdayDate.getMonth()+1) + "."
-                    + Integer.toString(MainActivity.transmittedContact.birthdayDate.getYear())
-            );
-        }
-        else{
-            contactBirthdayTV.setText("Please select Date");
-        }
-
-
+        //Neues Geburtsdatum setzen
         contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                //int year = cal.get(Calendar.YEAR);
-                int year = MainActivity.transmittedContact.birthdayDate.getYear();
-                int month = MainActivity.transmittedContact.birthdayDate.getMonth();
-                int day = MainActivity.transmittedContact.birthdayDate.getDate();
-               // int month = cal.get(Calendar.MONTH);
-                //int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        ContactActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mdateSetListener,
+                int year = displayedContact.getBirthdayDate().getYear();
+                int month = displayedContact.getBirthdayDate().getMonth();
+                int day = displayedContact.getBirthdayDate().getDate();
+                //DatePicker auf aktuelles geburtsdatum setzen
+                DatePickerDialog dialog = new DatePickerDialog(ContactActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,mdateSetListener,
                         year,month,day);
+
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });
-
+        //Wenn neues datum gesetzt wird
         mdateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month+1;
                 String date = day +"."+ month +"."+ year;
                 contactBirthdayTV.setText(date);
-                SetBirthdateInMain(new Date(year,month-1,day));
+                displayedContact.setBirthdayDate(new Date(year,month-1,day));
             }
         };
 
@@ -151,15 +157,17 @@ public class ContactActivity extends AppCompatActivity {
         pieChart_luck.setProgress(todayLuck);
         TextView txt_luck = (TextView) findViewById(R.id.pieChart_Luck_ID).findViewById(R.id.percentText);
         txt_luck.setText(todayLuck + "%");
+
+*/
      }
 
 
-     private int CalculateAge(){
+     private int CalculateAge(Date _birthday){
 
-        Log.d("Date of Contact", Integer.toString(MainActivity.transmittedContact.birthdayDate.getYear()));
+        Log.d("Date of Contact", Integer.toString(_birthday.getYear()));
 
         //hier müsste eigentlich noch das genaue datum berüchsichtigt werden
-         int age =  Calendar.getInstance().get(Calendar.YEAR) - MainActivity.transmittedContact.birthdayDate.getYear();
+         int age =  Calendar.getInstance().get(Calendar.YEAR) -_birthday.getYear();
 
         return age;
     }
@@ -187,14 +195,13 @@ public class ContactActivity extends AppCompatActivity {
 
     }
 
-    public void setTempContact(Contactdata tempContact) {
-        this.tempContact = tempContact;
-    }
 
     private String CalculateStarSign(){
         String starSign = "NoStarsignFound";
         Contactdata actualContact = MainActivity.transmittedContact;
 
+        return "capricorn";
+        /*
         if(actualContact.birthdayDate.after(new Date(actualContact.birthdayDate.getYear(),11,21))
                 && actualContact.birthdayDate.before(new Date(actualContact.birthdayDate.getYear(),11, 32))) {
             // Steinbock - capricorn
@@ -202,7 +209,7 @@ public class ContactActivity extends AppCompatActivity {
             /*
             actualContact.setJob(10);
             actualContact.setLuck(2);
-            actualContact.setLove(9);*/
+            actualContact.setLove(9);*//*
             zodiacsign.setImageResource(R.drawable.capricorn_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.capricorn);
@@ -217,12 +224,12 @@ public class ContactActivity extends AppCompatActivity {
             /*
             actualContact.setJob(5);
             actualContact.setLuck(4);
-            actualContact.setLove(8);*/
+            actualContact.setLove(8);*//*
             zodiacsign.setImageResource(R.drawable.capricorn_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.capricorn);
             return starSign;
-        }/*
+        }
         else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),0,20))
                 && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),1, 20))){
             //Wassermann - aquarius
@@ -362,12 +369,14 @@ public class ContactActivity extends AppCompatActivity {
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.sagittarius);
             return starSign;
-        }*/
+        }*//*
         else {
             return starSign;
-        }
+        }*/
     }
 
+
+/*  // war um transmittet contakt zu setzen kann eigentlich raus
     private void SetBirthdateInMain(Date d){
         Contactdata newContact = MainActivity.transmittedContact;
         newContact.setBirthdayDate(d);
@@ -383,7 +392,7 @@ public class ContactActivity extends AppCompatActivity {
         newContact.setName(n);
         MainActivity.contactList.set(MainActivity.transmittedContactPosition, newContact);
 
-    }
+    }*/
 
     @Override
     public void finish(){

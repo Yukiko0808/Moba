@@ -101,6 +101,17 @@ public class MySQLHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updateContactName(Contactdata contactdata, String newName){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues value = new ContentValues();
+        value.put(KEY_NAME, newName);
+
+        db.update(TABLE_CONTACTDATA, value, KEY_ID + "=?",
+                new String[]{String.valueOf(contactdata.getId())});
+        db.close();
+    }
+
     public Contactdata getOneContact(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 

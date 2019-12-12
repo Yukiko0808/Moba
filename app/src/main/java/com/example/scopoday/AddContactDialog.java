@@ -17,29 +17,6 @@ public class AddContactDialog extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-/*
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        //View mView = getLayoutInflater().inflate(R.layout.add_contact_popup_window, null);
-        //builder.setView(R.layout.add_contact_popup_window);
-        //View mView = new View(builder.getContext());
-
-        View mView = getLayoutInflater().inflate(R.layout.add_contact_popup_window, null);
-
-        final EditText mContactName = (EditText)  mView.findViewById(R.id.insertName_ET_ID);
-        final EditText mBirthday  = (EditText) mView.findViewById(R.id.selectBirthday_ET_ID);
-
-        builder.setView(mView);
-
-        builder.setTitle("Add a contact")
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Log.d("Name", mContactName.getText().toString());
-                    }
-                });
-
-        return null;
-        */
 
         //Dialog Fenster erstellen
         final Dialog dialog = new Dialog(getContext());
@@ -54,9 +31,9 @@ public class AddContactDialog extends AppCompatDialogFragment {
         okButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                dialog.dismiss();
 
-                // Überprüfung ob Einfabe richtiges Format hat
+
+                // Überprüfung ob Eingabe richtiges Format hat
                 if(mBirthday.getText().toString().matches("\\d\\d\\.\\d\\d\\.\\d\\d\\d\\d")){
 
                     // Neuer Kontakt erstellen und zur Datenbank hinzufügen
@@ -67,9 +44,12 @@ public class AddContactDialog extends AppCompatDialogFragment {
                     ContactListActivity.contactAdapter.add(newContact);
 
                     Log.i("Name", mContactName.getText().toString());
+
+                    //Dialog schließen
+                    dialog.dismiss();
                 }
                 else{
-                    Toast.makeText(ContactListActivity.contactAdapter.getContext(), "Wrong date format, try: DD.MM.YYYY", Toast.LENGTH_LONG);
+                    Toast.makeText(getContext(), "Wrong date format, try: DD.MM.YYYY", Toast.LENGTH_LONG).show();
                     Log.i("Hinzufügen fehlgeschlagen, falsches Format", mContactName.getText().toString());
                 }
 

@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     ContactListAdapter mainAdapter;
 
 
-    private MySQLHelper db;
+    public static MySQLHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

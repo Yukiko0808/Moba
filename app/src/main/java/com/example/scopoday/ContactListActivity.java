@@ -38,10 +38,14 @@ public class ContactListActivity extends AppCompatActivity {
         Window window = this.getWindow();
 
         //Datenbank helfer erstellen
-        db = new MySQLHelper(this);
+        db = MainActivity.db;
+
+        //Contakte aus der db in conactList einfügen
+        ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
+        listOfContacts.addAll(db.getAllContacts());
+        contactList = listOfContacts;
 
         // Anzeigeleiste Oben ändern
-
         // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
@@ -73,18 +77,22 @@ public class ContactListActivity extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.contactListView_ID);
 
-        contactList = MainActivity.mainActivity.getAllContactsFromDatabase();
-
         contactAdapter = new ContactListAdapter( ContactListActivity.this, contactList);
 
         lv.setAdapter(contactAdapter);
+
+        //Klick auf Kontakt -> Kontakt öffnen
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MainActivity.transmittedContact = contactList.get(i);
-                openContactActivity();
+
+                //MainActivity.transmittedContact = contactList.get(i);
+
+                openContactActivity(contactList.get(i));
             }
         });
+
+        //Langes Antippen auf Kontakt -> Context Menü öffnen
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -129,14 +137,18 @@ public class ContactListActivity extends AppCompatActivity {
         contactAdapter.notifyDataSetChanged();
     }
 
-    public void AddContact() {
-        Intent intent = new Intent(this, PhoneContactListActivity.class);
-        startActivity(intent);
-    }
-
-    public void openContactActivity(){
+    public void openContactActivity(Contactdata _contact){
         Intent intent = new Intent(this, ContactActivity.class);
+        Bundle bundle = new Bundle();
+
+        //Contact daten mitschicken
+        bundle.putSerializable("CONTACTDATA", _contact);
+        intent.putExtras(bundle);
+
+        //Activity starten
         startActivity(intent);
+
+        //Animation überschreiben
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
