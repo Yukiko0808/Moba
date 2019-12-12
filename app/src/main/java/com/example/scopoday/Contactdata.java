@@ -15,13 +15,20 @@ public class Contactdata {
 
         }
 
-    public Contactdata(String _name){
-        name = _name;
-    }
-
+        public Contactdata(String _name){
+             name = _name;
+        }
+        //Konstruktor mit Date type
+        /*
         public Contactdata(String _name, Date _birthdayDate){
             name = _name;
             birthdayDate = _birthdayDate;
+        }*/
+
+        public Contactdata(String _name, String _birthday) {
+            name = _name;
+            birthday = _birthday;
+            //zodiacsign = calculateZodiacsign();
         }
 
         public Contactdata(String _name, String _birthday, String _zodiacsign) {
@@ -48,6 +55,13 @@ public class Contactdata {
 
         public void setBirthdayDate(Date newBirthday){
             this.birthdayDate = newBirthday;
+        }
+
+        public String calculateZodiacsign(){
+            String zodiac = "";
+            //alles aus Kontakt seite für bestimmung des Sternzeichens
+
+            return zodiac;
         }
 
     }

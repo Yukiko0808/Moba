@@ -56,11 +56,6 @@ public class MainActivity extends AppCompatActivity {
     ContactListAdapter mainAdapter;
 
 
-
-    //ArrayAdapter adapter;
-
-    //DatabaseHelper db = new DatabaseHelper(this);
-
     private MySQLHelper db;
 
     @Override

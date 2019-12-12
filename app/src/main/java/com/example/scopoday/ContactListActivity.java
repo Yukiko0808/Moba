@@ -20,7 +20,7 @@ public class ContactListActivity extends AppCompatActivity {
 
     ArrayList<Contactdata> contactList;
 
-    ContactListAdapter contactAdapter;
+    public static ContactListAdapter contactAdapter;
 
     Button addButton;
 
@@ -28,12 +28,17 @@ public class ContactListActivity extends AppCompatActivity {
 
     int tempPos;
 
+    MySQLHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
         Window window = this.getWindow();
+
+        //Datenbank helfer erstellen
+        db = new MySQLHelper(this);
 
         // Anzeigeleiste Oben ändern
 
@@ -54,13 +59,15 @@ public class ContactListActivity extends AppCompatActivity {
         View.OnClickListener addListener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                //Kontakt mit Telefon Kontakten hinzufügen
+                //Kontakt aus Telefon Kontakten hinzufügen
                 // AddContact();
 
-                // Popup window das Kontakt hinzufügt
+                // Popup window um Kontakt hinzufügt
                 openAddContactPopupWindow(v);
             }
         };
+
+        addButton.setOnClickListener(addListener);
 
         //Kontakt liste anzeigen
 
@@ -71,7 +78,6 @@ public class ContactListActivity extends AppCompatActivity {
         contactAdapter = new ContactListAdapter( ContactListActivity.this, contactList);
 
         lv.setAdapter(contactAdapter);
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -79,7 +85,6 @@ public class ContactListActivity extends AppCompatActivity {
                 openContactActivity();
             }
         });
-
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -93,17 +98,14 @@ public class ContactListActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        addButton.setOnClickListener(addListener);
         lv.setAdapter(contactAdapter);
     }
-
 
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("Context Menu");
+        menu.setHeaderTitle("Manage contact");
         menu.add(0, v.getId(), 0, "Delete");
         menu.add(1, v.getId(), 0, "Cancel");
     }
@@ -111,6 +113,8 @@ public class ContactListActivity extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item) {
         Toast.makeText(this, "Selected Item: " +item.getTitle() + item.getGroupId(), Toast.LENGTH_SHORT).show();
         if(item.getGroupId() == 0){
+            //Löschen des Kontakts
+            db.deleteContacts(contactList.get(tempPos));
             contactAdapter.remove(contactList.get(tempPos));
         }
         if(item.getGroupId() == 1){
