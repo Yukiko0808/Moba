@@ -1,6 +1,10 @@
 package com.example.scopoday;
 
 import java.io.Serializable;
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Contactdata implements Serializable {
@@ -16,15 +20,14 @@ public class Contactdata implements Serializable {
 
         }
 
-        public Contactdata(String _name){
-             name = _name;
-        }
-        //Konstruktor mit Date type
-        /*
+    public Contactdata(String _name){
+        name = _name;
+    }
+
         public Contactdata(String _name, Date _birthdayDate){
             name = _name;
             birthdayDate = _birthdayDate;
-        }*/
+        }
 
         public Contactdata(String _name, String _birthday) {
             name = _name;
@@ -51,11 +54,26 @@ public class Contactdata implements Serializable {
         public void setZodiacsign(String zodiacsign) {this.zodiacsign = zodiacsign;}
 
         public Date getBirthdayDate(){
-            return birthdayDate;
+         Log.d("aktuelles Geburtsdatum:", this.birthday);
+
+         Date date = new Date();
+            try{
+            SimpleDateFormat birthdaytodate = new SimpleDateFormat("dd.MM.yyyy");
+            Date date1 = birthdaytodate.parse(birthday);
+            date = date1;
+            }
+            catch (ParseException e){
+
+            }
+            birthdayDate = date;
+            return date;
         }
 
-        public void setBirthdayDate(Date newBirthday){
-            this.birthdayDate = newBirthday;
+
+
+        public void setBirthdayDateToString(Date newBirthday){
+            this.birthday = this.birthdayDate.toString();
+            Log.d("Datum zu string:" , birthday );
         }
 
         public String calculateZodiacsign(){

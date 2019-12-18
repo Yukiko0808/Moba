@@ -44,6 +44,7 @@ public class ContactActivity extends AppCompatActivity {
     int todayLove;
     int todayJob;
 
+    //SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy hh:mm:ss");
     private DatePickerDialog.OnDateSetListener mdateSetListener;
 
     MySQLHelper db;
@@ -70,7 +71,9 @@ public class ContactActivity extends AppCompatActivity {
                 contactNameText.selectAll();
             }
         });
-        //Neuen Kontakt Namen eingeben
+
+        zodiacsign = findViewById(R.id.zodiacsign);
+
         contactNameText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -92,7 +95,7 @@ public class ContactActivity extends AppCompatActivity {
 
         //Kontakt Name anzeigen
         contactNameText.setText(displayedContact.getName());
-/*
+
         //Sternzeichen Bild anzeigen
         zodiacsign = findViewById(R.id.zodiacsign);
 
@@ -104,16 +107,23 @@ public class ContactActivity extends AppCompatActivity {
         contactAge = findViewById(R.id.ContactAlter_TV_ID);
         String ageString = Integer.toString(CalculateAge(displayedContact.getBirthdayDate()));
         contactAge.setText(ageString);
+        //Log.d("birthday", "neuer birthday:" + displayedContact.getBirthdayDate());
 
+        //Datepicker
 
         //Geburtsdatum anzeigen
         contactBirthdayTV = (TextView) findViewById(R.id.contactDatepicker_TV_ID);
         contactBirthdayTV.setText(displayedContact.birthday);
 
-        //Neues Geburtsdatum setzen
+
         contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                //int year = cal.get(Calendar.YEAR);
+
+               // int month = cal.get(Calendar.MONTH);
+                //int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 int year = displayedContact.getBirthdayDate().getYear();
                 int month = displayedContact.getBirthdayDate().getMonth();
@@ -127,14 +137,14 @@ public class ContactActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-        //Wenn neues datum gesetzt wird
+
         mdateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month+1;
                 String date = day +"."+ month +"."+ year;
                 contactBirthdayTV.setText(date);
-                displayedContact.setBirthdayDate(new Date(year,month-1,day));
+               db.updateContactbirthday(displayedContact,date);
             }
         };
 
@@ -158,7 +168,7 @@ public class ContactActivity extends AppCompatActivity {
         TextView txt_luck = (TextView) findViewById(R.id.pieChart_Luck_ID).findViewById(R.id.percentText);
         txt_luck.setText(todayLuck + "%");
 
-*/
+
      }
 
 
@@ -167,10 +177,11 @@ public class ContactActivity extends AppCompatActivity {
         Log.d("Date of Contact", Integer.toString(_birthday.getYear()));
 
         //hier müsste eigentlich noch das genaue datum berüchsichtigt werden
-         int age =  Calendar.getInstance().get(Calendar.YEAR) -_birthday.getYear();
-         _birthday.
+        int geburtsjahr =  _birthday.getYear() + 1900;
+         int age =  Calendar.getInstance().get(Calendar.YEAR) - geburtsjahr;
 
         return age;
+
     }
 
     private void CalculateHoroskopValues(){
@@ -196,21 +207,23 @@ public class ContactActivity extends AppCompatActivity {
 
     }
 
+    //public void setTempContact(Contactdata tempContact) {
+        //this.tempContact = tempContact;
+   // }
 
     private String CalculateStarSign(){
         String starSign = "NoStarsignFound";
-        Contactdata actualContact = MainActivity.transmittedContact;
+        Contactdata actualContact = displayedContact;
 
-        return "capricorn";
-        /*
-        if(actualContact.birthdayDate.after(new Date(actualContact.birthdayDate.getYear(),11,21))
-                && actualContact.birthdayDate.before(new Date(actualContact.birthdayDate.getYear(),11, 32))) {
+
+        if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),11,21))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),11, 32))) {
             // Steinbock - capricorn
             starSign = "capricorn";
-            /*
-            actualContact.setJob(10);
+
+           /* actualContact.setJob(10);
             actualContact.setLuck(2);
-            actualContact.setLove(9);*//*
+            actualContact.setLove(9);*/
             zodiacsign.setImageResource(R.drawable.capricorn_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.capricorn);
@@ -218,50 +231,50 @@ public class ContactActivity extends AppCompatActivity {
 
         }
 
-        if(actualContact.birthdayDate.after(new Date(actualContact.birthdayDate.getYear(),0,0))
-                && actualContact.birthdayDate.before(new Date(actualContact.birthdayDate.getYear(),0, 21))) {
+        if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),0,0))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),0, 21))) {
             // Steinbock - capricorn
             starSign = "capricorn";
-            /*
-            actualContact.setJob(5);
+
+            /*actualContact.setJob(5);
             actualContact.setLuck(4);
-            actualContact.setLove(8);*//*
+            actualContact.setLove(8);*/
             zodiacsign.setImageResource(R.drawable.capricorn_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.capricorn);
             return starSign;
         }
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),0,20))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),1, 20))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),0,20))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),1, 20))){
             //Wassermann - aquarius
             starSign = "aquarius";
-            actualContact.setJob(8);
+            /*actualContact.setJob(8);
             actualContact.setLuck(4);
-            actualContact.setLove(3);
+            actualContact.setLove(3);*/
             zodiacsign.setImageResource(R.drawable.aquarius_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.aquarius);
             return starSign;
         }
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),1,19))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),2, 21))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),1,19))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),2, 21))){
             starSign = "pisces";
-            actualContact.setJob(5);
+            /*actualContact.setJob(5);
             actualContact.setLuck(9);
-            actualContact.setLove(2);
+            actualContact.setLove(2);*/
             zodiacsign.setImageResource(R.drawable.pisces_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.pisces);
             return starSign;
 
         }
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),2,20))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),3, 21))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),2,20))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),3, 21))){
             //widder - aries
             starSign = "aries";
-            actualContact.setJob(7);
+           /* actualContact.setJob(7);
             actualContact.setLuck(6);
-            actualContact.setLove(3);
+            actualContact.setLove(3);*/
             zodiacsign.setImageResource(R.drawable.aries_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.aries);
@@ -269,12 +282,12 @@ public class ContactActivity extends AppCompatActivity {
 
         }
 
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),3,20))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),4, 21))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),3,20))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),4, 21))){
             starSign = "taurus";
-            actualContact.setJob(10);
+           /* actualContact.setJob(10);
             actualContact.setLuck(8);
-            actualContact.setLove(3);
+            actualContact.setLove(3);*/
             zodiacsign.setImageResource(R.drawable.taurus_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.taurus);
@@ -282,25 +295,25 @@ public class ContactActivity extends AppCompatActivity {
         }
 
 
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),4,20))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),5, 22))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),4,20))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),5, 22))){
             starSign = "gemini";
-            actualContact.setJob(10);
+            /*actualContact.setJob(10);
             actualContact.setLuck(8);
-            actualContact.setLove(2);
+            actualContact.setLove(2);*/
             zodiacsign.setImageResource(R.drawable.gemini_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.gemini);
             return starSign;
         }
 
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),5,21))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),6, 23))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),5,21))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),6, 23))){
             //fish
             starSign = "cancer";
-            actualContact.setJob(8);
+           /* actualContact.setJob(8);
             actualContact.setLuck(8);
-            actualContact.setLove(1);
+            actualContact.setLove(1);*/
             zodiacsign.setImageResource(R.drawable.cancer_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.cancer);
@@ -308,37 +321,37 @@ public class ContactActivity extends AppCompatActivity {
         }
 
 
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),6,22))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),7, 24))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),6,22))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),7, 24))){
             starSign = "lio";
-            actualContact.setJob(2);
+           /* actualContact.setJob(2);
             actualContact.setLuck(10);
-            actualContact.setLove(4);
+            actualContact.setLove(4);*/
             zodiacsign.setImageResource(R.drawable.leo_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.leo);
             return starSign;
         }
 
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),7,23))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),8, 24))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),7,23))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),8, 24))){
             starSign = "virgo";
-            actualContact.setJob(10);
+            /*actualContact.setJob(10);
             actualContact.setLuck(8);
-            actualContact.setLove(3);
+            actualContact.setLove(3);*/
             zodiacsign.setImageResource(R.drawable.virgo_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.virgo);
             return starSign;
         }
 
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),8,23))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),9, 24))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),8,23))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),9, 24))){
             //fish
             starSign = "libra";
-            actualContact.setJob(10);
+           /* actualContact.setJob(10);
             actualContact.setLuck(8);
-            actualContact.setLove(2);
+            actualContact.setLove(2);*/
             zodiacsign.setImageResource(R.drawable.libra_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.libra);
@@ -346,34 +359,34 @@ public class ContactActivity extends AppCompatActivity {
         }
 
 
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),9,23))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),10, 23))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),9,23))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),10, 23))){
             //fish
             starSign = "scorpio";
-            actualContact.setJob(10);
+            /*actualContact.setJob(10);
             actualContact.setLuck(8);
-            actualContact.setLove(2);
+            actualContact.setLove(2);*/
             zodiacsign.setImageResource(R.drawable.scorpio_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.scorpio);
             return starSign;
         }
 
-        else if(actualContact.getBirthdate().after(new Date(actualContact.getBirthdate().getYear(),10,22))
-                && actualContact.getBirthdate().before(new Date(actualContact.getBirthdate().getYear(),11, 22))){
+        else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),10,22))
+                && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),11, 22))){
             //fish
             starSign = "sagittarius";
-            actualContact.setJob(9);
+           /* actualContact.setJob(9);
             actualContact.setLuck(2);
-            actualContact.setLove(8);
+            actualContact.setLove(8);*/
             zodiacsign.setImageResource(R.drawable.sagittarius_black);
             TextView pisces = findViewById(R.id.horoskoptext);
             pisces.setText(R.string.sagittarius);
             return starSign;
-        }*//*
+        }
         else {
             return starSign;
-        }*/
+        }
     }
 
 

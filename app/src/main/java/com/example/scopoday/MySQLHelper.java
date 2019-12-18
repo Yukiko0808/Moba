@@ -20,6 +20,7 @@ public class MySQLHelper extends SQLiteOpenHelper {
     private static final String KEY_ZODIACSIGN = "zodiacsign";
 
 
+
     private static final String[] COLUMNS = {KEY_ID, KEY_NAME, KEY_BIRTHDAY, KEY_ZODIACSIGN};
 
     private static final int DATABSE_VERSION = 4;
@@ -58,6 +59,7 @@ public class MySQLHelper extends SQLiteOpenHelper {
         values.put(KEY_NAME, contactdata.getName());
         values.put(KEY_BIRTHDAY, contactdata.getBirthday());
         values.put(KEY_ZODIACSIGN, contactdata.getZodiacsign());
+
 
 
         db.insert(TABLE_CONTACTDATA,
@@ -112,6 +114,17 @@ public class MySQLHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+
+    public void updateContactbirthday(Contactdata contactdata, String newbirthday){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues value = new ContentValues();
+        value.put(KEY_BIRTHDAY, newbirthday);
+
+        db.update(TABLE_CONTACTDATA, value, KEY_ID + "=?",
+                new String[]{String.valueOf(contactdata.getId())});
+        db.close();
+    }
     public Contactdata getOneContact(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 

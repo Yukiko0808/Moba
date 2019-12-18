@@ -53,7 +53,7 @@
             android:text="Aquarius"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintHorizontal_bias="0.103"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.204" />
@@ -81,7 +81,7 @@
             android:text="Aries"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintHorizontal_bias="0.103"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.327" />
@@ -109,10 +109,10 @@
             android:text="Gemini"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintHorizontal_bias="0.103"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.445" />
+            app:layout_constraintVertical_bias="0.444" />
 
         <Button
             android:id="@+id/button6"
@@ -137,7 +137,7 @@
             android:text="Leo"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintHorizontal_bias="0.103"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.564" />
@@ -165,10 +165,10 @@
             android:text="Libra"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintHorizontal_bias="0.103"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.682" />
+            app:layout_constraintVertical_bias="0.681" />
 
         <Button
             android:id="@+id/button10"
@@ -193,10 +193,10 @@
             android:text="Sagittarius"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintHorizontal_bias="0.103"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.805" />
+            app:layout_constraintVertical_bias="0.795" />
 
         <Button
             android:id="@+id/button12"
@@ -210,7 +210,7 @@
             app:layout_constraintHorizontal_bias="0.78"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.806" />
+            app:layout_constraintVertical_bias="0.794" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
