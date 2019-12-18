@@ -1,50 +1,34 @@
 package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.Toast;
-import android.widget.PopupMenu;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class ContactListActivity extends AppCompatActivity {
 
     ArrayList<Contactdata> contactList;
 
-    ContactListAdapter contactAdapter;
+    public static ContactListAdapter contactAdapter;
 
     Button addButton;
 
     ListView lv;
 
-
     int tempPos;
+
+    MySQLHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +37,15 @@ public class ContactListActivity extends AppCompatActivity {
 
         Window window = this.getWindow();
 
+        //Datenbank helfer erstellen
+        db = MainActivity.db;
+
+        //Contakte aus der db in conactList einfügen
+        ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
+        listOfContacts.addAll(db.getAllContacts());
+        contactList = listOfContacts;
+
+        // Anzeigeleiste Oben ändern
         // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
@@ -62,33 +55,44 @@ public class ContactListActivity extends AppCompatActivity {
         // finally change the color
         window.setStatusBarColor(this.getResources().getColor(R.color.cardview_shadow_end_color));
 
+
+        //Kontakte hinzufügen mit Add Button
+
         addButton = findViewById(R.id.addContact_Btn_ID);
 
+        View.OnClickListener addListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //Kontakt aus Telefon Kontakten hinzufügen
+                // AddContact();
+
+                // Popup window um Kontakt hinzufügt
+                openAddContactPopupWindow(v);
+            }
+        };
+
+        addButton.setOnClickListener(addListener);
+
+        //Kontakt liste anzeigen
 
         lv = (ListView) findViewById(R.id.contactListView_ID);
-
-        contactList = MainActivity.mainActivity.getAllContactsFromDatabase();
 
         contactAdapter = new ContactListAdapter( ContactListActivity.this, contactList);
 
         lv.setAdapter(contactAdapter);
 
-        View.OnClickListener addListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-               // contactList.add()
-                AddContact();
-            }
-        };
-
+        //Klick auf Kontakt -> Kontakt öffnen
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MainActivity.transmittedContact = contactList.get(i);
-                openContactActivity();
+
+                //MainActivity.transmittedContact = contactList.get(i);
+
+                openContactActivity(contactList.get(i));
             }
         });
 
+        //Langes Antippen auf Kontakt -> Context Menü öffnen
         lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -102,17 +106,14 @@ public class ContactListActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        addButton.setOnClickListener(addListener);
         lv.setAdapter(contactAdapter);
     }
-
 
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("Context Menu");
+        menu.setHeaderTitle("Manage contact");
         menu.add(0, v.getId(), 0, "Delete");
         menu.add(1, v.getId(), 0, "Cancel");
     }
@@ -120,6 +121,8 @@ public class ContactListActivity extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item) {
         Toast.makeText(this, "Selected Item: " +item.getTitle() + item.getGroupId(), Toast.LENGTH_SHORT).show();
         if(item.getGroupId() == 0){
+            //Löschen des Kontakts
+            db.deleteContacts(contactList.get(tempPos));
             contactAdapter.remove(contactList.get(tempPos));
         }
         if(item.getGroupId() == 1){
@@ -134,16 +137,28 @@ public class ContactListActivity extends AppCompatActivity {
         contactAdapter.notifyDataSetChanged();
     }
 
-    public void AddContact() {
-        Intent intent = new Intent(this, PhoneContactListActivity.class);
-        startActivity(intent);
-    }
-
-    public void openContactActivity(){
+    public void openContactActivity(Contactdata _contact){
         Intent intent = new Intent(this, ContactActivity.class);
+        Bundle bundle = new Bundle();
+
+        //Contact daten mitschicken
+        bundle.putSerializable("CONTACTDATA", _contact);
+        intent.putExtras(bundle);
+
+        //Activity starten
         startActivity(intent);
+
+        //Animation überschreiben
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
+    public void openAddContactPopupWindow(View view){
+
+        AddContactDialog addContactDialog = new AddContactDialog();
+        addContactDialog.show(getSupportFragmentManager(), "Add Contact");
+
+    }
+
 
 
 

@@ -1,12 +1,13 @@
 package com.example.scopoday;
 
+import java.io.Serializable;
 import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Contactdata {
+public class Contactdata implements Serializable {
 
         private int id;
         protected String name;
@@ -28,6 +29,12 @@ public class Contactdata {
             birthdayDate = _birthdayDate;
         }
 
+        public Contactdata(String _name, String _birthday) {
+            name = _name;
+            birthday = _birthday;
+            //zodiacsign = calculateZodiacsign();
+        }
+
         public Contactdata(String _name, String _birthday, String _zodiacsign) {
             name = _name;
             birthday = _birthday;
@@ -47,21 +54,33 @@ public class Contactdata {
         public void setZodiacsign(String zodiacsign) {this.zodiacsign = zodiacsign;}
 
         public Date getBirthdayDate(){
+         Log.d("aktuelles Geburtsdatum:", this.birthday);
 
+         Date date = new Date();
             try{
             SimpleDateFormat birthdaytodate = new SimpleDateFormat("dd.MM.yyyy");
             Date date1 = birthdaytodate.parse(birthday);
+            date = date1;
             }
             catch (ParseException e){
 
             }
-
-            return birthdayDate;
+            birthdayDate = date;
+            return date;
         }
+
+
 
         public void setBirthdayDateToString(Date newBirthday){
             this.birthday = this.birthdayDate.toString();
             Log.d("Datum zu string:" , birthday );
+        }
+
+        public String calculateZodiacsign(){
+            String zodiac = "";
+            //alles aus Kontakt seite für bestimmung des Sternzeichens
+
+            return zodiac;
         }
 
     }

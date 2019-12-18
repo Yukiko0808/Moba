@@ -53,6 +53,8 @@ public class ContactListAdapter extends ArrayAdapter<Contactdata> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        //Kontakt erstellen
         Contactdata contact = getItem(position);
         String name = getItem(position).getName();
         //Date birthdate = getItem(position).birthdayDate;
@@ -72,7 +74,6 @@ public class ContactListAdapter extends ArrayAdapter<Contactdata> {
         TextView tvCountdown = (TextView) convertView.findViewById(R.id.textViewDays);
 
         tvName.setText(name);
-        //tvBirthdate.setText(Integer.toString(birthdate.getDate()) + "." +Integer.toString(birthdate.getMonth()+1) + "." + Integer.toString(birthdate.getYear()));
         tvBirthdate.setText(birthdate);
         //tvCountdown.setText(Long.toString(CalculateDaysTillBD(birthdate)));
         return convertView;
