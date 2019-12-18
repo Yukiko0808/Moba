@@ -1,5 +1,9 @@
 package com.example.scopoday;
 
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Contactdata {
@@ -43,11 +47,21 @@ public class Contactdata {
         public void setZodiacsign(String zodiacsign) {this.zodiacsign = zodiacsign;}
 
         public Date getBirthdayDate(){
+
+            try{
+            SimpleDateFormat birthdaytodate = new SimpleDateFormat("dd.MM.yyyy");
+            Date date1 = birthdaytodate.parse(birthday);
+            }
+            catch (ParseException e){
+
+            }
+
             return birthdayDate;
         }
 
-        public void setBirthdayDate(Date newBirthday){
-            this.birthdayDate = newBirthday;
+        public void setBirthdayDateToString(Date newBirthday){
+            this.birthday = this.birthdayDate.toString();
+            Log.d("Datum zu string:" , birthday );
         }
 
     }
