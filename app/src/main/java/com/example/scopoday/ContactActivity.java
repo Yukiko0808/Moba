@@ -168,6 +168,7 @@ public class ContactActivity extends AppCompatActivity {
 
         //hier müsste eigentlich noch das genaue datum berüchsichtigt werden
          int age =  Calendar.getInstance().get(Calendar.YEAR) -_birthday.getYear();
+         _birthday.
 
         return age;
     }
