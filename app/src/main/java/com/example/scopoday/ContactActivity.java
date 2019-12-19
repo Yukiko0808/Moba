@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.inputmethodservice.Keyboard;
 import android.media.Image;
+import android.media.MediaController2;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
@@ -47,6 +48,8 @@ public class ContactActivity extends AppCompatActivity {
     int todayLuck;
     int todayLove;
     int todayJob;
+
+
 
     //SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy hh:mm:ss");
     private DatePickerDialog.OnDateSetListener mdateSetListener;
@@ -228,7 +231,7 @@ public class ContactActivity extends AppCompatActivity {
         int loveValue = 1;
 
 
-        TextView dailyHoroscopeText = findViewById(R.id.horoskoptext);
+        final TextView dailyHoroscopeText = findViewById(R.id.horoskoptext);
 
         if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),11,21))
                 && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),11, 32))) {
@@ -239,9 +242,14 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(2);
             actualContact.setLove(9);*/
             zodiacsign.setImageResource(R.drawable.capricorn_black);
-            //dailyHoroscopeText.setText(R.string.capricorn);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            //Daten von der Webseite holen
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
+
             return starSign;
 
         }
@@ -255,8 +263,12 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(4);
             actualContact.setLove(8);*/
             zodiacsign.setImageResource(R.drawable.capricorn_black);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
         }
         else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),0,20))
@@ -267,8 +279,12 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(4);
             actualContact.setLove(3);*/
             zodiacsign.setImageResource(R.drawable.aquarius_black);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
         }
         else if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),1,19))
@@ -278,8 +294,12 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(9);
             actualContact.setLove(2);*/
             zodiacsign.setImageResource(R.drawable.pisces_black);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
 
         }
@@ -291,8 +311,12 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(6);
             actualContact.setLove(3);*/
             zodiacsign.setImageResource(R.drawable.aries_black);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
 
         }
@@ -304,8 +328,12 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(8);
             actualContact.setLove(3);*/
             zodiacsign.setImageResource(R.drawable.taurus_black);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
         }
 
@@ -316,8 +344,12 @@ public class ContactActivity extends AppCompatActivity {
             /*actualContact.setJob(10);
             actualContact.setLuck(8);
             actualContact.setLove(2);*/
-            zodiacsign.setImageResource(R.drawable.gemini_black);
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
         }
 
@@ -329,8 +361,12 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(8);
             actualContact.setLove(1);*/
             zodiacsign.setImageResource(R.drawable.cancer_black);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
         }
 
@@ -342,8 +378,12 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(10);
             actualContact.setLove(4);*/
             zodiacsign.setImageResource(R.drawable.leo_black);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
         }
 
@@ -354,8 +394,12 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(8);
             actualContact.setLove(3);*/
             zodiacsign.setImageResource(R.drawable.virgo_black);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
         }
 
@@ -366,9 +410,12 @@ public class ContactActivity extends AppCompatActivity {
            /* actualContact.setJob(10);
             actualContact.setLuck(8);
             actualContact.setLove(2);*/
-            zodiacsign.setImageResource(R.drawable.libra_black);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
         }
 
@@ -381,8 +428,12 @@ public class ContactActivity extends AppCompatActivity {
             actualContact.setLuck(8);
             actualContact.setLove(2);*/
             zodiacsign.setImageResource(R.drawable.scorpio_black);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
         }
 
@@ -396,8 +447,14 @@ public class ContactActivity extends AppCompatActivity {
             zodiacsign.setImageResource(R.drawable.sagittarius_black);
             //TextView pisces = findViewById(R.id.horoskoptext);
             //pisces.setText(R.string.sagittarius);
-            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
-            dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            //horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext());
+            //dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+            horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    dailyHoroscopeText.setText(horoscopeData.getDailyHoroscopeText());
+                }
+            });
             return starSign;
         }
         else {

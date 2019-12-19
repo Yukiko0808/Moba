@@ -32,8 +32,12 @@ public class FetchingHoroscopeData {
 
     }
 
-    public void loadDailyHoroscopeData(final String zodiac, Context con){
+    public interface ServerCallback{
+        //void onSuccess(JSONObject result);
+        void  onSuccess(String result);
+    }
 
+    public void loadDailyHoroscopeData(final String zodiac, Context con, final ServerCallback callback){
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
             URL_DATA_HOROSCOPE,
@@ -43,11 +47,17 @@ public class FetchingHoroscopeData {
 
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-
+                        //Reinspringen in horoskop Jason
                         JSONObject zodicaHoroscopeJSON = jsonObject.getJSONObject("dailyhoroscope");
+                        //Richitges Sternzeichen auswählen
                         String zodicaHoroscopeText = zodicaHoroscopeJSON.getString(zodiac);
+
                         dailyHoroscopeText = zodicaHoroscopeText;
                         Log.i("FETCH", "horosko text " + zodiac +  ": " + dailyHoroscopeText);
+
+                        //Bei erfolg zurückgeben
+                        callback.onSuccess(response);
+
                     }
                     catch (JSONException jsonE){
                         jsonE.printStackTrace();
