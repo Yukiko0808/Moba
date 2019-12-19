@@ -61,16 +61,18 @@ public class ContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
-        // Datenbank aus Activity holen
+        // Datenbank aus Main Activity holen (Damit die Daten die gleichen sind)
         db = MainActivity.db;
-        //horoskopdaten
+
+        //Neues Objekt das die Horoskop Daten holt erstellen -> Verwendet wird es in der Funktion die das Sternzeichen des Kontakts bestimmt
         horoscopeData = new FetchingHoroscopeData();
 
-        //Kontaktdaten aus intent holen
+        //Kontaktdaten aus intent holen (Intent Funktion mit der man Daten von einer Activity in die Andere übertragen kann)
         Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
+        Bundle bundle = intent.getExtras();//Mit bundle werden mehrere Daten oder Besondere Datentypen übergeben (in diesem fall Contactdata)
         displayedContact =(Contactdata) bundle.getSerializable("CONTACTDATA");
 
+        //Ausgabe ob Intent Kontakt richtig ist
         Log.d("Displayed Kontakt id: ", String.valueOf(displayedContact.getId()) + "Name: " + displayedContact.getName());
 
         //Kontakt Namenfeld einrichten
@@ -78,12 +80,11 @@ public class ContactActivity extends AppCompatActivity {
         contactNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contactNameText.selectAll();
+                contactNameText.selectAll(); //Damit text beim antippen makiert ist
             }
         });
 
-
-        //Kontakt Name On Click Listener
+        //Kontakt Name 2er On Click Listener !! Vielleicht kann man die noch verbinden ?
         contactNameText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -91,7 +92,7 @@ public class ContactActivity extends AppCompatActivity {
                 if (i == EditorInfo.IME_ACTION_DONE){
 
                     Log.d("CONTACT_CHANGE_NAME", "neuer name:" + contactNameText.getText().toString());
-                    // Namen in der datenbank setzen
+                    // Namen in die Datenbank setzen
                     db.updateContactName(displayedContact, contactNameText.getText().toString());
 
                     handled = true;
@@ -117,7 +118,6 @@ public class ContactActivity extends AppCompatActivity {
         contactAge = findViewById(R.id.ContactAlter_TV_ID);
         String ageString = Integer.toString(CalculateAge(displayedContact.getBirthdayDate()));
         contactAge.setText(ageString);
-        //Log.d("birthday", "neuer birthday:" + displayedContact.getBirthdayDate());
 
         //Geburtsdatum anzeigen
         contactBirthdayTV = (TextView) findViewById(R.id.contactDatepicker_TV_ID);
@@ -127,36 +127,43 @@ public class ContactActivity extends AppCompatActivity {
         contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Neuen Kalender erstellen
                 Calendar cal = Calendar.getInstance();
-                //int year = cal.get(Calendar.YEAR);
-
-               // int month = cal.get(Calendar.MONTH);
-                //int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 int year = displayedContact.getBirthdayDate().getYear();
                 int month = displayedContact.getBirthdayDate().getMonth();
                 int day = displayedContact.getBirthdayDate().getDate();
-                //DatePicker auf aktuelles geburtsdatum setzen
+
+                //DatePicker auf aktuelles Geburtsdatum setzen
                 DatePickerDialog dialog = new DatePickerDialog(ContactActivity.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,mdateSetListener,
                         year,month,day);
 
+                //Datepicker anzeigen
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });
-
+        //Nach eingabe des neuen Geburtsdatums wird ...
         mdateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month+1;
-                String date = day +"."+ month +"."+ year;
+
+                month = month+1;// (Monat wird um 1 erhöht, da Monate im Programm ab 0 gezählt werden
+                String date = day +"."+ month +"."+ year;// ( Neues datum in String umwandeln)
+
+                //... das neue Datum angezeigt ...
                 contactBirthdayTV.setText(date);
+                //... und in der Datenbank verändert
                db.updateContactbirthday(displayedContact,date);
             }
         };
 
+
+        // Horoskop berechenn und anzeigen
         CalculateHoroskopValues();
+
+        //Kreishoroskop Werte Bestimmen
 
         //LOVE
         ProgressBar pieChart_love = findViewById(R.id.pieChart_Love_ID).findViewById(R.id.progressBar);
@@ -344,6 +351,7 @@ public class ContactActivity extends AppCompatActivity {
             /*actualContact.setJob(10);
             actualContact.setLuck(8);
             actualContact.setLove(2);*/
+            zodiacsign.setImageResource(R.drawable.gemini_black);
             horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
                 @Override
                 public void onSuccess(String result) {

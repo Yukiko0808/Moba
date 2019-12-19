@@ -32,30 +32,37 @@ public class FetchingHoroscopeData {
 
     }
 
+    // Success Callback um Antwort des Webserver abzuwarten um Daten danach anzuzeigen zu können
     public interface ServerCallback{
         //void onSuccess(JSONObject result);
         void  onSuccess(String result);
     }
 
+    // Funktion die Horoskop Texte von Webseite holt
     public void loadDailyHoroscopeData(final String zodiac, Context con, final ServerCallback callback){
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-            URL_DATA_HOROSCOPE,
+            URL_DATA_HOROSCOPE, // String = "https://www.horoscopes-and-astrology.com/json"
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
                     try {
+                        //JSON Objekt erstellen
                         JSONObject jsonObject = new JSONObject(response);
-                        //Reinspringen in horoskop Jason
+
+                        //Reinspringen in horoskop-Jason-Objekt auf dem Webserver
                         JSONObject zodicaHoroscopeJSON = jsonObject.getJSONObject("dailyhoroscope");
-                        //Richitges Sternzeichen auswählen
+
+                        //Reinspringen in Sternzeichen-JSon-Objekt des Webservers
+                        //Richitges Sternzeichen auswählen (Sternzeichen-String wird aus Contact Activity mitgegeben -> String zodiac)
                         String zodicaHoroscopeText = zodicaHoroscopeJSON.getString(zodiac);
+
 
                         dailyHoroscopeText = zodicaHoroscopeText;
                         Log.i("FETCH", "horosko text " + zodiac +  ": " + dailyHoroscopeText);
 
-                        //Bei erfolg zurückgeben
+                        //Bei Erfolg zurückgeben
                         callback.onSuccess(response);
 
                     }
