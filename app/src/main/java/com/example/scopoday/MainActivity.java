@@ -68,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // App nach dem Berechtigungen überprüfen -> war für Kontakte aus dem Telefonbuch zu laden
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
 
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 10);
-
         }
 
 
@@ -102,15 +102,16 @@ public class MainActivity extends AppCompatActivity {
         contactListView.setAdapter(adapter);
         mainAdapter = adapter;
 
+        /*
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(MainActivity.this, ""+ contactList.get(i).getName(), Toast.LENGTH_SHORT).show();
-                transmittedContact = contactList.get(i);
-                transmittedContactPosition = i;
+                //transmittedContact = contactList.get(i);
+                //transmittedContactPosition = i;
                 openContactActivity();
             }
-        });
+        });*/
 
         contactText = findViewById(R.id.textView_ID);
 
@@ -126,15 +127,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*addProfileButton = (ImageButton) findViewById(R.id.ProfileButton_ID);
-
-        addProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Zum Profil", Toast.LENGTH_SHORT).show();
-                openProfile();
-            }
-        });*/
 
     }
 
