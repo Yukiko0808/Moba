@@ -24,15 +24,14 @@
 
     <ImageView
         android:id="@+id/zodiacsign"
-        android:layout_width="78dp"
-        android:layout_height="71dp"
+        android:layout_width="65dp"
+        android:layout_height="56dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:foregroundTint="#00DFC2C2"
         android:tint="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
@@ -45,6 +44,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="@font/poppins_light"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.074"
@@ -93,7 +93,6 @@
         android:id="@+id/starSign_TV_ID"
         android:layout_width="367dp"
         android:layout_height="27dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="628dp"
         android:text="TextView"
@@ -103,10 +102,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/zodiacsign"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -114,6 +113,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_light"
         android:text="Geburtsdatum"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID" />
@@ -124,13 +124,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintHorizontal_bias="0.959"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
-        app:layout_constraintVertical_bias="0.101" />
+        app:layout_constraintTop_toBottomOf="@+id/remainderButton_ID"
+        app:layout_constraintVertical_bias="0.029" />
 
     <include
         android:id="@+id/pieChart_Love_ID"
@@ -138,13 +139,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
-        app:layout_constraintVertical_bias="0.101" />
+        app:layout_constraintTop_toBottomOf="@+id/remainderButton_ID"
+        app:layout_constraintVertical_bias="0.029" />
 
     <include
         android:id="@+id/pieChart_Job_ID"
@@ -152,23 +154,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
-        app:layout_constraintVertical_bias="0.101" />
+        app:layout_constraintTop_toBottomOf="@+id/remainderButton_ID"
+        app:layout_constraintVertical_bias="0.029" />
 
     <TextView
         android:id="@+id/horoskoptext"
-        android:layout_width="400dp"
-        android:layout_height="232dp"
+        android:layout_width="374dp"
+        android:layout_height="168dp"
         android:layout_marginTop="20dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pieChart_Job_ID"
         app:layout_constraintVertical_bias="0.0" />
@@ -186,6 +189,28 @@
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID"
         app:layout_constraintVertical_bias="0.25" />
+
+    <Button
+        android:id="@+id/remainderButton_ID"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="367dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="320dp"
+        android:background="@drawable/btn_rounded_corners"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Remaind Me"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
+        app:layout_constraintVertical_bias="0.096" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

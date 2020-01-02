@@ -2,9 +2,12 @@ package com.example.scopoday;
 
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.inputmethodservice.Keyboard;
@@ -15,9 +18,11 @@ import android.os.Debug;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import android.view.View;
@@ -31,6 +36,7 @@ import java.util.List;
 import java.util.Random;
 
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ToggleButton;
 
 public class ContactActivity extends AppCompatActivity {
 
@@ -49,6 +55,7 @@ public class ContactActivity extends AppCompatActivity {
     int todayLove;
     int todayJob;
 
+    Button reminderButton;
 
 
     //SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy hh:mm:ss");
@@ -183,6 +190,16 @@ public class ContactActivity extends AppCompatActivity {
         TextView txt_luck = (TextView) findViewById(R.id.pieChart_Luck_ID).findViewById(R.id.percentText);
         txt_luck.setText(todayLuck + "%");
 
+
+        // toggle der Notification ausläßt / geburtstags reminder
+        reminderButton = findViewById(R.id.remainderButton_ID);
+        reminderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notificationcall();
+            }
+        });
+
      }
 
 ////////////// ON CREATE ENDE ////////////////////////
@@ -228,6 +245,17 @@ public class ContactActivity extends AppCompatActivity {
     //public void setTempContact(Contactdata tempContact) {
         //this.tempContact = tempContact;
    // }
+
+    // notification builden (kontakt hat heute geburtstag)
+    public void notificationcall(){
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setSmallIcon(R.drawable.btn_rounded_corners)
+                .setContentTitle("Notification from Scopoday")
+                .setContentText("Hello, today is " + displayedContact.getName()+ "'s birthday !!!");
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notificationBuilder.build());
+    }
 
     // Sternzeichen Bestimmen und Bilder/Texte setzen
     private String CalculateStarSign(){
@@ -470,7 +498,6 @@ public class ContactActivity extends AppCompatActivity {
         }
 
     }
-
 
 /*  // war um transmittet contakt zu setzen kann eigentlich raus
     private void SetBirthdateInMain(Date d){
