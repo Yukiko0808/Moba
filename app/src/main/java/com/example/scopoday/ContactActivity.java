@@ -69,7 +69,7 @@ public class ContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact);
 
         // Datenbank aus Main Activity holen (Damit die Daten die gleichen sind)
-        db = MainActivity.db;
+        db = new MySQLHelper(this);
 
         //Neues Objekt das die Horoskop Daten holt erstellen -> Verwendet wird es in der Funktion die das Sternzeichen des Kontakts bestimmt
         horoscopeData = new FetchingHoroscopeData();
@@ -77,7 +77,7 @@ public class ContactActivity extends AppCompatActivity {
         //Kontaktdaten aus intent holen (Intent Funktion mit der man Daten von einer Activity in die Andere übertragen kann)
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();//Mit bundle werden mehrere Daten oder Besondere Datentypen übergeben (in diesem fall Contactdata)
-        displayedContact =(Contactdata) bundle.getSerializable("CONTACTDATA");
+        displayedContact = (Contactdata) bundle.getSerializable("CONTACTDATA");
 
         //Ausgabe ob Intent Kontakt richtig ist
         Log.d("Displayed Kontakt id: ", String.valueOf(displayedContact.getId()) + "Name: " + displayedContact.getName());
@@ -96,14 +96,15 @@ public class ContactActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 boolean handled = false;
-                if (i == EditorInfo.IME_ACTION_DONE){
+                if (i == EditorInfo.IME_ACTION_DONE) {
 
                     Log.d("CONTACT_CHANGE_NAME", "neuer name:" + contactNameText.getText().toString());
                     // Namen in die Datenbank setzen
                     db.updateContactName(displayedContact, contactNameText.getText().toString());
+                    displayedContact.setBirthday(contactNameText.getText().toString());
 
                     handled = true;
-                    InputMethodManager imm = (InputMethodManager)getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(contactNameText.getWindowToken(), 0);
                 }
                 return handled;
@@ -117,7 +118,7 @@ public class ContactActivity extends AppCompatActivity {
         zodiacsign = findViewById(R.id.zodiacsign);
 
         //Sternzeichen Text anzeigen
-        starSignText =  findViewById(R.id.starSign_TV_ID);
+        starSignText = findViewById(R.id.starSign_TV_ID);
         starSignText.setText(CalculateStarSign());
 
 
@@ -129,6 +130,24 @@ public class ContactActivity extends AppCompatActivity {
         //Geburtsdatum anzeigen
         contactBirthdayTV = (TextView) findViewById(R.id.contactDatepicker_TV_ID);
         contactBirthdayTV.setText(displayedContact.birthday);
+        contactBirthdayTV.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                boolean handled = false;
+                if (i == EditorInfo.IME_ACTION_DONE) {
+
+                    Log.d("CONTACT_CHANGE_BIRTHDAY", "neuer geburtstag:" + contactBirthdayTV.getText().toString());
+                    // Namen in die Datenbank setzen
+                    db.updateContactbirthday(displayedContact, contactBirthdayTV.getText().toString());
+                    displayedContact.setBirthday(contactBirthdayTV.getText().toString());
+                    handled = true;
+                    InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(contactBirthdayTV.getWindowToken(), 0);
+                }
+                return handled;
+
+            }
+        });
 
         //Datepicker
        /* contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
