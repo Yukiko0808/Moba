@@ -131,7 +131,7 @@ public class ContactActivity extends AppCompatActivity {
         contactBirthdayTV.setText(displayedContact.birthday);
 
         //Datepicker
-        contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
+       /* contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Neuen Kalender erstellen
@@ -164,7 +164,7 @@ public class ContactActivity extends AppCompatActivity {
                 //... und in der Datenbank verändert
                db.updateContactbirthday(displayedContact,date);
             }
-        };
+        };*/
 
 
         // Horoskop berechenn und anzeigen
