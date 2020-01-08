@@ -130,6 +130,7 @@ public class ContactActivity extends AppCompatActivity {
         contactBirthdayTV = (TextView) findViewById(R.id.contactDatepicker_TV_ID);
         contactBirthdayTV.setText(displayedContact.birthday);
 
+
         //Datepicker
         contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
             @Override
