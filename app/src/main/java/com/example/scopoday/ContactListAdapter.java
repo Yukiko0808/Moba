@@ -58,9 +58,9 @@ public class ContactListAdapter extends ArrayAdapter<Contactdata> {
         Contactdata contact = getItem(position);
         String name = getItem(position).getName();
         //Date birthdate = getItem(position).birthdayDate;
-        String birthdate = getItem(position).birthday;
+        String birthdate = getItem(position).getBirthday();
 
-        //Contact contact = new Contact(name, birthdate);
+        //Contact contact = new Contact(name, getbirthday);
 /*
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
@@ -75,7 +75,7 @@ public class ContactListAdapter extends ArrayAdapter<Contactdata> {
 
         tvName.setText(name);
         tvBirthdate.setText(birthdate);
-        //tvCountdown.setText(Long.toString(CalculateDaysTillBD(birthdate)));
+        tvCountdown.setText(Long.toString(CalculateDaysTillBD(contact.getBirthdayDate())));
         return convertView;
 
     }

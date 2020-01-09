@@ -54,8 +54,6 @@ public class Contactdata implements Serializable {
         public void setZodiacsign(String zodiacsign) {this.zodiacsign = zodiacsign;}
 
         public Date getBirthdayDate(){
-         Log.d("aktuelles Geburtsdatum:", this.birthday);
-
          Date date = new Date();
             try{
             SimpleDateFormat birthdaytodate = new SimpleDateFormat("dd.MM.yyyy");

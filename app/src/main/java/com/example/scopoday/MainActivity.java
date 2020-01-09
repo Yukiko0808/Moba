@@ -32,11 +32,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button addContactButton;
     ImageButton addProfileButton;
+
+    CompactCalendarView compCalendarView;
+
 
     ListView contactListView;
     public static ArrayList<Contactdata> contactList;
@@ -67,12 +73,15 @@ public class MainActivity extends AppCompatActivity {
         // createContactButtons();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // App nach dem Berechtigungen überprüfen -> war für Kontakte aus dem Telefonbuch zu laden
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
 
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 10);
         }
+
+        //compCalendarView = (CompactCalendarView) findViewById(R.id.)
 
 
         // wenn man sich in einem Fragment befindet, wird nicht "this" übergeben sondern "getContext()"
