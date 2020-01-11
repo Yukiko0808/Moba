@@ -1,9 +1,12 @@
 package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -38,7 +41,7 @@ public class ContactListActivity extends AppCompatActivity {
         Window window = this.getWindow();
 
         //Datenbank helfer erstellen
-        db = MainActivity.db;
+        db = new MySQLHelper(this);
 
         //Contakte aus der db in conactList einfügen
         ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
@@ -54,7 +57,6 @@ public class ContactListActivity extends AppCompatActivity {
 
         // finally change the color
         window.setStatusBarColor(this.getResources().getColor(R.color.cardview_shadow_end_color));
-
 
         //Kontakte hinzufügen mit Add Button
 
@@ -77,7 +79,7 @@ public class ContactListActivity extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.contactListView_ID);
 
-        contactAdapter = new ContactListAdapter( ContactListActivity.this, contactList);
+        contactAdapter = new ContactListAdapter( this, contactList);
 
         lv.setAdapter(contactAdapter);
 
@@ -133,9 +135,26 @@ public class ContactListActivity extends AppCompatActivity {
 
     protected void onStart() {
         super.onStart();
+
         //transmittedContact = null;
         contactAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //contactAdapter.notifyDataSetChanged();
+
+        ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
+        listOfContacts.addAll(db.getAllContacts());
+        contactList = listOfContacts;
+
+        contactAdapter = new ContactListAdapter( this, contactList);
+
+        lv.setAdapter(contactAdapter);
+    }
+
 
     public void openContactActivity(Contactdata _contact){
         Intent intent = new Intent(this, ContactActivity.class);
