@@ -34,7 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+//import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 
 import java.io.Console;
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     Button addContactButton;
     ImageButton addProfileButton;
 
-    CompactCalendarView compCalendarView;
+    //CompactCalendarView compCalendarView;
 
 
     ListView contactListView;
@@ -183,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        //transmittedContact = null;
         mainAdapter.notifyDataSetChanged();
         Intent intent = new Intent(this, CheckService.class);
         startService(intent);

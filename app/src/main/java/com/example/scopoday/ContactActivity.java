@@ -4,7 +4,9 @@ import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -124,7 +126,7 @@ public class ContactActivity extends AppCompatActivity {
 
         //Kontakt Alter anzeigen
         contactAge = findViewById(R.id.ContactAlter_TV_ID);
-        String ageString = Integer.toString(CalculateAge(displayedContact.getBirthdayDate()));
+        final String ageString = Integer.toString(CalculateAge(displayedContact.getBirthdayDate()));
         contactAge.setText(ageString);
 
         //Geburtsdatum anzeigen
@@ -137,9 +139,11 @@ public class ContactActivity extends AppCompatActivity {
                 if (i == EditorInfo.IME_ACTION_DONE) {
 
                     Log.d("CONTACT_CHANGE_BIRTHDAY", "neuer geburtstag:" + contactBirthdayTV.getText().toString());
-                    // Namen in die Datenbank setzen
+                    // Namen in die Datenbank setzen In Liste Ändern und Alter aktualisieren
                     db.updateContactbirthday(displayedContact, contactBirthdayTV.getText().toString());
                     displayedContact.setBirthday(contactBirthdayTV.getText().toString());
+                    contactAge.setText(Integer.toString(CalculateAge((displayedContact.getBirthdayDate()))));
+
                     handled = true;
                     InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(contactBirthdayTV.getWindowToken(), 0);
@@ -216,26 +220,48 @@ public class ContactActivity extends AppCompatActivity {
         reminderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notificationcall();
+                // notificationcall(); // erstellt eine notification
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.HOUR_OF_DAY,16);
+                cal.set(Calendar.HOUR_OF_DAY,55);
+                cal.set(Calendar.HOUR_OF_DAY,30);
+
+                Intent notifyIntent = new Intent(getApplicationContext(), AlarmNotificationReceiver.class);
+                notifyIntent.setAction("Notification Action Massage from Contact Activity");
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 2, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                AlarmManager alarmManager =(AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
             }
         });
 
      }
 
+
 ////////////// ON CREATE ENDE ////////////////////////
 
 
-    // Für Alter Bestimmen
+    // Alter berechnen
     private int CalculateAge(Date _birthday){
 
-        Log.d("Date of Contact", Integer.toString(_birthday.getYear()));
+        Calendar calToday = Calendar.getInstance();
 
-        //hier müsste eigentlich noch das genaue datum berüchsichtigt werden
-        int geburtsjahr =  _birthday.getYear() + 1900;
-         int age =  Calendar.getInstance().get(Calendar.YEAR) - geburtsjahr;
+        Calendar calBD  = Calendar.getInstance();
+        calBD.setTime(_birthday);
 
-        return age;
+        //int geburtsjahr =  _birthday.getYear() + 1900;
+        int geburtsjahr = calBD.get(Calendar.YEAR);
+        int age =  Calendar.getInstance().get(Calendar.YEAR) - geburtsjahr;
 
+        if(calToday.get(Calendar.DAY_OF_MONTH) >= calBD.get(Calendar.DAY_OF_MONTH) &&
+                calToday.get(Calendar.MONTH) >= calBD.get(Calendar.MONTH))
+        {
+            return age;
+        }
+        else{
+            age = age-1;
+            return age;
+        }
     }
 
     // Für die Kreise
