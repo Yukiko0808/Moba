@@ -8,9 +8,11 @@ import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainActivity = this;
+
+
 
         setContentView(R.layout.activity_main);
         // createContactButtons();
@@ -169,8 +173,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         //transmittedContact = null;
         mainAdapter.notifyDataSetChanged();
+        Intent intent = new Intent(this, CheckService.class);
+        startService(intent);
     }
 
     public void openProfile(){

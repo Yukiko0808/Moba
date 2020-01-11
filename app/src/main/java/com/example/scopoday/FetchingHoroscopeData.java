@@ -59,7 +59,8 @@ public class FetchingHoroscopeData {
                         String zodicaHoroscopeText = zodicaHoroscopeJSON.getString(zodiac);
 
 
-                        dailyHoroscopeText = zodicaHoroscopeText;
+
+                        dailyHoroscopeText = zodicaHoroscopeText.substring(0, zodicaHoroscopeText.indexOf("<"));
                         Log.i("FETCH", "horosko text " + zodiac +  ": " + dailyHoroscopeText);
 
                         //Bei Erfolg zurückgeben
