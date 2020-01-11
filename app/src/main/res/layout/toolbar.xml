@@ -6,6 +6,8 @@
     android:background="@drawable/header_main"
     android:foregroundTint="#FFFFFF"
     android:minHeight="?attr/actionBarSize"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:subtitleTextColor="#FDFFFFFF"
     app:titleTextColor="#FAF8F8">
 
