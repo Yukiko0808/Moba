@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ZodiacsignsActivity"></activity>
+        <activity android:name=".ZodiacsignActivity"></activity>
+        <activity android:name=".ZodiacsignsActivity" />
         <activity android:name=".PhoneContactListActivity" />
         <activity android:name=".ContactListActivity" />
         <activity android:name=".Profile" />
@@ -26,14 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity" />
-        <service android:name=".CheckService"/>
-        <receiver android:name=".AlarmNotificationReceiver"/>
+
+        <service android:name=".CheckService" />
+
+        <receiver android:name=".AlarmNotificationReceiver" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>
