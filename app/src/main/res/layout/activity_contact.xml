@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041"
+        app:layout_constraintVertical_bias="0.003"
         app:srcCompat="@drawable/header_contact" />
 
     <ImageView
@@ -28,7 +28,7 @@
         android:layout_width="65dp"
         android:layout_height="56dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:foregroundTint="#00DFC2C2"
         android:tint="@android:color/background_light"
@@ -37,18 +37,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="234dp"
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/poppins_light"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/starSign_TV_ID" />
 
@@ -200,19 +199,14 @@
         android:id="@+id/starSign_TV_ID"
         android:layout_width="367dp"
         android:layout_height="27dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="628dp"
+        android:foregroundTint="#00000000"
         android:text="TextView"
         android:textAlignment="center"
-        android:textColor="#FCFCFC"
-        android:textColorHint="#FAF8F4F4"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/zodiacsign"
-        app:layout_constraintVertical_bias="1.0" />
+        android:textColor="#020202"
+        android:textColorHint="#FA030303"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="22dp"
+        tools:layout_editor_absoluteY="154dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
