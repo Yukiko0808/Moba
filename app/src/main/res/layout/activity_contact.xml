@@ -171,7 +171,7 @@
         android:background="@drawable/btn_rounded_corners"
         android:backgroundTint="@color/colorPrimaryDark"
         android:fontFamily="@font/poppins_bold"
-        android:text="Remaind Me"
+        android:text="Remind Me"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -199,14 +199,20 @@
         android:id="@+id/starSign_TV_ID"
         android:layout_width="367dp"
         android:layout_height="27dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="21dp"
         android:foregroundTint="#00000000"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="#020202"
         android:textColorHint="#FA030303"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="22dp"
-        tools:layout_editor_absoluteY="154dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

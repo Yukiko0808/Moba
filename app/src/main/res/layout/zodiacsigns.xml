@@ -58,7 +58,7 @@
             app:layout_constraintVertical_bias="0.204" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/pisces"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
@@ -73,7 +73,7 @@
             app:layout_constraintVertical_bias="0.204" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/aries"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
@@ -88,7 +88,7 @@
             app:layout_constraintVertical_bias="0.327" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/taurus"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
@@ -103,7 +103,7 @@
             app:layout_constraintVertical_bias="0.328" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/gemini"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
@@ -118,7 +118,7 @@
             app:layout_constraintVertical_bias="0.444" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/cancer"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
@@ -133,7 +133,7 @@
             app:layout_constraintVertical_bias="0.444" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/leo"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
@@ -148,7 +148,7 @@
             app:layout_constraintVertical_bias="0.564" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/virgo"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
@@ -163,7 +163,7 @@
             app:layout_constraintVertical_bias="0.564" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/libra"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
@@ -178,7 +178,7 @@
             app:layout_constraintVertical_bias="0.681" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/scorpio"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
@@ -193,7 +193,7 @@
             app:layout_constraintVertical_bias="0.681" />
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/sagittarius"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
@@ -208,7 +208,7 @@
             app:layout_constraintVertical_bias="0.795" />
 
         <Button
-            android:id="@+id/button12"
+            android:id="@+id/capricorn"
             android:layout_width="148dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"

@@ -7,7 +7,7 @@
     tools:context=".ZodiacsignActivity">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/zodiacsignstext"
         android:layout_width="345dp"
         android:layout_height="409dp"
         android:ems="10"
@@ -36,7 +36,7 @@
         android:id="@+id/imageView"
         android:layout_width="115dp"
         android:layout_height="97dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/zodiacsignstext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Zodiacsign"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/zodiacsignstext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
