@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.TextureView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ZodiacsignActivity extends AppCompatActivity {
 
     String displayedzodiacsign;
     TextView zodiacsignstext;
+    ImageView zodiacsignimage;
+    String imagename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,9 @@ public class ZodiacsignActivity extends AppCompatActivity {
         displayedzodiacsign = (String) bundle.getSerializable("ZODIACSIGN");
         zodiacsignstext = findViewById(R.id.zodiacsignstext);
         zodiacsignstext.setText(getResources().getIdentifier(displayedzodiacsign, "string", getPackageName()));
-
+        zodiacsignimage = findViewById(R.id.zodiacsignimage);
+        imagename = "drawable/" + displayedzodiacsign + "_white";
+        zodiacsignimage.setImageResource(getResources().getIdentifier(imagename, "id", getPackageName()));
 
     }
 }

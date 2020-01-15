@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/header_contact" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/zodiacsignimage"
         android:layout_width="115dp"
         android:layout_height="97dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/zodiacsignimage" />
 
     <TextView
         android:id="@+id/zodiacsignstext"
