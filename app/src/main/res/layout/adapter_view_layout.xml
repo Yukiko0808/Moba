@@ -12,13 +12,43 @@
         android:layout_weight="50">
 
         <TextView
-            android:id="@+id/textViewDays"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/textViewDate"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewName"
+            android:layout_alignStart="@+id/textViewName"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="TextView2"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="18dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="66.6"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="TextView1"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewDays"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/textViewName"
+            android:layout_alignBottom="@+id/textViewDate"
+            android:layout_marginStart="53dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:layout_toEndOf="@+id/textViewName"
             android:layout_weight="66.66"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
@@ -27,32 +57,6 @@
             android:text="00"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark" />
-
-        <TextView
-            android:id="@+id/textViewDate"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textViewName"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="-5dp"
-            android:layout_toEndOf="@+id/textViewDays"
-            android:fontFamily="@font/poppins_light"
-            android:text="TextView2"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textViewName"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/textViewDays"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="-4dp"
-            android:layout_toEndOf="@+id/textViewDays"
-            android:layout_weight="66.6"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="TextView1"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
 
     </RelativeLayout>

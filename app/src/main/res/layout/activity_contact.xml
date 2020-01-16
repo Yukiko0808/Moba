@@ -56,7 +56,7 @@
         android:layout_width="366dp"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="18dp"
         android:fontFamily="@font/poppins_semibold"
         android:imeOptions="actionDone"
         android:inputType="text"
@@ -69,11 +69,13 @@
         android:layout_width="49dp"
         android:layout_height="31dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Alter"
         android:textAlignment="textEnd"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toEndOf="@+id/contactDatepicker_TV_ID"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -87,7 +89,7 @@
         android:text="Geburtsdatum"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID" />
-
+    <!---
     <include
         android:id="@+id/pieChart_Luck_ID"
         layout="@layout/piechart"
@@ -133,18 +135,20 @@
         app:layout_constraintTop_toBottomOf="@+id/remainderButton_ID"
         app:layout_constraintVertical_bias="0.32" />
 
+    -->
+
     <TextView
         android:id="@+id/horoskoptext"
-        android:layout_width="374dp"
-        android:layout_height="168dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="371dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pieChart_Job_ID"
-        app:layout_constraintVertical_bias="0.16" />
+        app:layout_constraintTop_toBottomOf="@+id/remainderButton_ID"
+        app:layout_constraintVertical_bias="0.065" />
 
     <TextView
         android:id="@+id/textView4"
@@ -159,6 +163,61 @@
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID"
         app:layout_constraintVertical_bias="0.29" />
+
+    <Button
+        android:id="@+id/zodiacsignButton_ID"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="367dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/btn_rounded_corners"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Zodiacsign infos"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ContactAlter_TV_ID"
+        app:layout_constraintVertical_bias="0.68" />
+
+    <EditText
+        android:id="@+id/contactDatepicker_TV_ID"
+        android:layout_width="306dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:hint="Select Date"
+        android:inputType="date"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/starSign_TV_ID"
+        android:layout_width="367dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="21dp"
+        android:foregroundTint="#00000000"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#020202"
+        android:textColorHint="#FA030303"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zodiacsign" />
 
     <Button
         android:id="@+id/remainderButton_ID"
@@ -176,43 +235,10 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
-        app:layout_constraintVertical_bias="0.043" />
-
-    <EditText
-        android:id="@+id/contactDatepicker_TV_ID"
-        android:layout_width="306dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:hint="Select Date"
-        android:inputType="date"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/starSign_TV_ID"
-        android:layout_width="367dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="21dp"
-        android:foregroundTint="#00000000"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="#020202"
-        android:textColorHint="#FA030303"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

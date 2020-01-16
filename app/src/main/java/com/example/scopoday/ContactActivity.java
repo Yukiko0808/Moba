@@ -58,7 +58,7 @@ public class ContactActivity extends AppCompatActivity {
     int todayJob;
 
     Button reminderButton;
-
+    Button zodiacsignButton;
 
     //SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy hh:mm:ss");
     private DatePickerDialog.OnDateSetListener mdateSetListener;
@@ -70,7 +70,7 @@ public class ContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
-        // Datenbank aus Main Activity holen (Damit die Daten die gleichen sind)
+        // Datenbank
         db = new MySQLHelper(this);
 
         //Neues Objekt das die Horoskop Daten holt erstellen -> Verwendet wird es in der Funktion die das Sternzeichen des Kontakts bestimmt
@@ -195,7 +195,7 @@ public class ContactActivity extends AppCompatActivity {
         CalculateHoroskopValues();
 
         //Kreishoroskop Werte Bestimmen
-
+        /*
         //LOVE
         ProgressBar pieChart_love = findViewById(R.id.pieChart_Love_ID).findViewById(R.id.progressBar);
         pieChart_love.setProgress(todayLove);
@@ -213,7 +213,7 @@ public class ContactActivity extends AppCompatActivity {
         pieChart_luck.setProgress(todayLuck);
         TextView txt_luck = (TextView) findViewById(R.id.pieChart_Luck_ID).findViewById(R.id.percentText);
         txt_luck.setText(todayLuck + "%");
-
+        */
 
         // toggle der Notification ausläßt / geburtstags reminder
         reminderButton = findViewById(R.id.remainderButton_ID);
@@ -232,6 +232,15 @@ public class ContactActivity extends AppCompatActivity {
 
                 AlarmManager alarmManager =(AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            }
+        });
+
+        //Link zur Sternzeichen seite mit allen Infos
+        zodiacsignButton = findViewById(R.id.zodiacsignButton_ID);
+        zodiacsignButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -337,13 +346,13 @@ public class ContactActivity extends AppCompatActivity {
 
         if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),0,0))
                 && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),0, 21))) {
-            // Steinbock - capricorn
+            // Wassermann - aquarius
             starSign = "Capricorn";
 
             /*actualContact.setJob(5);
             actualContact.setLuck(4);
             actualContact.setLove(8);*/
-            zodiacsign.setImageResource(R.drawable.capricorn_black);
+            zodiacsign.setImageResource(R.drawable.aquarius_white);
             horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
                 @Override
                 public void onSuccess(String result) {
@@ -545,23 +554,6 @@ public class ContactActivity extends AppCompatActivity {
 
     }
 
-/*  // war um transmittet contakt zu setzen kann eigentlich raus
-    private void SetBirthdateInMain(Date d){
-        Contactdata newContact = MainActivity.transmittedContact;
-        newContact.setBirthdayDate(d);
-        MainActivity.contactList.set(MainActivity.transmittedContactPosition, newContact);
-        String ageString = Integer.toString(CalculateAge());
-        contactAge.setText(ageString);
-        starSignText.setText(CalculateStarSign());
-        Log.d("CONTACT", "changed contact:" + MainActivity.transmittedContact.name);
-    }
-
-    private void SetNameInMain(String n){
-        Contactdata newContact = MainActivity.transmittedContact;
-        newContact.setName(n);
-        MainActivity.contactList.set(MainActivity.transmittedContactPosition, newContact);
-
-    }*/
 
     @Override
     public void finish(){

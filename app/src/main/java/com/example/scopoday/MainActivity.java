@@ -4,29 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Debug;
-import android.os.Handler;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -36,11 +23,7 @@ import android.widget.Toast;
 
 //import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,16 +36,18 @@ public class MainActivity extends AppCompatActivity {
     public static int transmittedContactPosition;
     public static MainActivity mainActivity;
 
-    Button addContactButton;
+    Button allContactsButton;
     ImageButton addProfileButton;
 
     //CompactCalendarView compCalendarView;
 
 
-    ListView contactListView;
+    //ListView contactListView;
+    RecyclerView contactListView;
     public static ArrayList<Contactdata> contactList;
     ContactListAdapter mainAdapter;
 
+    NextBirthdaysListAdapter birthdayContactAdapter;
 
     public static MySQLHelper db;
 
@@ -70,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainActivity = this;
-
-
 
         setContentView(R.layout.activity_main);
         // createContactButtons();
@@ -106,32 +89,30 @@ public class MainActivity extends AppCompatActivity {
 
 
        // contactList = null;
-        contactListView = findViewById(R.id.ContantList_ID);
+        contactListView = findViewById(R.id.birthdaysRecyclerView);
 
-        if(contactList == null) contactList = new ArrayList<>();    //Falls Permissions abgelehnt wurden, eine leere Liste erstellen.
+        if(contactList == null) contactList = new ArrayList<>();
 
-        //ContactListAdapter adapter = new ContactListAdapter(this, R.layout.adapter_view_layout, contactList);
-        ContactListAdapter adapter = new ContactListAdapter(this, contactList);
-        contactListView.setAdapter(adapter);
-        mainAdapter = adapter;
+        ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
+        listOfContacts.addAll(db.getAllContacts());
+        contactList = listOfContacts;
 
-        /*
-        contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, ""+ contactList.get(i).getName(), Toast.LENGTH_SHORT).show();
-                //transmittedContact = contactList.get(i);
-                //transmittedContactPosition = i;
-                openContactActivity();
-            }
-        });*/
+       // ContactListAdapter adapter = new ContactListAdapter(this, contactList);
+        //contactListView.setAdapter(adapter);
+        //mainAdapter = adapter;
+
+        birthdayContactAdapter = new NextBirthdaysListAdapter(this, contactList);
+        contactListView.setAdapter(birthdayContactAdapter);
+
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.birthdaysRecyclerView);
+        recyclerView.setLayoutManager(layoutManager);
 
         contactText = findViewById(R.id.textView_ID);
 
+        allContactsButton = (Button) findViewById(R.id.AddContactButton_ID);
 
-        addContactButton = (Button) findViewById(R.id.AddContactButton_ID);
-
-        addContactButton.setOnClickListener(new View.OnClickListener() {
+        allContactsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Open Contact list", Toast.LENGTH_SHORT).show();
@@ -183,7 +164,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        mainAdapter.notifyDataSetChanged();
+        //mainAdapter.notifyDataSetChanged();
+        birthdayContactAdapter.notifyDataSetChanged();
         Intent intent = new Intent(this, CheckService.class);
         startService(intent);
     }
@@ -198,15 +180,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
-/*
-    public void AddContact() {
-        Contact sampleContact = new Contact(contactList.size(),"Name", new Date(2000,00,01));
-        contactList.add(sampleContact);
-        transmittedContact = sampleContact;
-        transmittedContactPosition = contactList.size()-1;
-        Log.d("TransmittedContactPostition", Integer.toString(contactList.size()));
-        openContactActivity();
-    }*/
 
     public void addContactToDatabase (Contactdata contact){
         db.addContact(contact);

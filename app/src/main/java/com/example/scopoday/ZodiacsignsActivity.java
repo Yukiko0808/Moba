@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 
-public class ZodiacsignsActivity extends AppCompatActivity implements View.OnClickListener {
+public class ZodiacsignsActivity extends AppCompatActivity{
 
     Button aquarius;
     Button aries;
@@ -36,23 +36,16 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
            public void onClick(View v){
                Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                Bundle bundle = new Bundle();
 
                bundle.putSerializable("ZODIACSIGN", "aquarius");
                intent.putExtras(bundle);
-
-               //Activity starten
 
                startActivity(intent);
 
            }
 
         });
-
-
-
-
 
         aries = (Button) findViewById(R.id.aries);
         aries.setOnClickListener(new View.OnClickListener() {
@@ -65,33 +58,21 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
                 bundle.putSerializable("ZODIACSIGN", "aries");
                 intent.putExtras(bundle);
 
-                //Activity starten
-
                 startActivity(intent);
 
             }
 
         });
 
-
-
-
-
-
-
-
         taurus = (Button) findViewById(R.id.taurus);
         taurus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("ZODIACSIGN", "taurus");
                 intent.putExtras(bundle);
-
-                //Activity starten
 
                 startActivity(intent);
 
@@ -104,13 +85,10 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v){
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("ZODIACSIGN", "pisces");
                 intent.putExtras(bundle);
-
-                //Activity starten
 
                 startActivity(intent);
 
@@ -124,13 +102,10 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v){
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("ZODIACSIGN", "cancer");
                 intent.putExtras(bundle);
-
-                //Activity starten
 
                 startActivity(intent);
 
@@ -143,13 +118,10 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v){
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("ZODIACSIGN", "gemini");
                 intent.putExtras(bundle);
-
-                //Activity starten
 
                 startActivity(intent);
 
@@ -162,13 +134,10 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v){
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("ZODIACSIGN", "leo");
                 intent.putExtras(bundle);
-
-                //Activity starten
 
                 startActivity(intent);
 
@@ -181,13 +150,10 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v){
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("ZODIACSIGN", "virgo");
                 intent.putExtras(bundle);
-
-                //Activity starten
 
                 startActivity(intent);
 
@@ -200,13 +166,10 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v){
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("ZODIACSIGN", "libra");
                 intent.putExtras(bundle);
-
-                //Activity starten
 
                 startActivity(intent);
 
@@ -219,13 +182,10 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v){
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("ZODIACSIGN", "scorpio");
                 intent.putExtras(bundle);
-
-                //Activity starten
 
                 startActivity(intent);
 
@@ -238,16 +198,12 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v){
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("ZODIACSIGN", "sagittarius");
                 intent.putExtras(bundle);
 
-                //Activity starten
-
                 startActivity(intent);
-
             }
 
         });
@@ -257,16 +213,12 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View v){
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
 
-
                 Bundle bundle = new Bundle();
 
                 bundle.putSerializable("ZODIACSIGN", "capricorn");
                 intent.putExtras(bundle);
 
-                //Activity starten
-
                 startActivity(intent);
-
             }
 
         });
@@ -275,22 +227,5 @@ public class ZodiacsignsActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent (this, ZodiacsignActivity.class);
-
-
-            Bundle bundle = new Bundle();
-
-
-
-
-           // bundle.putSerializable("ZODIACSIGN", _zodiacsign);
-            intent.putExtras(bundle);
-
-            //Activity starten
-
-        startActivity(intent);
-        }
 }
 

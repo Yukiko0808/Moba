@@ -13,14 +13,13 @@ import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class PhoneContactListActivity extends AppCompatActivity {
 
-    ArrayList<PhoneContacts> phoneContacts = null;
+    ArrayList<Contactdata> phoneContacts = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +59,13 @@ public class PhoneContactListActivity extends AppCompatActivity {
             }
         });
 
-        PhoneContactListAdapter adapter;
-        adapter = new PhoneContactListAdapter(this, phoneContacts);
-        listView.setAdapter(adapter);
+        NextBirthdaysListAdapter adapter;
+        //adapter = new NextBirthdaysListAdapter(this, phoneContacts);
+        //listView.setAdapter(adapter);
 
     }
 
-    public ArrayList<PhoneContacts> getContactsListFromMobilePhone(){
+    public ArrayList<Contactdata> getContactsListFromMobilePhone(){
         ContentResolver cr = getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,null, null, null, null);
 
@@ -74,7 +73,7 @@ public class PhoneContactListActivity extends AppCompatActivity {
             return null;
         }
 
-        ArrayList<PhoneContacts> contacts = new ArrayList<PhoneContacts>();
+        ArrayList<Contactdata> contacts = new ArrayList<Contactdata>();
 
         if (cur.getCount()  > 0) {
             while (cur.moveToNext()) {
@@ -84,7 +83,7 @@ public class PhoneContactListActivity extends AppCompatActivity {
                 Log.i("Contact ID", id);
                 Log.i("Contact name", name);*/
 
-                contacts.add(new PhoneContacts(id, name));
+                contacts.add(new Contactdata(id, name));
             }
 
             cur.close();
