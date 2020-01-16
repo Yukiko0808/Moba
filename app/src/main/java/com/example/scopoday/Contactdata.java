@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Contactdata implements Serializable {
@@ -80,6 +81,28 @@ public class Contactdata implements Serializable {
 
             return zodiac;
         }
+
+    public long CalculateDaysTillBD (Date bd){
+
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+
+        Date birthDate = new Date(0000, bd.getMonth(), bd.getDate());
+        Date todayDate = new Date(0000, today.getMonth(), today.getDate());
+
+        if(birthDate.getTime()<todayDate.getTime()){
+            birthDate = new Date(1, birthDate.getMonth(), birthDate.getDate());
+        }
+
+        long days = birthDate.getTime() - todayDate.getTime();
+        days = days / (24 * 60 * 60 * 1000);
+        /*
+        Log.d("First date", birthDate.toString());
+        Log.d("Second Date", todayDate.toString());
+        Log.d("Days?" , Long.toString(days));*/
+
+        return  days;
+    }
 
     }
 

@@ -2,6 +2,7 @@ package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,12 +12,14 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,8 @@ import android.widget.Toast;
 //import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     TextView contactText;
     String contactInfo;
-    public static Contactdata transmittedContact;
-    public static int transmittedContactPosition;
     public static MainActivity mainActivity;
 
     Button allContactsButton;
@@ -47,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Contactdata> contactList;
     ContactListAdapter mainAdapter;
 
+    public List<Contactdata> onlyNext3Bds;
+
+
     NextBirthdaysListAdapter birthdayContactAdapter;
+
+    ConstraintLayout nextBD1, nextBD2, nextBD3;
 
     public static MySQLHelper db;
 
@@ -88,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         // 2. "Run" -> "Debug 'app'. Compiler wird am Breakpoint anhalten. Unter Variables kann man die Liste anschauen.
 
 
-       // contactList = null;
+        contactList = null;
         contactListView = findViewById(R.id.birthdaysRecyclerView);
 
         if(contactList == null) contactList = new ArrayList<>();
@@ -97,16 +105,27 @@ public class MainActivity extends AppCompatActivity {
         listOfContacts.addAll(db.getAllContacts());
         contactList = listOfContacts;
 
-       // ContactListAdapter adapter = new ContactListAdapter(this, contactList);
-        //contactListView.setAdapter(adapter);
-        //mainAdapter = adapter;
+        onlyNext3Bds = contactList;
+        onlyNext3Bds.sort(new Comparator<Contactdata>() {
+             @Override
+             public int compare(Contactdata c1, Contactdata c2) {
 
-        birthdayContactAdapter = new NextBirthdaysListAdapter(this, contactList);
-        contactListView.setAdapter(birthdayContactAdapter);
+                 if(c1.CalculateDaysTillBD(c1.getBirthdayDate()) < c2.CalculateDaysTillBD(c2.getBirthdayDate())) {
+                     return -1;
+                 }
+                 return 0;
+             }
+        });
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.birthdaysRecyclerView);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+
+
+        birthdayContactAdapter = new NextBirthdaysListAdapter(this, onlyNext3Bds);
+        contactListView.setAdapter(birthdayContactAdapter);
+
 
         contactText = findViewById(R.id.textView_ID);
 
@@ -124,9 +143,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void addContacttoDatabase (Contactdata Contact){
-        db.addContact(Contact);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -165,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         //mainAdapter.notifyDataSetChanged();
-        birthdayContactAdapter.notifyDataSetChanged();
+//        birthdayContactAdapter.notifyDataSetChanged();
         Intent intent = new Intent(this, CheckService.class);
         startService(intent);
     }
@@ -174,12 +190,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
-
+/*
     public void openContactActivity(){
         Intent intent = new Intent(this, ContactActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-    }
+    }*/
 
     public void addContactToDatabase (Contactdata contact){
         db.addContact(contact);
@@ -209,6 +225,21 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0; i<=contactList.size(); i++){
 
         }
+    }
+
+    public void openContactActivity(Contactdata _contact){
+        Intent intent = new Intent(this, ContactActivity.class);
+        Bundle bundle = new Bundle();
+
+        //Contact daten mitschicken
+        bundle.putSerializable("CONTACTDATA", _contact);
+        intent.putExtras(bundle);
+
+        //Activity starten
+        startActivity(intent);
+
+        //Animation überschreiben
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     @Override
