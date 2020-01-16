@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -26,8 +27,13 @@ import android.widget.Toast;
 
 //import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 
+import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+import com.github.sundeepk.compactcalendarview.domain.Event;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 
@@ -42,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     Button allContactsButton;
     ImageButton addProfileButton;
 
-    //CompactCalendarView compCalendarView;
+    CompactCalendarView compCalendarView;
 
 
     //ListView contactListView;
@@ -145,7 +151,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        compCalendarView = (CompactCalendarView) findViewById(R.id.compactCalendarView);
+        Date bd = onlyNext3Bds.get(0).getBirthdayDate();
+        Calendar cal = Calendar.getInstance();
+        Calendar calBD = Calendar.getInstance();
+        calBD.setTime(bd);
+        cal.set(Calendar.getInstance().get(Calendar.YEAR), calBD.get(Calendar.MONTH), calBD.get(Calendar.DAY_OF_MONTH));
+        Event event = new Event(Color.BLACK, cal.getTimeInMillis(), "Ein geburstag");
+        compCalendarView.addEvent(event);
+        compCalendarView.shouldDrawIndicatorsBelowSelectedDays(true);
     }
 
 
