@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -38,6 +39,7 @@ import java.util.List;
 import java.util.Random;
 
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class ContactActivity extends AppCompatActivity {
@@ -47,7 +49,9 @@ public class ContactActivity extends AppCompatActivity {
     TextView contactBirthdayTV;
     TextView starSignText;
     ImageView zodiacsign;
-    TextView horoskopText;
+    TextView horoscopeZodiacsignTitle;
+
+    RelativeLayout horoscopeCard;
 
     FetchingHoroscopeData horoscopeData;
 
@@ -58,7 +62,6 @@ public class ContactActivity extends AppCompatActivity {
     int todayJob;
 
     Button reminderButton;
-    Button zodiacsignButton;
 
     //SimpleDateFormat sdf = new SimpleDateFormat("dd_mm_yyyy hh:mm:ss");
     private DatePickerDialog.OnDateSetListener mdateSetListener;
@@ -118,11 +121,13 @@ public class ContactActivity extends AppCompatActivity {
 
         //Sternzeichen layout image finden
         zodiacsign = findViewById(R.id.zodiacsign);
+        horoscopeZodiacsignTitle = findViewById(R.id.zodiacsign_TextView);
 
         //Sternzeichen Text anzeigen
         starSignText = findViewById(R.id.starSign_TV_ID);
-        starSignText.setText(CalculateStarSign());
-
+        String zodiacsign = CalculateStarSign();
+        starSignText.setText(zodiacsign);
+        horoscopeZodiacsignTitle.setText(zodiacsign);
 
         //Kontakt Alter anzeigen
         contactAge = findViewById(R.id.ContactAlter_TV_ID);
@@ -215,6 +220,7 @@ public class ContactActivity extends AppCompatActivity {
         txt_luck.setText(todayLuck + "%");
         */
 
+        /*
         // toggle der Notification ausläßt / geburtstags reminder
         reminderButton = findViewById(R.id.remainderButton_ID);
         reminderButton.setOnClickListener(new View.OnClickListener() {
@@ -233,14 +239,15 @@ public class ContactActivity extends AppCompatActivity {
                 AlarmManager alarmManager =(AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
             }
-        });
+        });*/
 
         //Link zur Sternzeichen seite mit allen Infos
-        zodiacsignButton = findViewById(R.id.zodiacsignButton_ID);
-        zodiacsignButton.setOnClickListener(new View.OnClickListener() {
+
+        horoscopeCard = findViewById(R.id.horoscopeCard);
+        horoscopeCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(getApplicationContext(), "Sternzeichen seite öffenen", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -321,7 +328,7 @@ public class ContactActivity extends AppCompatActivity {
         int loveValue = 1;
 
 
-        final TextView dailyHoroscopeText = findViewById(R.id.horoskoptext);
+        final TextView dailyHoroscopeText = findViewById(R.id.horoskopText_ID);
 
         if(actualContact.getBirthdayDate().after(new Date(actualContact.getBirthdayDate().getYear(),11,21))
                 && actualContact.getBirthdayDate().before(new Date(actualContact.getBirthdayDate().getYear(),11, 32))) {

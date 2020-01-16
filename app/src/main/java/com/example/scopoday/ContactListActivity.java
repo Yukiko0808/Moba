@@ -126,6 +126,7 @@ public class ContactListActivity extends AppCompatActivity {
             //Löschen des Kontakts
             db.deleteContacts(contactList.get(tempPos));
             contactAdapter.remove(contactList.get(tempPos));
+
         }
         if(item.getGroupId() == 1){
             return true;

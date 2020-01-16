@@ -56,7 +56,7 @@
             android:gravity="center"
             android:text="00"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorText_darkRed" />
 
 
     </RelativeLayout>

@@ -45,11 +45,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewName"
-            android:layout_marginTop="-65dp"
+            android:layout_marginTop="-68dp"
             android:fontFamily="@font/poppins_light"
             android:text="Days until birthday"
             android:textAlignment="center"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/textViewDays"

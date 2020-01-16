@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Contactdata> contactList;
     ContactListAdapter mainAdapter;
 
-    public List<Contactdata> onlyNext3Bds;
+    public List<Contactdata> onlyNext3Bds = new ArrayList<>();
 
 
     NextBirthdaysListAdapter birthdayContactAdapter;
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
         listOfContacts.addAll(db.getAllContacts());
         contactList = listOfContacts;
 
-        onlyNext3Bds = contactList;
-        onlyNext3Bds.sort(new Comparator<Contactdata>() {
+        List<Contactdata> orderdList = contactList;
+        orderdList.sort(new Comparator<Contactdata>() {
              @Override
              public int compare(Contactdata c1, Contactdata c2) {
 
@@ -117,15 +117,20 @@ public class MainActivity extends AppCompatActivity {
              }
         });
 
+        for(int i = 0; i<3; i++){
+            if(orderdList.size() > i){
+                onlyNext3Bds.add(orderdList.get(i));
+            }
+
+        }
+
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.birthdaysRecyclerView);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-
 
         birthdayContactAdapter = new NextBirthdaysListAdapter(this, onlyNext3Bds);
         contactListView.setAdapter(birthdayContactAdapter);
-
 
         contactText = findViewById(R.id.textView_ID);
 
@@ -180,10 +185,48 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        //mainAdapter.notifyDataSetChanged();
-//        birthdayContactAdapter.notifyDataSetChanged();
+        birthdayContactAdapter.notifyDataSetChanged();
+
+
         Intent intent = new Intent(this, CheckService.class);
         startService(intent);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+        onlyNext3Bds = new ArrayList<Contactdata>();
+
+        List<Contactdata> tempList;
+        tempList = db.getAllContacts();
+
+        tempList.sort(new Comparator<Contactdata>() {
+            @Override
+            public int compare(Contactdata c1, Contactdata c2) {
+
+                if(c1.CalculateDaysTillBD(c1.getBirthdayDate()) < c2.CalculateDaysTillBD(c2.getBirthdayDate())) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+
+        for(int i = 0; i<3; i++){
+            if(tempList.size() > i){
+                onlyNext3Bds.add(tempList.get(i));
+            }
+
+        }
+
+        birthdayContactAdapter.notifyDataSetChanged();
+        birthdayContactAdapter = new NextBirthdaysListAdapter(this, onlyNext3Bds);
+        contactListView.setAdapter(birthdayContactAdapter);
+
+
     }
 
     public void openProfile(){

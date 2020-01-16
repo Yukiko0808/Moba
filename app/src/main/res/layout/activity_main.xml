@@ -21,14 +21,14 @@
         android:id="@+id/textView_ID"
         android:layout_width="344dp"
         android:layout_height="25dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="288dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/poppins_light"
         android:text="Next Birthdays:"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView2" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/currentZodiacsignHeadline"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
     <!---
     <ListView
         android:id="@+id/ContantList_ID"
@@ -45,70 +45,23 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/birthdaysRecyclerView"
         class="androidx.appcompat.app.AlertController$RecycleListView"
-        android:layout_width="372dp"
-        android:layout_height="184dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="366dp"
+        android:layout_height="183dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.833"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView_ID"
         app:layout_constraintTop_toBottomOf="@+id/textView_ID">
 
     </androidx.recyclerview.widget.RecyclerView>
 
 
-    <!---
-        <include
-            android:id="@+id/nextBirthday1"
-            layout="@layout/activity_phone_contact_list_adapter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="164dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.08"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_ID"
-            app:layout_constraintVertical_bias="0.312" />
-
-        <include
-            android:id="@+id/nextBirthday2"
-            layout="@layout/activity_phone_contact_list_adapter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="164dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.46"
-            app:layout_constraintStart_toStartOf="@+id/textView_ID"
-            app:layout_constraintTop_toBottomOf="@+id/textView_ID"
-            app:layout_constraintVertical_bias="0.312" />
-
-        <include
-            android:id="@+id/nextBirthday3"
-            layout="@layout/activity_phone_contact_list_adapter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="164dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/textView_ID"
-            app:layout_constraintTop_toBottomOf="@+id/textView_ID"
-            app:layout_constraintVertical_bias="0.312" />
-    -->
-
     <Button
         android:id="@+id/AddContactButton_ID"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="349dp"
-        android:layout_height="48dp"
+        android:layout_width="375dp"
+        android:layout_height="42dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="44dp"
@@ -121,7 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
+<!---
     <CalendarView
         android:id="@+id/calendarView2"
         android:layout_width="411dp"
@@ -132,15 +85,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />-->
+
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView
+        android:id="@+id/compactCalendarView"
+        android:layout_width="376dp"
+        android:layout_height="304dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#00DE72A4"
+        android:backgroundTint="#00FFFFFF"
+        app:compactCalendarBackgroundColor="#00FFFFFF"
+        app:compactCalendarCurrentDayBackgroundColor="#CFC7CA"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="@color/colorPrimaryDark"
+        app:compactCalendarCurrentSelectedDayTextColor="#FFFFFF"
+        app:compactCalendarMultiEventIndicatorColor="#0C57D8"
+        app:compactCalendarTextSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.368"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/KalenderHeadline"
         android:layout_width="195dp"
         android:layout_height="31dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Monat"
         android:textColor="#FFFFFF"
@@ -149,15 +121,15 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/currentZodiacsignHeadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_light"
         android:text="Sternzeichen"
         android:textColor="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintStart_toStartOf="@+id/KalenderHeadline"
+        app:layout_constraintTop_toBottomOf="@+id/KalenderHeadline" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
