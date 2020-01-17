@@ -49,14 +49,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/starSign_TV_ID" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
         android:id="@+id/ContactName_TV_ID"
         android:layout_width="366dp"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_semibold"
         android:imeOptions="actionDone"
         android:inputType="text"
@@ -70,7 +70,7 @@
         android:layout_width="49dp"
         android:layout_height="31dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Alter"
         android:textAlignment="textEnd"
@@ -86,7 +86,7 @@
         android:layout_width="234dp"
         android:layout_height="25dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_light"
         android:text="Geburtsdatum"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,20 +162,20 @@
         android:layout_width="374dp"
         android:layout_height="254dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
-        app:layout_constraintVertical_bias="0.234" />
+        app:layout_constraintVertical_bias="0.01999998" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="58dp"
         android:layout_height="22dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Alter"
         android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@+id/ContactAlter_TV_ID"
@@ -183,14 +183,14 @@
         app:layout_constraintHorizontal_bias="0.728"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID"
-        app:layout_constraintVertical_bias="0.29" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/contactDatepicker_TV_ID"
         android:layout_width="306dp"
         android:layout_height="51dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_semibold"
         android:hint="Select Date"
         android:inputType="date"
@@ -199,28 +199,6 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/starSign_TV_ID"
-        android:layout_width="362dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="21dp"
-        android:fontFamily="@font/poppins_bold"
-        android:foregroundTint="#00000000"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/colorText_darkRed"
-        android:textColorHint="#FA030303"
-        android:textSize="24sp"
-
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/zodiacsign" />
 
 
     <!---

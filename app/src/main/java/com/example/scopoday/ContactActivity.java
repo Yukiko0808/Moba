@@ -47,7 +47,6 @@ public class ContactActivity extends AppCompatActivity {
     EditText contactNameText;
     TextView contactAge;
     TextView contactBirthdayTV;
-    TextView starSignText;
     ImageView zodiacsign;
     TextView horoscopeZodiacsignTitle;
 
@@ -124,9 +123,7 @@ public class ContactActivity extends AppCompatActivity {
         horoscopeZodiacsignTitle = findViewById(R.id.zodiacsign_TextView);
 
         //Sternzeichen Text anzeigen
-        starSignText = findViewById(R.id.starSign_TV_ID);
         String zodiacsign = CalculateStarSign();
-        starSignText.setText(zodiacsign);
         horoscopeZodiacsignTitle.setText(zodiacsign);
 
         //Kontakt Alter anzeigen

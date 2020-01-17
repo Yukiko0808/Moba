@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,8 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     CompactCalendarView compCalendarView;
 
     TextView monthYearIndicatorText;
+    TextView recylerHeadline;
+    TextView calendarZodiacsignHeadline;
 
 
     //ListView contactListView;
@@ -67,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
     ConstraintLayout nextBD1, nextBD2, nextBD3;
 
     public static MySQLHelper db;
+
+    final SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("MMMM - yyyy");
+    final SimpleDateFormat dateFormatForDate = new SimpleDateFormat("MMMM - dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 10);
         }
-
-        final SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("MMM - yyyy");
-
 
         // wenn man sich in einem Fragment befindet, wird nicht "this" übergeben sondern "getContext()"
         db = new MySQLHelper(this);
@@ -134,14 +133,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.birthdaysRecyclerView);
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.birthdaysRecyclerView);
         //recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
         birthdayContactAdapter = new NextBirthdaysListAdapter(this, onlyNext3Bds);
         contactListView.setAdapter(birthdayContactAdapter);
 
-        contactText = findViewById(R.id.textView_ID);
+        contactText = findViewById(R.id.textViewDateBD_ID);
 
         allContactsButton = (Button) findViewById(R.id.AddContactButton_ID);
 
@@ -156,7 +155,8 @@ public class MainActivity extends AppCompatActivity {
 
         monthYearIndicatorText = findViewById(R.id.calendarHeadline);
 
-
+        recylerHeadline = findViewById(R.id.textViewDateBD_ID);
+        calendarZodiacsignHeadline = findViewById(R.id.currentZodiacsignHeadline);
 
         compCalendarView = (CompactCalendarView) findViewById(R.id.compactCalendarView);
 
@@ -164,27 +164,55 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDayClick(Date dateClicked) {
                 List<Event> events = compCalendarView.getEvents(dateClicked);
+                List<Contactdata> bdToday = new ArrayList<>();
                 for(Event bd : events){
                     Contactdata contact = (Contactdata) bd.getData();
-                    Log.d(TAG, "Day was clicked: " + dateClicked + " with events " + contact.getName());
+                    bdToday.add(contact);
                 }
+                birthdayContactAdapter = new NextBirthdaysListAdapter(getApplicationContext(), bdToday);
+                contactListView.setAdapter(birthdayContactAdapter);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(dateClicked);
+                recylerHeadline.setText("Birthdays on "+ dateFormatForDate.format(dateClicked) );
 
+                calendarZodiacsignHeadline.setText(CalculateStarSign(dateClicked));
             }
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
                 monthYearIndicatorText.setText(dateFormatForMonth.format(firstDayOfNewMonth)); //Headline Setzen = Monat und Jahr
+                List<Event> events = compCalendarView.getEvents(firstDayOfNewMonth);
+                List<Contactdata> bdToday = new ArrayList<>();
+                for(Event bd : events){
+                    Contactdata contact = (Contactdata) bd.getData();
+                    bdToday.add(contact);
+                }
+                birthdayContactAdapter = new NextBirthdaysListAdapter(getApplicationContext(), bdToday);
+                contactListView.setAdapter(birthdayContactAdapter);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(firstDayOfNewMonth);
+                recylerHeadline.setText("Birthdays on "+ dateFormatForDate.format(firstDayOfNewMonth) );
+
+                calendarZodiacsignHeadline.setText(CalculateStarSign(firstDayOfNewMonth));
             }
         });
 
-        Date bd = onlyNext3Bds.get(0).getBirthdayDate();
-        Calendar cal = Calendar.getInstance();
-        Calendar calBD = Calendar.getInstance();
-        calBD.setTime(bd);
-        cal.set(Calendar.getInstance().get(Calendar.YEAR), calBD.get(Calendar.MONTH), calBD.get(Calendar.DAY_OF_MONTH));
-        Event event = new Event(R.color.colorAccent, cal.getTimeInMillis(), onlyNext3Bds.get(0));
-        compCalendarView.addEvent(event);
+        monthYearIndicatorText.setText(dateFormatForMonth.format(compCalendarView.getFirstDayOfCurrentMonth()));
+        calendarZodiacsignHeadline.setText(CalculateStarSign(Calendar.getInstance().getTime()));
+
+        for(int i = 0; i<contactList.size(); i++){
+            Date tempBD = contactList.get(i).getBirthdayDate();
+            Calendar calNextBD = Calendar.getInstance();
+            Calendar calBD = Calendar.getInstance();
+            calBD.setTime(tempBD);
+            calNextBD.set(Calendar.getInstance().get(Calendar.YEAR), calBD.get(Calendar.MONTH), calBD.get(Calendar.DAY_OF_MONTH));
+            Event event = new Event(R.color.colorAccent, calNextBD.getTimeInMillis(), contactList.get(i));
+            compCalendarView.addEvent(event);
+        }
+
         compCalendarView.shouldDrawIndicatorsBelowSelectedDays(true);
+
+
 
 
 
@@ -229,7 +257,6 @@ public class MainActivity extends AppCompatActivity {
 
         birthdayContactAdapter.notifyDataSetChanged();
 
-
         Intent intent = new Intent(this, CheckService.class);
         startService(intent);
     }
@@ -261,7 +288,17 @@ public class MainActivity extends AppCompatActivity {
             if(tempList.size() > i){
                 onlyNext3Bds.add(tempList.get(i));
             }
+        }
 
+        compCalendarView.removeAllEvents();
+        for(int i = 0; i<contactList.size(); i++){
+            Date tempBD = contactList.get(i).getBirthdayDate();
+            Calendar calNextBD = Calendar.getInstance();
+            Calendar calBD = Calendar.getInstance();
+            calBD.setTime(tempBD);
+            calNextBD.set(Calendar.getInstance().get(Calendar.YEAR), calBD.get(Calendar.MONTH), calBD.get(Calendar.DAY_OF_MONTH));
+            Event event = new Event(R.color.colorAccent, calNextBD.getTimeInMillis(), contactList.get(i));
+            compCalendarView.addEvent(event);
         }
 
         birthdayContactAdapter.notifyDataSetChanged();
@@ -344,6 +381,84 @@ public class MainActivity extends AppCompatActivity {
             // other 'case' lines to check for other
             // permissions this app might request.
         }
+    }
+
+    private String CalculateStarSign(Date date){
+        String starSign = "NoStarsignFound";
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        if(date.after(new Date(date.getYear(),11,21))
+                && date.before(new Date(date.getYear(),11, 32))) {
+            starSign = "Capricorn";
+            return starSign;
+        }
+        if(date.after(new Date(date.getYear(),0,0))
+                && date.before(new Date(date.getYear(),0, 21))) {
+            starSign = "Capricorn";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),0,20))
+                && date.before(new Date(date.getYear(),1, 20))){
+            starSign = "Aquarius";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),1,19))
+                && date.before(new Date(date.getYear(),2, 21))){
+            starSign = "Pisces";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),2,20))
+                && date.before(new Date(date.getYear(),3, 21))){
+            starSign = "Aries";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),3,20))
+                && date.before(new Date(date.getYear(),4, 21))){
+            starSign = "Taurus";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),4,20))
+                && date.before(new Date(date.getYear(),5, 22))){
+            starSign = "Gemini";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),5,21))
+                && date.before(new Date(date.getYear(),6, 23))){
+            starSign = "Cancer";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),6,22))
+                && date.before(new Date(date.getYear(),7, 24))){
+            starSign = "Leo";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),7,23))
+                && date.before(new Date(date.getYear(),8, 24))){
+            starSign = "Virgo";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),8,23))
+                && date.before(new Date(date.getYear(),9, 24))){
+            starSign = "Libra";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),9,23))
+                && date.before(new Date(date.getYear(),10, 23))){
+            starSign = "Scorpio";
+            return starSign;
+        }
+        else if(date.after(new Date(date.getYear(),10,22))
+                && date.before(new Date(date.getYear(),11, 22))){
+            starSign = "Sagittarius";
+            return starSign;
+        }
+        else {
+            starSign = "Kacke";
+            return starSign;
+        }
+
     }
 
 }

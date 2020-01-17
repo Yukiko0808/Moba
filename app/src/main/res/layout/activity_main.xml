@@ -18,10 +18,10 @@
         app:titleTextColor="#FFFFFFFF" />
 
     <TextView
-        android:id="@+id/textView_ID"
+        android:id="@+id/textViewDateBD_ID"
         android:layout_width="344dp"
         android:layout_height="25dp"
-        android:layout_marginTop="288dp"
+        android:layout_marginTop="304dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/poppins_light"
         android:text="Next Birthdays:"
@@ -51,8 +51,8 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView_ID"
-        app:layout_constraintTop_toBottomOf="@+id/textView_ID">
+        app:layout_constraintStart_toStartOf="@+id/textViewDateBD_ID"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDateBD_ID">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -64,7 +64,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/btn_rounded_corners"
         android:backgroundTint="@color/colorPrimaryDark"
         android:fontFamily="@font/poppins_bold"
@@ -73,6 +73,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="parent" />
 <!---
     <CalendarView
@@ -112,7 +113,7 @@
         android:layout_width="195dp"
         android:layout_height="31dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Monat"
         android:textColor="#FFFFFF"
@@ -128,6 +129,7 @@
         android:fontFamily="@font/poppins_light"
         android:text="Sternzeichen"
         android:textColor="#FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/calendarHeadline"
         app:layout_constraintTop_toBottomOf="@+id/calendarHeadline" />
 
