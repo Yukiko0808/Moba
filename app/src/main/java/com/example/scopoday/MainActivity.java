@@ -12,6 +12,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     CompactCalendarView compCalendarView;
 
+    TextView monthYearIndicatorText;
+
 
     //ListView contactListView;
     RecyclerView contactListView;
@@ -82,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 10);
         }
 
-        //compCalendarView = (CompactCalendarView) findViewById(R.id.)
+        final SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("MMM - yyyy");
 
 
         // wenn man sich in einem Fragment befindet, wird nicht "this" übergeben sondern "getContext()"
         db = new MySQLHelper(this);
-
+/*
         // Kontakte in die Tabelle schreiben
         // Wenn man beim Eintragen auf den Haken in der Tastatur geht, muss eine Funktion aufgerufen werden, die folgendes aufruft:
         // (natürlich mit Variablen statt Strings)
@@ -100,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         // Wenn man die Liste sehen will, folgendes machen:
         // 1. Breakpoint setzen (an Stelle der Liste oder eins weiter)
         // 2. "Run" -> "Debug 'app'. Compiler wird am Breakpoint anhalten. Unter Variables kann man die Liste anschauen.
-
+*/
 
         contactList = null;
         contactListView = findViewById(R.id.birthdaysRecyclerView);
@@ -151,15 +154,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        monthYearIndicatorText = findViewById(R.id.calendarHeadline);
+
+
+
         compCalendarView = (CompactCalendarView) findViewById(R.id.compactCalendarView);
+
+        compCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
+            @Override
+            public void onDayClick(Date dateClicked) {
+                List<Event> events = compCalendarView.getEvents(dateClicked);
+                for(Event bd : events){
+                    Contactdata contact = (Contactdata) bd.getData();
+                    Log.d(TAG, "Day was clicked: " + dateClicked + " with events " + contact.getName());
+                }
+
+            }
+
+            @Override
+            public void onMonthScroll(Date firstDayOfNewMonth) {
+                monthYearIndicatorText.setText(dateFormatForMonth.format(firstDayOfNewMonth)); //Headline Setzen = Monat und Jahr
+            }
+        });
+
         Date bd = onlyNext3Bds.get(0).getBirthdayDate();
         Calendar cal = Calendar.getInstance();
         Calendar calBD = Calendar.getInstance();
         calBD.setTime(bd);
         cal.set(Calendar.getInstance().get(Calendar.YEAR), calBD.get(Calendar.MONTH), calBD.get(Calendar.DAY_OF_MONTH));
-        Event event = new Event(Color.BLACK, cal.getTimeInMillis(), "Ein geburstag");
+        Event event = new Event(R.color.colorAccent, cal.getTimeInMillis(), onlyNext3Bds.get(0));
         compCalendarView.addEvent(event);
         compCalendarView.shouldDrawIndicatorsBelowSelectedDays(true);
+
+
+
     }
 
 

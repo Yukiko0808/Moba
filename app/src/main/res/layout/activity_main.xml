@@ -99,7 +99,7 @@
         app:compactCalendarCurrentDayBackgroundColor="#CFC7CA"
         app:compactCalendarCurrentSelectedDayBackgroundColor="@color/colorPrimaryDark"
         app:compactCalendarCurrentSelectedDayTextColor="#FFFFFF"
-        app:compactCalendarMultiEventIndicatorColor="#0C57D8"
+        app:compactCalendarMultiEventIndicatorColor="@color/colorPrimaryDark"
         app:compactCalendarTextSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.368"
@@ -108,7 +108,7 @@
 
 
     <TextView
-        android:id="@+id/KalenderHeadline"
+        android:id="@+id/calendarHeadline"
         android:layout_width="195dp"
         android:layout_height="31dp"
         android:layout_marginStart="28dp"
@@ -128,8 +128,8 @@
         android:fontFamily="@font/poppins_light"
         android:text="Sternzeichen"
         android:textColor="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/KalenderHeadline"
-        app:layout_constraintTop_toBottomOf="@+id/KalenderHeadline" />
+        app:layout_constraintStart_toStartOf="@+id/calendarHeadline"
+        app:layout_constraintTop_toBottomOf="@+id/calendarHeadline" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
