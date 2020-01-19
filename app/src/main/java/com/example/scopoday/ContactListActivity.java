@@ -1,12 +1,14 @@
 package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -38,7 +40,11 @@ public class ContactListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        Window window = this.getWindow();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
 
         //Datenbank helfer erstellen
         db = new MySQLHelper(this);
@@ -48,6 +54,8 @@ public class ContactListActivity extends AppCompatActivity {
         listOfContacts.addAll(db.getAllContacts());
         contactList = listOfContacts;
 
+        /*
+        Window window = this.getWindow();
         // Anzeigeleiste Oben ändern
         // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -57,6 +65,7 @@ public class ContactListActivity extends AppCompatActivity {
 
         // finally change the color
         window.setStatusBarColor(this.getResources().getColor(R.color.cardview_shadow_end_color));
+        */
 
         //Kontakte hinzufügen mit Add Button
 
@@ -109,6 +118,40 @@ public class ContactListActivity extends AppCompatActivity {
             }
         });
         lv.setAdapter(contactAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == R.id.profil_settings){
+            Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, Profile.class);
+            startActivity(intent);
+        }
+
+        if(id == R.id.contact_settings){
+            Toast.makeText(this, "contacts", Toast.LENGTH_SHORT).show();
+
+        }
+
+        if(id == R.id.zodiacsign_settings){
+            Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ZodiacsignsActivity.class);
+            startActivity(intent);
+        }
+
+
+        if(id == R.id.calendar_settings){
+            Toast.makeText(this, "calendar", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

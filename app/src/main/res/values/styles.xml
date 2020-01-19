@@ -14,7 +14,9 @@
         <item name="android:calendarViewShown">false</item>
         <item name="android:datePickerStyle">@color/colorAccent</item>
     </style>
-    
+
+
+
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_up</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_up</item>

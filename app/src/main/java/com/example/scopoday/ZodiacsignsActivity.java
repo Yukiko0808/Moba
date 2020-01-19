@@ -1,12 +1,16 @@
 package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class ZodiacsignsActivity extends AppCompatActivity{
 
@@ -28,6 +32,10 @@ public class ZodiacsignsActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zodiacsigns);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         aquarius = (Button) findViewById(R.id.aquarius);
@@ -224,6 +232,43 @@ public class ZodiacsignsActivity extends AppCompatActivity{
         });
 
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == R.id.profil_settings){
+            Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, Profile.class);
+            startActivity(intent);
+        }
+
+        if(id == R.id.contact_settings){
+            Toast.makeText(this, "contacts", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ContactListActivity.class);
+            startActivity(intent);
+        }
+
+        if(id == R.id.zodiacsign_settings){
+            Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
+        }
+
+
+        if(id == R.id.calendar_settings){
+            Toast.makeText(this, "calendar", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

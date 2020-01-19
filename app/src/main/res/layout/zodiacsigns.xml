@@ -2,22 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ZodiacsignsActivity">
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="448dp"
-        android:layout_height="776dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_dark"
+            android:foregroundTint="#2B2B2B"
+            app:subtitleTextColor="#FF4B3540"
+            app:titleTextColor="#FF4B3540" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="55dp"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,51 +38,48 @@
             android:id="@+id/textView7"
             android:layout_width="276dp"
             android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:text="Zodiacsigns"
             android:textColor="#000000"
             android:textSize="29sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.136"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.053" />
+            app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
         <Button
             android:id="@+id/aquarius"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Aquarius"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.103"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.204" />
+            app:layout_constraintVertical_bias="0.22000003" />
 
         <Button
             android:id="@+id/pisces"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Pisces"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.78"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.204" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/aquarius"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/aries"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
@@ -84,143 +88,155 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.103"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.327" />
+            app:layout_constraintTop_toBottomOf="@+id/aquarius"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/taurus"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Taurus"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.78"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.328" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/pisces" />
 
         <Button
             android:id="@+id/gemini"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Gemini"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.103"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.444" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/aries"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/cancer"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Cancer"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.78"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.444" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/taurus" />
 
         <Button
             android:id="@+id/leo"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Leo"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.103"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.564" />
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/gemini" />
 
         <Button
             android:id="@+id/virgo"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Virgo"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.78"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.564" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/cancer" />
 
         <Button
             android:id="@+id/libra"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Libra"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.103"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.681" />
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/leo" />
 
         <Button
             android:id="@+id/scorpio"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Scorpio"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.78"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.681" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/virgo" />
 
         <Button
             android:id="@+id/sagittarius"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Sagittarius"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.103"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.795" />
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/libra" />
 
         <Button
             android:id="@+id/capricorn"
-            android:layout_width="148dp"
+            android:layout_width="160dp"
             android:layout_height="67dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_rounded_corners"
             android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:text="Capricorn"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.78"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.794" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/scorpio" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="25dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="387dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="28dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="77dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
