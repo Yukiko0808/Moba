@@ -2,6 +2,7 @@ package com.example.scopoday;
 
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 
 import android.app.AlarmManager;
@@ -19,6 +20,8 @@ import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,6 +78,10 @@ public class ContactActivity extends AppCompatActivity {
         // Datenbank
         db = new MySQLHelper(this);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         //Neues Objekt das die Horoskop Daten holt erstellen -> Verwendet wird es in der Funktion die das Sternzeichen des Kontakts bestimmt
         horoscopeData = new FetchingHoroscopeData();
 
@@ -119,7 +126,7 @@ public class ContactActivity extends AppCompatActivity {
         contactNameText.setText(displayedContact.getName());
 
         //Sternzeichen layout image finden
-        zodiacsign = findViewById(R.id.zodiacsign);
+        zodiacsign = findViewById(R.id.horoscopeCard).findViewById(R.id.zodiacsign);
         horoscopeZodiacsignTitle = findViewById(R.id.zodiacsign_TextView);
 
         //Sternzeichen Text anzeigen
@@ -252,6 +259,35 @@ public class ContactActivity extends AppCompatActivity {
 
 
 ////////////// ON CREATE ENDE ////////////////////////
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == R.id.profil_settings){
+            Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
+        }
+
+        if(id == R.id.contact_settings){
+            Toast.makeText(this, "contacts", Toast.LENGTH_SHORT).show();
+        }
+
+        if(id == R.id.zodiacsign_settings){
+            Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
+        }
+
+
+        if(id == R.id.calendar_settings){
+            Toast.makeText(this, "calendar", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
     // Alter berechnen

@@ -7,37 +7,42 @@
     tools:context=".ZodiacsignActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="404dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="-8dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.821"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/header_contact" />
 
     <TextView
         android:id="@+id/Sternzeichen_zeitraum"
         android:layout_width="308dp"
         android:layout_height="38dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_light"
         android:text="TextView"
-        android:textColor="#000000"
+        android:textColor="@color/colorText_darkRed"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/zodiacsignstext"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.291"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/zodiacsigntitle"
-        app:layout_constraintVertical_bias="0.233" />
+        app:layout_constraintTop_toBottomOf="@+id/zodiacsigntitle" />
 
     <ImageView
         android:id="@+id/zodiacsignimage"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/aquarius_black" />
@@ -46,38 +51,39 @@
         android:id="@+id/zodiacsigntitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/poppins_bold"
         android:text="Zodiacsign"
-        android:textColor="#000000"
+        android:textColor="@color/colorText_darkRed"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/zodiacsignimage" />
 
     <TextView
         android:id="@+id/zodiacsignstext"
-        android:layout_width="350dp"
-        android:layout_height="425dp"
-        android:layout_marginLeft="9dp"
+        android:layout_width="352dp"
+        android:layout_height="367dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="9dp"
-        android:layout_marginBottom="9dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/text_bg_roundedcorners"
         android:elevation="4dp"
+        android:fontFamily="@font/poppins_light"
         android:paddingLeft="20dp"
         android:paddingTop="20dp"
         android:paddingEnd="20dp"
         android:paddingRight="20dp"
         android:paddingBottom="20dp"
         android:text="TextView"
-        android:textColor="#000000"
+        android:textColor="@color/colorText_darkRed"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/zodiacsigntitle"
-        app:layout_constraintVertical_bias="0.939" />
+        app:layout_constraintTop_toBottomOf="@+id/Sternzeichen_zeitraum" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

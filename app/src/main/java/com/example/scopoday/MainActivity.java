@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
@@ -297,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
             Calendar calBD = Calendar.getInstance();
             calBD.setTime(tempBD);
             calNextBD.set(Calendar.getInstance().get(Calendar.YEAR), calBD.get(Calendar.MONTH), calBD.get(Calendar.DAY_OF_MONTH));
-            Event event = new Event(R.color.colorAccent, calNextBD.getTimeInMillis(), contactList.get(i));
+            Event event = new Event(Color.rgb(222,114,164), calNextBD.getTimeInMillis(), contactList.get(i));
             compCalendarView.addEvent(event);
         }
 
