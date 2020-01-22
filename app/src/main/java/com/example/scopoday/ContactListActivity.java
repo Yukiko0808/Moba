@@ -20,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ContactListActivity extends AppCompatActivity {
 
@@ -150,6 +151,9 @@ public class ContactListActivity extends AppCompatActivity {
 
         if(id == R.id.calendar_settings){
             Toast.makeText(this, "calendar", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        
         }
         return super.onOptionsItemSelected(item);
     }
