@@ -3,6 +3,32 @@
     <string name="userName">exampleName</string>
     <string name="contactName">emptyName</string>
     <string name="action_settings">menu</string>
+    <string name = "aquarius_titel">Aquarius</string>
+    <string name = "pisces_titel">Pisces</string>
+    <string name = "cancer_titel">Cancer</string>
+    <string name = "leo_titel">Leo</string>
+    <string name = "virgo_titel">Virgo</string>
+    <string name = "gemini_titel">Gemini</string>
+    <string name = "taurus_titel">Taurus</string>
+    <string name = "libra_titel">Libra</string>
+    <string name = "scorpio_titel">Scorpio</string>
+    <string name = "sagittarius_titel">Sagittarius</string>
+    <string name = "capricorn_titel">Capricorn</string>
+    <string name = "aries_titel">Aries</string>
+
+    <string name = "aquarius_zeitraum">20. January - 18. February</string>
+    <string name = "pisces_zeitraum">19. February - 20. March</string>
+    <string name = "cancer_zeitraum">21. June - 22. July</string>
+    <string name = "leo_zeitraum">23. July - 22. August</string>
+    <string name = "virgo_zeitraum">23. August - 22. September</string>
+    <string name = "gemini_zeitraum">21. May - 20. June</string>
+    <string name = "taurus_zeitraum">20. April - 20. May</string>
+    <string name = "libra_zeitraum">23. September - 22. October</string>
+    <string name = "scorpio_zeitraum">23. October - 21. November</string>
+    <string name = "sagittarius_zeitraum">22. November - 21. December</string>
+    <string name = "capricorn_zeitraum">22. December - 19. January</string>
+    <string name = "aries_zeitraum">21. March - 19. April</string>
+
 
     <string name="pisces">Pisces are very friendly, so they often find themselves in a company of very different people.
         Pisces are selfless, they are always willing to help others, without hoping to get anything back. Pisces is a Water sign and as such
