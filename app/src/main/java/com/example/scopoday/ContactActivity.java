@@ -356,7 +356,7 @@ public class ContactActivity extends AppCompatActivity {
             /*actualContact.setJob(5);
             actualContact.setLuck(4);
             actualContact.setLove(8);*/
-            zodiacsign.setImageResource(R.drawable.aquarius_white);
+            zodiacsign.setImageResource(R.drawable.capricorn_black);
             horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
                 @Override
                 public void onSuccess(String result) {
@@ -505,6 +505,7 @@ public class ContactActivity extends AppCompatActivity {
            /* actualContact.setJob(10);
             actualContact.setLuck(8);
             actualContact.setLove(2);*/
+            zodiacsign.setImageResource(R.drawable.libra_black);
             horoscopeData.loadDailyHoroscopeData(starSign, getApplicationContext(), new FetchingHoroscopeData.ServerCallback() {
                 @Override
                 public void onSuccess(String result) {
