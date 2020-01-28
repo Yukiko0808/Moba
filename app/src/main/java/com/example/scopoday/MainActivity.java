@@ -14,6 +14,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -170,13 +172,26 @@ public class MainActivity extends AppCompatActivity {
                     Contactdata contact = (Contactdata) bd.getData();
                     bdToday.add(contact);
                 }
-                birthdayContactAdapter = new NextBirthdaysListAdapter(getApplicationContext(), bdToday);
-                contactListView.setAdapter(birthdayContactAdapter);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(dateClicked);
-                recylerHeadline.setText("Birthdays on "+ dateFormatForDate.format(dateClicked) );
+                if(bdToday.size() > 0){
+                    Log.d("VIEW", bdToday.size() + "geburtstage heute");
+                    birthdayContactAdapter = new NextBirthdaysListAdapter(getApplicationContext(), bdToday);
+                    contactListView.setAdapter(birthdayContactAdapter);
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(dateClicked);
+                    recylerHeadline.setText("Birthdays on "+ dateFormatForDate.format(dateClicked) );
 
-                calendarZodiacsignHeadline.setText(CalculateStarSign(dateClicked));
+                    calendarZodiacsignHeadline.setText(CalculateStarSign(dateClicked));
+                }
+                else {
+                    Log.d("VIEW", "keine geburtstag heute");
+                    List<Contactdata> setNoBDList = new ArrayList<>();
+                    setNoBDList.add(new Contactdata());
+                    birthdayContactAdapter = new NextBirthdaysListAdapter(getApplicationContext(), setNoBDList);
+                    birthdayContactAdapter.onCreateViewHolder(recyclerView,1);
+                    contactListView.setAdapter(birthdayContactAdapter);
+                    Log.d("MAIN", "After Set Adapter");
+                }
+
             }
 
             @Override
@@ -213,16 +228,20 @@ public class MainActivity extends AppCompatActivity {
 
         compCalendarView.shouldDrawIndicatorsBelowSelectedDays(true);
 
-
-
-
-
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem tempItem = menu.getItem(1) ;
+
+        SpannableString spanString = new SpannableString(tempItem.getTitle().toString());
+        spanString.setSpan(new ForegroundColorSpan(Color.LTGRAY), 0,     spanString.length(), 0); //fix the color to white
+
+        tempItem.setTitle(spanString);
+
         return true;
     }
 
@@ -236,19 +255,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(id == R.id.contact_settings){
-            Toast.makeText(MainActivity.this, "contacts", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Contacts", Toast.LENGTH_SHORT).show();
             openContactListActivity();
         }
 
         if(id == R.id.zodiacsign_settings){
-            Toast.makeText(MainActivity.this, "zodiacsigns", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Zodiacsigns", Toast.LENGTH_SHORT).show();
             openZodiacsigns();
         }
 
-
+        /*
         if(id == R.id.calendar_settings){
-            Toast.makeText(MainActivity.this, "calendar", Toast.LENGTH_SHORT).show();
-        }
+            Toast.makeText(MainActivity.this, "Calendar", Toast.LENGTH_SHORT).show();
+        }*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -310,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openProfile(){
-        Intent intent = new Intent(this, Profile.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
 /*

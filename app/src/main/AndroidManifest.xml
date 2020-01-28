@@ -18,7 +18,7 @@
         <activity android:name=".ZodiacsignsActivity" />
         <activity android:name=".PhoneContactListActivity" />
         <activity android:name=".ContactListActivity" />
-        <activity android:name=".Profile" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".ContactActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>

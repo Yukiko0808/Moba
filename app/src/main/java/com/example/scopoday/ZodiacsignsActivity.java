@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -238,6 +240,14 @@ public class ZodiacsignsActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem tempItem = menu.getItem(3) ;
+
+        SpannableString spanString = new SpannableString(tempItem.getTitle().toString());
+        spanString.setSpan(new ForegroundColorSpan(Color.LTGRAY), 0,     spanString.length(), 0); //fix the color to white
+
+        tempItem.setTitle(spanString);
+
         return true;
     }
 
@@ -247,7 +257,7 @@ public class ZodiacsignsActivity extends AppCompatActivity{
 
         if(id == R.id.profil_settings){
             Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, Profile.class);
+            Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }
 
@@ -258,7 +268,7 @@ public class ZodiacsignsActivity extends AppCompatActivity{
         }
 
         if(id == R.id.zodiacsign_settings){
-            Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
         }
 
 

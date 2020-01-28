@@ -1,12 +1,19 @@
 package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.TextureView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ZodiacsignActivity extends AppCompatActivity {
 
@@ -21,6 +28,10 @@ public class ZodiacsignActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zodiacsign);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         Intent intent = this.getIntent();
@@ -39,7 +50,38 @@ public class ZodiacsignActivity extends AppCompatActivity {
         String zeitraum =  displayedzodiacsign+ "_zeitraum";
         Sternzeichen_zeitraum.setText(getResources().getIdentifier(zeitraum, "string", getPackageName()));
 
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
 
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == R.id.profil_settings){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+        if(id == R.id.contact_settings){
+            Intent intent = new Intent(this, ContactListActivity.class);
+            startActivity(intent);
+        }
+
+        if(id == R.id.zodiacsign_settings){
+            Intent intent = new Intent(this, ZodiacsignsActivity.class);
+            startActivity(intent);
+        }
+
+        if(id == R.id.calendar_settings){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

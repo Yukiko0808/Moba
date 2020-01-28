@@ -7,19 +7,19 @@
         android:title="Profil" />
 
     <item
-        android:id="@+id/contact_settings"
-        android:orderInCategory="102"
-        android:title="contacts" />
-
-    <item
         android:id="@+id/calendar_settings"
         android:orderInCategory="102"
-        android:title="calendar" />
+        android:title="Calendar" />
+
+    <item
+        android:id="@+id/contact_settings"
+        android:orderInCategory="102"
+        android:title="Contacts" />
 
     <item
         android:id="@+id/zodiacsign_settings"
         android:orderInCategory="102"
-        android:title="zodiacsigns" />
+        android:title="Zodiacsigns" />
 
 
 </menu>

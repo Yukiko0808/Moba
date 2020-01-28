@@ -61,8 +61,8 @@ public class Contactdata implements Serializable {
             Date date1 = birthdaytodate.parse(birthday);
             date = date1;
             }
-            catch (ParseException e){
-
+            catch (Exception e){
+                return null;
             }
             birthdayDate = date;
             return date;

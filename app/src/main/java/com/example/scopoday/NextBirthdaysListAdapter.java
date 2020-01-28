@@ -1,21 +1,18 @@
 package com.example.scopoday;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,12 +44,19 @@ public class NextBirthdaysListAdapter extends RecyclerView.Adapter<NextBirthdays
     @Override
     public _ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View v = (View) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_phone_contact_list_adapter, parent, false);
-
-
-        contactName = v.findViewById(R.id.textViewName);
-        daysCounter = v.findViewById(R.id.textViewDays);
+        View v = null;
+        switch (viewType){
+            case 0:
+                Log.d("VIEW", "Type 0");
+                v = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_contact_calender_adapter, parent, false);
+                contactName = v.findViewById(R.id.textViewName);
+                daysCounter = v.findViewById(R.id.textViewDays);
+                break;
+            case 1:
+                Log.d("VIEW", "Type 1");
+                v = (View) LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_contact_calendar_no_birthdays_adapter, parent, false);
+                break;
+        }
 
         _ViewHolder vh = new _ViewHolder(v);
         return vh;
@@ -61,28 +65,48 @@ public class NextBirthdaysListAdapter extends RecyclerView.Adapter<NextBirthdays
 
     @Override
     public void onBindViewHolder(@NonNull _ViewHolder holder, final int position) {
+        int viewType = getItemViewType(position);
+        switch (viewType) {
+            case 0:
+                Log.d("VIEW", "geburtstag anzeigen");
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, ContactActivity.class);
+                        Bundle bundle = new Bundle();
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ContactActivity.class);
-                Bundle bundle = new Bundle();
+                        bundle.putSerializable("CONTACTDATA", dataset.get(position));
+                        intent.putExtras(bundle);
 
-                bundle.putSerializable("CONTACTDATA", dataset.get(position));
-                intent.putExtras(bundle);
+                        //Activity starten
+                        context.startActivity(intent);
+                    }
+                });
 
-                //Activity starten
-                context.startActivity(intent);
-            }
-        });
+                Contactdata tempContact  = dataset.get(position);
+                contactName.setText(tempContact.name);
+                Date bd = tempContact.getBirthdayDate();
+                Long days = tempContact.CalculateDaysTillBD(tempContact.getBirthdayDate());
 
-        Contactdata tempContact  = dataset.get(position);
-        contactName.setText(tempContact.name);
-        Date bd = tempContact.getBirthdayDate();
-        Long days = tempContact.CalculateDaysTillBD(tempContact.getBirthdayDate());
+                daysCounter.setText(Long.toString(days));
+                break;
+            case 1:
+                Log.d("VIEW", "keine geburtstag heute anzeigen");
+                break;
 
-        daysCounter.setText(Long.toString(days));
+        }
+
     }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        if(dataset.get(position).getBirthdayDate() != null)//position%2==0)       // Even position
+            return 0;
+        else                   // Odd position
+            return 1;
+    }
+
 
     @Override
     public int getItemCount() {

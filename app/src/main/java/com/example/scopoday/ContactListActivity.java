@@ -2,12 +2,12 @@ package com.example.scopoday;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.OnLifecycleEvent;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,11 +16,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.view.ContextMenu;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Enumeration;
+import java.util.List;
 
 public class ContactListActivity extends AppCompatActivity {
 
@@ -35,6 +36,8 @@ public class ContactListActivity extends AppCompatActivity {
     int tempPos;
 
     MySQLHelper db;
+
+    ArrayList<Contactdata> sortedContactList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +127,87 @@ public class ContactListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem tempItem = menu.getItem(2) ;
+
+        SpannableString spanString = new SpannableString(tempItem.getTitle().toString());
+        spanString.setSpan(new ForegroundColorSpan(Color.LTGRAY), 0,     spanString.length(), 0); //fix the color to white
+
+        tempItem.setTitle(spanString);
+
+        ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
+        listOfContacts.addAll(db.getAllContacts());
+        contactList = listOfContacts;
+
+
+
+
         return true;
+    }
+
+
+    enum sortType{
+        BY_NAME,
+        BY_DAYS_TO_BD,
+        BY_CALENDER_DATE
+    }
+
+    public ArrayList<Contactdata> sortListBy(sortType st){
+
+        ArrayList<Contactdata> tempArrayList = new ArrayList<>();
+
+        List<Contactdata> orderdList = contactList;
+
+        // Nach Tagen bis zum Geburtstag sortieren
+        if(st == sortType.BY_DAYS_TO_BD){
+            orderdList.sort(new Comparator<Contactdata>() {
+                @Override
+                public int compare(Contactdata c1, Contactdata c2) {
+
+                    if(c1.CalculateDaysTillBD(c1.getBirthdayDate()) < c2.CalculateDaysTillBD(c2.getBirthdayDate())) {
+                        return -1;
+                    }
+                    return 0;
+                }
+            });
+
+            for(int i = 0; i<3; i++){
+                if(orderdList.size() > i){
+                    sortedContactList.add(orderdList.get(i));
+                }
+            }
+            return sortedContactList;
+        }
+
+        // Nach Geburtsdatum Sortieren
+        if(st == sortType.BY_CALENDER_DATE){
+
+            final Calendar cal1 = Calendar.getInstance();
+            final Calendar cal2  = Calendar.getInstance();
+
+
+            orderdList.sort(new Comparator<Contactdata>() {
+                @Override
+                public int compare(Contactdata c1, Contactdata c2) {
+
+                    cal1.setTime(c1.getBirthdayDate());
+                    cal2.setTime(c2.getBirthdayDate());
+
+                    if(cal1.get(Calendar.MONTH) < cal2.get(Calendar.MONTH)) {
+                        return -1;
+                    }
+                    return 0;
+                }
+            });
+
+            for(int i = 0; i<3; i++){
+                if(orderdList.size() > i){
+                    sortedContactList.add(orderdList.get(i));
+                }
+            }
+            return sortedContactList;
+        }
+        return null;
     }
 
     @Override
@@ -133,13 +216,12 @@ public class ContactListActivity extends AppCompatActivity {
 
         if(id == R.id.profil_settings){
             Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, Profile.class);
+            Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }
 
         if(id == R.id.contact_settings){
-            Toast.makeText(this, "contacts", Toast.LENGTH_SHORT).show();
-
+            //Toast.makeText(this, "contacts", Toast.LENGTH_SHORT).show();
         }
 
         if(id == R.id.zodiacsign_settings){

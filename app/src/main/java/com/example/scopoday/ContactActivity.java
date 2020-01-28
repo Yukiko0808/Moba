@@ -59,6 +59,7 @@ public class ContactActivity extends AppCompatActivity {
 
     Contactdata displayedContact;
 
+
     int todayLuck;
     int todayLove;
     int todayJob;
@@ -130,8 +131,8 @@ public class ContactActivity extends AppCompatActivity {
         horoscopeZodiacsignTitle = findViewById(R.id.zodiacsign_TextView);
 
         //Sternzeichen Text anzeigen
-        String zodiacsign = CalculateStarSign();
-        horoscopeZodiacsignTitle.setText(zodiacsign);
+        final String zodiacsignText = CalculateStarSign();
+        horoscopeZodiacsignTitle.setText(zodiacsignText);
 
         //Kontakt Alter anzeigen
         contactAge = findViewById(R.id.ContactAlter_TV_ID);
@@ -252,6 +253,13 @@ public class ContactActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Sternzeichen seite öffenen", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ZODIACSIGN", zodiacsignText.toLowerCase());
+                intent.putExtras(bundle);
+                startActivity(intent);
+
             }
         });
 
