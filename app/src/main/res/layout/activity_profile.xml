@@ -7,27 +7,6 @@
     tools:context=".ProfileActivity">
 
 
-    <TextView
-        android:id="@+id/textViewDays2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/textView13"
-        android:layout_alignParentBottom="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:layout_weight="66.66"
-        android:background="@drawable/btn_rounded_corners"
-        android:backgroundTint="@color/colorAccent"
-        android:fontFamily="@font/poppins_semibold"
-        android:gravity="center"
-        android:text="00"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ContactAlter_TV_ID" />
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
@@ -48,7 +27,7 @@
         android:layout_width="234dp"
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/poppins_light"
         android:text="Name"
@@ -108,7 +87,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID" />
 
     <TextView
         android:id="@+id/textView4"
@@ -139,26 +119,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-
-    <TextView
-        android:id="@+id/starSign_TV_ID"
-        android:layout_width="362dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="22dp"
-        android:fontFamily="@font/poppins_bold"
-        android:foregroundTint="#00000000"
-        android:text="Days left til your birthday"
-        android:textAlignment="textStart"
-        android:textColor="@color/colorText_darkRed"
-        android:textColorHint="#FA030303"
-
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/horoscopeCard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID" />
 
     <include
         android:id="@+id/toolbar"

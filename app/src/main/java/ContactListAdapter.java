@@ -1,5 +1,4 @@
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +7,9 @@ import android.widget.TextView;
 
 import java.util.Date;
 
-import com.example.scopoday.Contact;
 import com.example.scopoday.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ContactListAdapter extends ArrayAdapter<Contact> {
 
