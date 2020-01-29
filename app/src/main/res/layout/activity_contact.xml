@@ -215,7 +215,9 @@
         layout="@layout/toolbar_white"
         android:foregroundTint="#FFFFFFFF"
         app:subtitleTextColor="#FFFFFFFF"
-        app:titleTextColor="#FFFFFFFF" />
+        app:titleTextColor="#FFFFFFFF"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="2dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"

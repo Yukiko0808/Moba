@@ -15,6 +15,7 @@ public class Contactdata implements Serializable {
         protected String birthday;
         protected Date birthdayDate;
         protected String zodiacsign;
+       public boolean isYou = false;
 
 
         public Contactdata() {

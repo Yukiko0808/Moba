@@ -164,41 +164,6 @@ public class ContactActivity extends AppCompatActivity {
         });
 
 
-        //Datepicker
-       /* contactBirthdayTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Neuen Kalender erstellen
-                Calendar cal = Calendar.getInstance();
-
-                int year = displayedContact.getBirthdayDate().getYear();
-                int month = displayedContact.getBirthdayDate().getMonth();
-                int day = displayedContact.getBirthdayDate().getDate();
-
-                //DatePicker auf aktuelles Geburtsdatum setzen
-                DatePickerDialog dialog = new DatePickerDialog(ContactActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,mdateSetListener,
-                        year,month,day);
-
-                //Datepicker anzeigen
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-        //Nach eingabe des neuen Geburtsdatums wird ...
-        mdateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
-                month = month+1;// (Monat wird um 1 erhöht, da Monate im Programm ab 0 gezählt werden
-                String date = day +"."+ month +"."+ year;// ( Neues datum in String umwandeln)
-
-                //... das neue Datum angezeigt ...
-                contactBirthdayTV.setText(date);
-                //... und in der Datenbank verändert
-               db.updateContactbirthday(displayedContact,date);
-            }
-        };*/
 
 
         // Horoskop berechenn und anzeigen
