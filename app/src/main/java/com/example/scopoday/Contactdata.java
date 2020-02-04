@@ -15,12 +15,27 @@ public class Contactdata implements Serializable {
         protected String birthday;
         protected Date birthdayDate;
         protected String zodiacsign;
-       public boolean isYou = false;
+       protected boolean isYou = false;
 
 
         public Contactdata() {
 
         }
+
+        public void setIsYou(int you){
+            if(you == 0){
+                isYou = false;
+            }
+            else{
+                isYou = true;
+            }
+            //isYou = you;
+        }
+
+        public boolean getIsYou(){
+            return isYou;
+        }
+
 
     public Contactdata(String _name){
         name = _name;
