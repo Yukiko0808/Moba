@@ -254,8 +254,10 @@ public class ContactListActivity extends AppCompatActivity {
         if(item.getGroupId() == 0){
             //Löschen des Kontakts
             db.deleteContacts(contactList.get(tempPos));
-            contactAdapter.remove(contactList.get(tempPos));
-
+            //contactAdapter.remove(contactList.get(tempPos));
+            contactList.remove(contactList.get(tempPos));
+            contactAdapter = new ContactListAdapter(this,contactList);
+            lv.setAdapter(contactAdapter);
         }
         if(item.getGroupId() == 1){
             return true;

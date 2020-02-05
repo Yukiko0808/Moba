@@ -27,9 +27,9 @@ public class ContactListAdapter extends ArrayAdapter<Contactdata> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         String name = getItem(position).getName();
-        Date birthdate = getItem(position).getBirthdate();
+        Date birthdate = getItem(position).getBirthdayDate();
 
-        Contact contact = new Contact();
+        Contactdata contact = new Contactdata();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);

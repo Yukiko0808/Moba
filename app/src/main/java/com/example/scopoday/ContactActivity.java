@@ -153,6 +153,9 @@ public class ContactActivity extends AppCompatActivity {
                     db.updateContactbirthday(displayedContact, contactBirthdayTV.getText().toString());
                     displayedContact.setBirthday(contactBirthdayTV.getText().toString());
                     contactAge.setText(Integer.toString(CalculateAge((displayedContact.getBirthdayDate()))));
+                    //horoskop aktualisieren
+                    String zodiacsignTextNew = CalculateStarSign();
+                    horoscopeZodiacsignTitle.setText(zodiacsignTextNew);
 
                     handled = true;
                     InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
@@ -163,7 +166,22 @@ public class ContactActivity extends AppCompatActivity {
             }
         });
 
+        //Link zur Sternzeichen Seite mit allen Infos
 
+        horoscopeCard = findViewById(R.id.horoscopeCard);
+        horoscopeCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Sternzeichen seite öffenen", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ZODIACSIGN", zodiacsignText.toLowerCase());
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
 
 
         // Horoskop berechenn und anzeigen
@@ -211,23 +229,6 @@ public class ContactActivity extends AppCompatActivity {
             }
         });*/
 
-        //Link zur Sternzeichen seite mit allen Infos
-
-        horoscopeCard = findViewById(R.id.horoscopeCard);
-        horoscopeCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Sternzeichen seite öffenen", Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("ZODIACSIGN", zodiacsignText.toLowerCase());
-                intent.putExtras(bundle);
-                startActivity(intent);
-
-            }
-        });
-
      }
 
 
@@ -245,19 +246,26 @@ public class ContactActivity extends AppCompatActivity {
 
         if(id == R.id.profil_settings){
             Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
         }
 
         if(id == R.id.contact_settings){
             Toast.makeText(this, "contacts", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ContactListActivity.class);
+            startActivity(intent);
         }
 
         if(id == R.id.zodiacsign_settings){
             Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ZodiacsignsActivity.class);
+            startActivity(intent);
         }
-
 
         if(id == R.id.calendar_settings){
             Toast.makeText(this, "calendar", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -190,7 +190,10 @@ public class MainActivity extends AppCompatActivity {
                     birthdayContactAdapter.onCreateViewHolder(recyclerView,1);
                     contactListView.setAdapter(birthdayContactAdapter);
                     Log.d("MAIN", "After Set Adapter");
+                    recylerHeadline.setText("Birthdays on "+ dateFormatForDate.format(dateClicked) );
                 }
+
+                calendarZodiacsignHeadline.setText(CalculateStarSign(dateClicked));
 
             }
 

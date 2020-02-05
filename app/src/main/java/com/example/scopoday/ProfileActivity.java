@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Debug;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -64,17 +65,22 @@ public class ProfileActivity extends AppCompatActivity {
         List<Contactdata> contacts = db.getAllContacts();
 
         for (int i =0; i < contacts.size(); i++){
-            if(contacts.get(i).isYou){
+            if(contacts.get(i).getIsYou()){
                 profilerstellen = false;
                 displayedContact = contacts.get(i);
+                Log.d("YOU CONTACT", contacts.get(i).name);
+            }
+            else{
+                Log.d("YOU CONTACT", "Noch nicht erstellt");
             }
         }
         if (profilerstellen == true) {
             Contactdata you = new Contactdata("You", "01.01.2000");
-            you.isYou = true;
+            you.setIsYou(1);
+            db.addContact(you);
             db.addContact(you);
             displayedContact = you;
-
+            Log.i("YOU CONTACT", "neu angelegt");
         }
 
 
