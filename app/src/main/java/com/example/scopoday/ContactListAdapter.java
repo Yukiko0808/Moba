@@ -37,12 +37,7 @@ public class ContactListAdapter extends ArrayAdapter<Contactdata> {
     private Handler handler;
     private Runnable runnable;
 
-/*
-    public ContactListAdapter(Context context, ArrayList<Contact> contacts) {
-        super(context, 0, contacts);
-        this.mContext = context;
-        //this.mResource = resource;
-    }*/
+
 
     public ContactListAdapter(Context context, ArrayList<Contactdata> contacts) {
         super(context, 0, contacts);
@@ -60,7 +55,7 @@ public class ContactListAdapter extends ArrayAdapter<Contactdata> {
         //Date birthdate = getItem(position).birthdayDate;
         String birthdate = getItem(position).getBirthday();
 
-        //Contact contact = new Contact(name, getbirthday);
+
 /*
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
