@@ -58,6 +58,13 @@ public class Contactdata implements Serializable {
             zodiacsign = _zodiacsign;
         }
 
+        public Contactdata(int _id, String _name, String _birthday){
+            id = _id;
+            name = _name;
+            birthday = _birthday;
+
+        }
+
         public int getId() {return id;}
         public void setId(int id) {this.id = id;}
 

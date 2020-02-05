@@ -65,7 +65,8 @@ public class ProfileActivity extends AppCompatActivity {
         List<Contactdata> contacts = db.getAllContacts();
 
         for (int i =0; i < contacts.size(); i++){
-            if(contacts.get(i).getIsYou()){
+            Log.d("YOU CONTACT ID: ", Integer.toString(contacts.get(i).getId()));
+            if(contacts.get(i).getId() == -1000){
                 profilerstellen = false;
                 displayedContact = contacts.get(i);
                 Log.d("YOU CONTACT", contacts.get(i).name);
@@ -75,12 +76,10 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
         if (profilerstellen == true) {
-            Contactdata you = new Contactdata("You", "01.01.2000");
-            you.setIsYou(1);
-            db.addContact(you);
+            Contactdata you = new Contactdata(-1000, "You", "01.01.2000");
             db.addContact(you);
             displayedContact = you;
-            Log.i("YOU CONTACT", "neu angelegt");
+            Log.i("YOU CONTACT", "neu angelegt" + "ID: " + displayedContact.getId());
         }
 
 
@@ -157,6 +156,20 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
+        horoscopeCard = findViewById(R.id.horoscopeCard);
+        horoscopeCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ZODIACSIGN", zodiacsignText.toLowerCase());
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
 
         ContactName_TV_ID.setOnClickListener(new View.OnClickListener() {
             @Override

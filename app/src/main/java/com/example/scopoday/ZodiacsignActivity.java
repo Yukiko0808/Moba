@@ -64,7 +64,7 @@ public class ZodiacsignActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.profil_settings){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }
 

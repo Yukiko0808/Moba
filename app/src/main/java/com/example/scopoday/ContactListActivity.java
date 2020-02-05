@@ -71,6 +71,7 @@ public class ContactListActivity extends AppCompatActivity {
         window.setStatusBarColor(this.getResources().getColor(R.color.cardview_shadow_end_color));
         */
 
+
         //Kontakte hinzufügen mit Add Button
 
         addButton = findViewById(R.id.addContact_Btn_ID);
