@@ -49,13 +49,17 @@ public class ContactListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-
         //Datenbank helfer erstellen
         db = new MySQLHelper(this);
 
         //Contakte aus der db in conactList einfügen
         ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
         listOfContacts.addAll(db.getAllContacts());
+        /*for (Contactdata contact : listOfContacts) {
+            if(contact.getName().equals("Me")){
+                listOfContacts.remove(contact);
+            }
+        }*/
         contactList = listOfContacts;
 
         /*
@@ -97,14 +101,20 @@ public class ContactListActivity extends AppCompatActivity {
 
         lv.setAdapter(contactAdapter);
 
+
         //Klick auf Kontakt -> Kontakt öffnen
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                //MainActivity.transmittedContact = contactList.get(i);
+                if(contactList.get(i).getName().equals("Me")){
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    openContactActivity(contactList.get(i));
+                }
 
-                openContactActivity(contactList.get(i));
             }
         });
 
@@ -135,13 +145,11 @@ public class ContactListActivity extends AppCompatActivity {
         spanString.setSpan(new ForegroundColorSpan(Color.LTGRAY), 0,     spanString.length(), 0); //fix the color to white
 
         tempItem.setTitle(spanString);
-
+/*
         ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
         listOfContacts.addAll(db.getAllContacts());
         contactList = listOfContacts;
-
-
-
+*/
 
         return true;
     }
@@ -216,7 +224,6 @@ public class ContactListActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.profil_settings){
-            Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }
@@ -226,14 +233,12 @@ public class ContactListActivity extends AppCompatActivity {
         }
 
         if(id == R.id.zodiacsign_settings){
-            Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, ZodiacsignsActivity.class);
             startActivity(intent);
         }
 
 
         if(id == R.id.calendar_settings){
-            Toast.makeText(this, "calendar", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         
@@ -249,6 +254,7 @@ public class ContactListActivity extends AppCompatActivity {
         menu.add(0, v.getId(), 0, "Delete");
         menu.add(1, v.getId(), 0, "Cancel");
     }
+
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         Toast.makeText(this, "Selected Item: " +item.getTitle() + item.getGroupId(), Toast.LENGTH_SHORT).show();
@@ -281,6 +287,11 @@ public class ContactListActivity extends AppCompatActivity {
 
         ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
         listOfContacts.addAll(db.getAllContacts());
+        /*for (Contactdata contact : listOfContacts) {
+            if(contact.getName().equals("Me")){
+                listOfContacts.remove(contact);
+            }
+        }*/
         contactList = listOfContacts;
 
         contactAdapter = new ContactListAdapter( this, contactList);

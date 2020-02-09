@@ -8,7 +8,6 @@
 
 
 
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
@@ -80,20 +79,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID" />
 
-    <include
-        android:id="@+id/horoscopeCard"
-        layout="@layout/daily_horoscope_card"
-        android:layout_width="374dp"
-        android:layout_height="254dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contactDatepicker_TV_ID"
-        app:layout_constraintVertical_bias="0.349" />
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="58dp"
@@ -111,7 +96,7 @@
         android:id="@+id/contactDatepicker_TV_ID"
         android:layout_width="306dp"
         android:layout_height="51dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_semibold"
         android:hint="Select Date"
@@ -151,7 +136,7 @@
         app:layout_constraintVertical_bias="0.329" />
 
     <include
-        android:id="@+id/toolbar_01"
+        android:id="@+id/toolbar_02"
         layout="@layout/toolbar_white"
         android:foregroundTint="#FFFFFFFF"
         app:subtitleTextColor="#FFFFFFFF"

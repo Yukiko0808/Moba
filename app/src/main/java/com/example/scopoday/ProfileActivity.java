@@ -29,10 +29,8 @@ import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
-
-    TextView ContactName_TV_ID;
     MySQLHelper db;
-    EditText contactNameText;
+    TextView contactNameText;
     TextView contactAge;
     TextView contactBirthdayTV;
     ImageView zodiacsign;
@@ -47,77 +45,137 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         db = new MySQLHelper(this);
 
-        ContactName_TV_ID = findViewById(R.id.ContactName_TV_ID);
+        boolean profilerstellen = false;
 
-        boolean profilerstellen = true;
-
+        //Prüfen ob schon ein Profil erstellt wurde
         List<Contactdata> contacts = db.getAllContacts();
-
+        Log.d("Boolean pofilerstellen vor der For schleife: ", Boolean.toString(profilerstellen));
         for (int i =0; i < contacts.size(); i++){
-            Log.d("YOU CONTACT ID: ", Integer.toString(contacts.get(i).getId()));
-            if(contacts.get(i).getId() == -1000){
+            Log.d("YOU CONTACT NAME: ", contacts.get(i).getName() + "CONTACT ID: " + Integer.toString(contacts.get(i).getId()) + " CONTACT ISYOU: " +Boolean.toString(contacts.get(i).isYou)  );
+            if(contacts.get(i).getName().equals("Me")){//(contacts.get(i).getId() == -1000){
                 profilerstellen = false;
                 displayedContact = contacts.get(i);
                 Log.d("YOU CONTACT", contacts.get(i).name);
+                Log.d("Boolean pofilerstellen in schleife: ", Boolean.toString(profilerstellen));
+
             }
             else{
                 Log.d("YOU CONTACT", "Noch nicht erstellt");
+                profilerstellen = true;
             }
         }
         if (profilerstellen == true) {
-            Contactdata you = new Contactdata(-1000, "You", "01.01.2000");
+            //Contactdata you = new Contactdata(-1000, "Me", "01.01.2000");
+            setContentView(R.layout.activity_create_profile);
+            Toolbar toolbar = findViewById(R.id.toolbar_02);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+            /*
+            you.setIsYou(1);
             db.addContact(you);
             displayedContact = you;
-            Log.i("YOU CONTACT", "neu angelegt" + "ID: " + displayedContact.getId());
+            Log.i("YOU CONTACT", "neu angelegt" + "ID: " + displayedContact.getId() + " CONTACT NAME " + you.getName() + " CONTACT IS YOU: " + you.getIsYou());*/
+
+            contactNameText = findViewById(R.id.ContactName_TV_ID);
+            contactNameText.setText("Me");
+
+            //Geburtsdatum anzeigen
+            contactBirthdayTV = (TextView) findViewById(R.id.contactDatepicker_TV_ID);
+            contactBirthdayTV.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                    boolean handled = false;
+                    if (i == EditorInfo.IME_ACTION_DONE) {
+
+                        Contactdata profile = new Contactdata(-1000, "Me", contactBirthdayTV.getText().toString());
+
+                        db.addContact(profile);
+                        displayedContact = profile;
+
+                        handled = true;
+                        InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(contactBirthdayTV.getWindowToken(), 0);
+                        setContentView(R.layout.activity_profile);
+                        setInterfaceWithContact();
+                    }
+                    return handled;
+
+                }
+            });
+
+    }
+        else {
+            Log.d("DISPLAYED CONTACT: " , displayedContact.name + " " +  displayedContact.getId() + " " + displayedContact.getBirthday());
+
+            setInterfaceWithContact();
+
+
         }
 
+    }
 
-        //Neues Objekt das die Horoskop Daten holt erstellen -> Verwendet wird es in der Funktion die das Sternzeichen des Kontakts bestimmt
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem tempItem = menu.getItem(0) ;
+
+        SpannableString spanString = new SpannableString(tempItem.getTitle().toString());
+        spanString.setSpan(new ForegroundColorSpan(Color.LTGRAY), 0,     spanString.length(), 0); //fix the color to white
+
+        tempItem.setTitle(spanString);
+        return(super.onCreateOptionsMenu(menu));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == R.id.profil_settings){
+            Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
+        }
+
+        if(id == R.id.contact_settings){
+            Toast.makeText(this, "contacts", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ContactListActivity.class);
+            startActivity(intent);
+        }
+
+        if(id == R.id.zodiacsign_settings){
+            Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ZodiacsignsActivity.class);
+            startActivity(intent);
+        }
+
+        if(id == R.id.calendar_settings){
+            Toast.makeText(this, "calendar", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setInterfaceWithContact(){
+
+        Toolbar toolbar = findViewById(R.id.toolbar_01);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         horoscopeData = new FetchingHoroscopeData();
-
-
 
         //Kontakt Namenfeld einrichten
         contactNameText = findViewById(R.id.ContactName_TV_ID);
-        contactNameText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                contactNameText.selectAll(); //Damit text beim antippen makiert ist
-            }
-        });
-
-        //Kontakt Name 2er On Click Listener !! Vielleicht kann man die noch verbinden ?
-        contactNameText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                boolean handled = false;
-                if (i == EditorInfo.IME_ACTION_DONE) {
-
-                    Log.d("CONTACT_CHANGE_NAME", "neuer name:" + contactNameText.getText().toString());
-                    // Namen in die Datenbank setzen
-                    db.updateContactName(displayedContact, contactNameText.getText().toString());
-                    displayedContact.setBirthday(contactNameText.getText().toString());
-
-                    handled = true;
-                    InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(contactNameText.getWindowToken(), 0);
-                }
-                return handled;
-            }
-        });
-
-        //Kontakt Name anzeigen
         contactNameText.setText(displayedContact.getName());
 
         //Sternzeichen layout image finden
@@ -148,6 +206,9 @@ public class ProfileActivity extends AppCompatActivity {
                     displayedContact.setBirthday(contactBirthdayTV.getText().toString());
                     contactAge.setText(Integer.toString(CalculateAge((displayedContact.getBirthdayDate()))));
 
+                    String zodiacsignTextNew = CalculateStarSign();
+                    horoscopeZodiacsignTitle.setText(zodiacsignTextNew);
+
                     handled = true;
                     InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(contactBirthdayTV.getWindowToken(), 0);
@@ -156,6 +217,8 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         horoscopeCard = findViewById(R.id.horoscopeCard);
         horoscopeCard.setOnClickListener(new View.OnClickListener() {
@@ -169,34 +232,50 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    public long CalculateDaysTillBD (Date bd){
 
-        ContactName_TV_ID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //ContactName_TV_ID.selectAll(); //Damit text beim antippen makiert ist
-            }
-        });
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
 
-        //Kontakt Name 2er On Click Listener !! Vielleicht kann man die noch verbinden ?
-       /* ContactName_TV_ID.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                boolean handled = false;
-            if (i == EditorInfo.IME_ACTION_DONE) {
+        Date birthDate = new Date(0000, bd.getMonth(), bd.getDate());
+        Date todayDate = new Date(0000, today.getMonth(), today.getDate());
 
-                    Log.d("CONTACT_CHANGE_NAME", "neuer name:" + ContactName_TV_ID.getText().toString());
-                    // Namen in die Datenbank setzen
-                    //db.updateContactName(displayedContact, ContactName_TV_ID.getText().toString());
-                   db.addContact(Contact).setBirthday(ContactName_TV_ID.getText().toString());
+        if(birthDate.getTime()<todayDate.getTime()){
+            birthDate = new Date(1, birthDate.getMonth(), birthDate.getDate());
+        }
 
-                    handled = true;
-                    InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(ContactName_TV_ID.getWindowToken(), 0);
-                }
-                return handled;
-            }
-        });*/
+        long days = birthDate.getTime() - todayDate.getTime();
+        days = days / (24 * 60 * 60 * 1000);
+        /*
+        Log.d("First date", birthDate.toString());
+        Log.d("Second Date", todayDate.toString());
+        Log.d("Days?" , Long.toString(days));*/
+
+        return  days;
+    }
+
+    private int CalculateAge(Date _birthday){
+
+        Calendar calToday = Calendar.getInstance();
+
+        Calendar calBD  = Calendar.getInstance();
+        calBD.setTime(_birthday);
+
+        //int geburtsjahr =  _birthday.getYear() + 1900;
+        int geburtsjahr = calBD.get(Calendar.YEAR);
+        int age =  Calendar.getInstance().get(Calendar.YEAR) - geburtsjahr;
+
+        if(calToday.get(Calendar.DAY_OF_MONTH) >= calBD.get(Calendar.DAY_OF_MONTH) &&
+                calToday.get(Calendar.MONTH) >= calBD.get(Calendar.MONTH))
+        {
+            return age;
+        }
+        else{
+            age = age-1;
+            return age;
+        }
     }
 
     private String CalculateStarSign(){
@@ -439,96 +518,5 @@ public class ProfileActivity extends AppCompatActivity {
             return starSign;
         }
 
-    }
-
-    private int CalculateAge(Date _birthday){
-
-        Calendar calToday = Calendar.getInstance();
-
-        Calendar calBD  = Calendar.getInstance();
-        calBD.setTime(_birthday);
-
-        //int geburtsjahr =  _birthday.getYear() + 1900;
-        int geburtsjahr = calBD.get(Calendar.YEAR);
-        int age =  Calendar.getInstance().get(Calendar.YEAR) - geburtsjahr;
-
-        if(calToday.get(Calendar.DAY_OF_MONTH) >= calBD.get(Calendar.DAY_OF_MONTH) &&
-                calToday.get(Calendar.MONTH) >= calBD.get(Calendar.MONTH))
-        {
-            return age;
-        }
-        else{
-            age = age-1;
-            return age;
-        }
-    }
-
-
-
-    public long CalculateDaysTillBD (Date bd){
-
-        Calendar calendar = Calendar.getInstance();
-        Date today = calendar.getTime();
-
-        Date birthDate = new Date(0000, bd.getMonth(), bd.getDate());
-        Date todayDate = new Date(0000, today.getMonth(), today.getDate());
-
-        if(birthDate.getTime()<todayDate.getTime()){
-            birthDate = new Date(1, birthDate.getMonth(), birthDate.getDate());
-        }
-
-        long days = birthDate.getTime() - todayDate.getTime();
-        days = days / (24 * 60 * 60 * 1000);
-        /*
-        Log.d("First date", birthDate.toString());
-        Log.d("Second Date", todayDate.toString());
-        Log.d("Days?" , Long.toString(days));*/
-
-        return  days;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        MenuItem tempItem = menu.getItem(0) ;
-
-        SpannableString spanString = new SpannableString(tempItem.getTitle().toString());
-        spanString.setSpan(new ForegroundColorSpan(Color.LTGRAY), 0,     spanString.length(), 0); //fix the color to white
-
-        tempItem.setTitle(spanString);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-
-        if(id == R.id.profil_settings){
-
-        }
-
-        if(id == R.id.contact_settings){
-            Toast.makeText(this, "contacts", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, ContactListActivity.class);
-            startActivity(intent);
-
-        }
-
-        if(id == R.id.zodiacsign_settings){
-            Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, ZodiacsignsActivity.class);
-            startActivity(intent);
-        }
-
-
-        if(id == R.id.calendar_settings){
-            Toast.makeText(this, "calendar", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
