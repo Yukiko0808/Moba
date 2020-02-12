@@ -79,7 +79,7 @@
         android:paddingBottom="20dp"
         android:text="TextView"
         android:textColor="@color/colorText_darkRed"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,6 +93,20 @@
         android:foregroundTint="#FFFFFFFF"
         app:subtitleTextColor="#FFFFFFFF"
         app:titleTextColor="#FFFFFFFF" />
+
+    <ImageView
+        android:id="@+id/zodiacsignsternbild"
+        android:layout_width="89dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintHorizontal_bias="0.863"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04000002"
+        app:srcCompat="@drawable/aquariussternbild" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
