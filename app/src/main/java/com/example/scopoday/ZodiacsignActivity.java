@@ -23,6 +23,7 @@ public class ZodiacsignActivity extends AppCompatActivity {
     String imagename;
     TextView zodiacsigntitle;
     TextView Sternzeichen_zeitraum;
+    ImageView zodiacsignsternbild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,10 @@ public class ZodiacsignActivity extends AppCompatActivity {
         zodiacsigntitle = findViewById(R.id.zodiacsigntitle);
         String titel =  displayedzodiacsign+ "_titel";
         zodiacsigntitle.setText(getResources().getIdentifier(titel, "string", getPackageName()));
+
+        zodiacsignsternbild = findViewById(R.id.zodiacsignsternbild);
+        imagename = "drawable/" + displayedzodiacsign + "sternbild";
+        zodiacsignsternbild.setImageResource(getResources().getIdentifier(imagename, "id", getPackageName()));
 
         Sternzeichen_zeitraum = findViewById(R.id.Sternzeichen_zeitraum);
         String zeitraum =  displayedzodiacsign+ "_zeitraum";
