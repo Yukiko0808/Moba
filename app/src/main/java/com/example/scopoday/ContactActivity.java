@@ -111,13 +111,20 @@ public class ContactActivity extends AppCompatActivity {
                 if (i == EditorInfo.IME_ACTION_DONE) {
 
                     Log.d("CONTACT_CHANGE_NAME", "neuer name:" + contactNameText.getText().toString());
-                    // Namen in die Datenbank setzen
-                    db.updateContactName(displayedContact, contactNameText.getText().toString());
-                    displayedContact.setBirthday(contactNameText.getText().toString());
+                    if(contactNameText.getText().toString().matches("Me")){
+                        Toast.makeText(getApplicationContext(), "Name 'Me' is not allowed", Toast.LENGTH_LONG ).show();
+                        contactNameText.setText(displayedContact.getName());
+                    }else{
 
-                    handled = true;
-                    InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(contactNameText.getWindowToken(), 0);
+                        // Namen in die Datenbank setzen
+                        db.updateContactName(displayedContact, contactNameText.getText().toString());
+                        displayedContact.setBirthday(contactNameText.getText().toString());
+
+                        handled = true;
+                        InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(contactNameText.getWindowToken(), 0);
+                    }
+
                 }
                 return handled;
             }
@@ -149,17 +156,30 @@ public class ContactActivity extends AppCompatActivity {
                 if (i == EditorInfo.IME_ACTION_DONE) {
 
                     Log.d("CONTACT_CHANGE_BIRTHDAY", "neuer geburtstag:" + contactBirthdayTV.getText().toString());
-                    // Namen in die Datenbank setzen In Liste Ändern und Alter aktualisieren
-                    db.updateContactbirthday(displayedContact, contactBirthdayTV.getText().toString());
-                    displayedContact.setBirthday(contactBirthdayTV.getText().toString());
-                    contactAge.setText(Integer.toString(CalculateAge((displayedContact.getBirthdayDate()))));
-                    //horoskop aktualisieren
-                    String zodiacsignTextNew = CalculateStarSign();
-                    horoscopeZodiacsignTitle.setText(zodiacsignTextNew);
+                    // Werte checken
+                    int day = Integer.parseInt(contactBirthdayTV.getText().toString().split("[.]")[0]);
+                    int month =  Integer.parseInt(contactBirthdayTV.getText().toString().split("[.]")[1]);
 
-                    handled = true;
-                    InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(contactBirthdayTV.getWindowToken(), 0);
+                    if(day > 31 || month > 12){
+                        Toast.makeText(getApplicationContext(), "Date is not possible", Toast.LENGTH_LONG).show();
+                        contactBirthdayTV.setText(displayedContact.getBirthday());
+                    }
+                    else{
+                        // Namen in die Datenbank setzen In Liste Ändern und Alter aktualisieren
+                        db.updateContactbirthday(displayedContact, contactBirthdayTV.getText().toString());
+                        displayedContact.setBirthday(contactBirthdayTV.getText().toString());
+                        contactAge.setText(Integer.toString(CalculateAge((displayedContact.getBirthdayDate()))));
+                        //horoskop aktualisieren
+                        String zodiacsignTextNew = CalculateStarSign();
+                        horoscopeZodiacsignTitle.setText(zodiacsignTextNew);
+
+                        handled = true;
+                        InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(contactBirthdayTV.getWindowToken(), 0);
+                    }
+
+
+
                 }
                 return handled;
 
@@ -185,7 +205,7 @@ public class ContactActivity extends AppCompatActivity {
 
 
         // Horoskop berechenn und anzeigen
-        CalculateHoroskopValues();
+        // CalculateHoroskopValues();
 
         //Kreishoroskop Werte Bestimmen
         /*
