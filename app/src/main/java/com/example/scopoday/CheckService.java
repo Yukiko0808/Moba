@@ -34,7 +34,7 @@ public class CheckService extends Service {
 
     @Override
     public void onCreate() {
-        Toast.makeText(getApplicationContext(), "Service onCreate", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "Service onCreate", Toast.LENGTH_LONG).show();
         if(!hasStarted) {
             hasStarted = true;
             Log.i("CheckService", "Start Thread");
@@ -47,7 +47,7 @@ public class CheckService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Toast.makeText(getApplicationContext(), "Service destroyed", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), "Service destroyed", Toast.LENGTH_LONG).show();
         Log.i("CheckService", "Destroy");
     }
 

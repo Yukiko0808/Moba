@@ -114,11 +114,12 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Contactdata> listOfContacts = new ArrayList<>(db.getAllContacts().size());
         listOfContacts.addAll(db.getAllContacts());
-        for (Contactdata contact : listOfContacts) {
+        //HIER WIEDER Entkommentieren
+/*        for (Contactdata contact : listOfContacts) {
             if(contact.getName().equals("Me")){
                 listOfContacts.remove(contact);
             }
-        }
+        }*/
         contactList = listOfContacts;
 
         List<Contactdata> orderdList = contactList;
@@ -298,11 +299,12 @@ public class MainActivity extends AppCompatActivity {
 
         List<Contactdata> tempList;
         tempList = db.getAllContacts();
-        for (Contactdata contact : tempList) {
+        //AUCH WIEDER EINFÜGEN
+      /*  for (Contactdata contact : tempList) {
             if(contact.getName().equals("Me")){
                 tempList.remove(contact);
             }
-        }
+        }*/
 
         tempList.sort(new Comparator<Contactdata>() {
             @Override
