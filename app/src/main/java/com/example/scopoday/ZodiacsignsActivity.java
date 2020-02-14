@@ -39,6 +39,10 @@ public class ZodiacsignsActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        //Weise statusbar
+        getWindow().setStatusBarColor(Color.WHITE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
 
         aquarius = (Button) findViewById(R.id.aquarius);
 

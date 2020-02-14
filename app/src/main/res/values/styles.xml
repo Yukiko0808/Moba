@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <!-- Animations-->
 
-       <!-- <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>-->
+       <!--<item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>-->
        <!-- <item name="android:windowContentTransitions">true</item>-->
     </style>
 

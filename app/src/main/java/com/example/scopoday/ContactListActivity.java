@@ -48,6 +48,21 @@ public class ContactListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+                /*
+        Window window = this.getWindow();
+        // Anzeigeleiste Oben ändern
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        // finally change the color
+        window.setStatusBarColor(this.getResources().getColor(R.color.cardview_shadow_end_color));
+        */
+        getWindow().setStatusBarColor(Color.WHITE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
 
         //Datenbank helfer erstellen
         db = new MySQLHelper(this);
@@ -62,18 +77,7 @@ public class ContactListActivity extends AppCompatActivity {
         }*/
         contactList = listOfContacts;
 
-        /*
-        Window window = this.getWindow();
-        // Anzeigeleiste Oben ändern
-        // clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-        // finally change the color
-        window.setStatusBarColor(this.getResources().getColor(R.color.cardview_shadow_end_color));
-        */
 
 
         //Kontakte hinzufügen mit Add Button

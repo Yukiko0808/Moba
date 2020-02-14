@@ -224,9 +224,12 @@ public class ProfileActivity extends AppCompatActivity {
         horoscopeCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String tempZodiacsignText = displayedContact.getZodiacsign();
+
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("ZODIACSIGN", zodiacsignText.toLowerCase());
+                bundle.putSerializable("ZODIACSIGN", tempZodiacsignText.toLowerCase());
                 intent.putExtras(bundle);
                 startActivity(intent);
 

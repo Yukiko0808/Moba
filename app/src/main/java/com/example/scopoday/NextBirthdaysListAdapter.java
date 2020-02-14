@@ -72,14 +72,22 @@ public class NextBirthdaysListAdapter extends RecyclerView.Adapter<NextBirthdays
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(context, ContactActivity.class);
-                        Bundle bundle = new Bundle();
 
-                        bundle.putSerializable("CONTACTDATA", dataset.get(position));
-                        intent.putExtras(bundle);
+                        if(dataset.get(position).getName().equals("Me")){
+                           Intent intent = new Intent(context, ProfileActivity.class);
+                           context.startActivity(intent);
+                        }
+                        else {
+                            Intent intent = new Intent(context, ContactActivity.class);
+                            Bundle bundle = new Bundle();
 
-                        //Activity starten
-                        context.startActivity(intent);
+                            bundle.putSerializable("CONTACTDATA", dataset.get(position));
+                            intent.putExtras(bundle);
+
+                            //Activity starten
+                            context.startActivity(intent);
+                        }
+
                     }
                 });
 

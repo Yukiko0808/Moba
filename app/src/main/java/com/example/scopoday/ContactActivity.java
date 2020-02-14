@@ -194,9 +194,11 @@ public class ContactActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Sternzeichen seite öffenen", Toast.LENGTH_LONG).show();
 
+                String tempZodiacsignText = CalculateStarSign();
+
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("ZODIACSIGN", zodiacsignText.toLowerCase());
+                bundle.putSerializable("ZODIACSIGN", tempZodiacsignText.toLowerCase());
                 intent.putExtras(bundle);
                 startActivity(intent);
                 //overridePendingTransition(android.R.transition.fade, android.R.transition.fade);

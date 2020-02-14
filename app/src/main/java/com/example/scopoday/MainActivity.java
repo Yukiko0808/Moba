@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         mainActivity = this;
 
         setContentView(R.layout.activity_main);
-
         // createContactButtons();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
