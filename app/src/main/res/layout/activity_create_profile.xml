@@ -7,6 +7,12 @@
     tools:context=".ProfileActivity">
 
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="715dp" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -28,7 +34,7 @@
         android:layout_width="234dp"
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/poppins_light"
         android:text="Name"
@@ -46,7 +52,7 @@
         android:fontFamily="@font/poppins_semibold"
         android:imeOptions="actionDone"
         android:inputType="text"
-        android:text="Beispiel Name"
+        android:text="Example Name"
         android:textColor="@color/colorText_darkRed"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +65,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="6dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Alter"
+        android:text="Age"
         android:textAlignment="textEnd"
         android:textColor="@color/colorText_darkRed"
         android:textSize="18sp"
@@ -75,7 +81,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/poppins_light"
-        android:text="Geburtsdatum"
+        android:text="Birthdate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ContactName_TV_ID" />
 
@@ -83,7 +89,7 @@
         android:id="@+id/textView4"
         android:layout_width="58dp"
         android:layout_height="22dp"
-        android:text="Alter"
+        android:text="Age"
         android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@+id/ContactAlter_TV_ID"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,8 +138,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.329" />
+        app:layout_constraintTop_toTopOf="@+id/guideline7"
+        app:layout_constraintVertical_bias="0.0" />
 
     <include
         android:id="@+id/toolbar_02"

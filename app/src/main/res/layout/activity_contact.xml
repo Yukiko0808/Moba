@@ -202,10 +202,10 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_white"
         android:foregroundTint="#FFFFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:subtitleTextColor="#FFFFFFFF"
-        app:titleTextColor="#FFFFFFFF"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="2dp" />
+        app:titleTextColor="#FFFFFFFF" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
