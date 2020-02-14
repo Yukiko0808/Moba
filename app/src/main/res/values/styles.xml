@@ -6,7 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <!-- Animations-->
+
+       <!-- <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>-->
+       <!-- <item name="android:windowContentTransitions">true</item>-->
     </style>
 
     <style name="MyDatePickerSpinnerStyle" parent="@android:style/Widget.Material.DatePicker">
@@ -15,13 +18,20 @@
         <item name="android:datePickerStyle">@color/colorAccent</item>
     </style>
 
+    <style name="SplashscreenTheme">
 
-
-    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_up</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_up</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_up</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_up</item>
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+        <item name="android:outAnimation">@anim/slide_out_up</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
     </style>
+
+
+        <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+
+            <item name="android:activityOpenEnterAnimation">@anim/slide_in_up</item>
+            <item name="android:activityOpenExitAnimation">@anim/slide_out_up</item>
+            <item name="android:activityCloseEnterAnimation">@anim/slide_in_up</item>
+            <item name="android:activityCloseExitAnimation">@anim/slide_out_up</item>
+        </style>
 
 </resources>

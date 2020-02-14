@@ -89,4 +89,5 @@ public class ZodiacsignActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

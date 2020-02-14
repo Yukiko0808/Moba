@@ -17,9 +17,6 @@ import java.util.List;
 
 import static android.app.PendingIntent.FLAG_ONE_SHOT;
 
-/**
- * Created by Sascha on 03/01/20.
- */
 
 public class AlarmNotificationReceiver extends BroadcastReceiver {
 

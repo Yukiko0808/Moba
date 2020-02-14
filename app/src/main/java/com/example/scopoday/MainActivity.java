@@ -16,6 +16,8 @@ import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.transition.Slide;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +43,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+
 
     TextView contactText;
     String contactInfo;
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         mainActivity = this;
 
         setContentView(R.layout.activity_main);
+
         // createContactButtons();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -210,10 +214,23 @@ public class MainActivity extends AppCompatActivity {
                     Contactdata contact = (Contactdata) bd.getData();
                     bdToday.add(contact);
                 }
-                birthdayContactAdapter = new NextBirthdaysListAdapter(getApplicationContext(), bdToday);
-                contactListView.setAdapter(birthdayContactAdapter);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(firstDayOfNewMonth);
+                if(bdToday.size() > 0){
+                    birthdayContactAdapter = new NextBirthdaysListAdapter(getApplicationContext(), bdToday);
+                    contactListView.setAdapter(birthdayContactAdapter);
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(firstDayOfNewMonth);
+                }
+                else{
+                    List<Contactdata> setNoBDList = new ArrayList<>();
+                    setNoBDList.add(new Contactdata());
+                    birthdayContactAdapter = new NextBirthdaysListAdapter(getApplicationContext(), setNoBDList);
+                    birthdayContactAdapter.onCreateViewHolder(recyclerView,1);
+                    contactListView.setAdapter(birthdayContactAdapter);
+                }
+               // birthdayContactAdapter = new NextBirthdaysListAdapter(getApplicationContext(), bdToday);
+                //contactListView.setAdapter(birthdayContactAdapter);
+                //Calendar cal = Calendar.getInstance();
+                //cal.setTime(firstDayOfNewMonth);
                 recylerHeadline.setText("Birthdays on "+ dateFormatForDate.format(firstDayOfNewMonth) );
 
                 calendarZodiacsignHeadline.setText(CalculateStarSign(firstDayOfNewMonth));
@@ -282,6 +299,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+
         birthdayContactAdapter.notifyDataSetChanged();
 
         Intent intent = new Intent(this, CheckService.class);
@@ -292,7 +310,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
 
 
         onlyNext3Bds = new ArrayList<Contactdata>();
@@ -382,20 +399,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void openContactActivity(Contactdata _contact){
-        Intent intent = new Intent(this, ContactActivity.class);
-        Bundle bundle = new Bundle();
-
-        //Contact daten mitschicken
-        bundle.putSerializable("CONTACTDATA", _contact);
-        intent.putExtras(bundle);
-
-        //Activity starten
-        startActivity(intent);
-
-        //Animation überschreiben
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

@@ -199,6 +199,7 @@ public class ContactActivity extends AppCompatActivity {
                 bundle.putSerializable("ZODIACSIGN", zodiacsignText.toLowerCase());
                 intent.putExtras(bundle);
                 startActivity(intent);
+                //overridePendingTransition(android.R.transition.fade, android.R.transition.fade);
 
             }
         });
@@ -600,7 +601,7 @@ public class ContactActivity extends AppCompatActivity {
     @Override
     public void finish(){
         super.finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        //overridePendingTransition(android.R.transition.fade, android.R.transition.fade);
     }
 
 

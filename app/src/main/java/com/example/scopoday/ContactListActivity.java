@@ -312,7 +312,7 @@ public class ContactListActivity extends AppCompatActivity {
         startActivity(intent);
 
         //Animation überschreiben
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        //overridePendingTransition(android.R.transition.fade, android.R.transition.fade);
     }
 
     public void openAddContactPopupWindow(View view){
@@ -321,7 +321,6 @@ public class ContactListActivity extends AppCompatActivity {
         addContactDialog.show(getSupportFragmentManager(), "Add Contact");
 
     }
-
 
 
 
