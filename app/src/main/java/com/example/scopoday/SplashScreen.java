@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.transition.Slide;
+import android.transition.Transition;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -44,18 +45,18 @@ public class SplashScreen extends AppCompatActivity {
             }
         });*/
         //splashBg.startAnimation(sBgAnim);
-/*
+
         EasySplashScreen config = new EasySplashScreen(SplashScreen.this)
                 .withFullScreen()
                 .withTargetActivity(MainActivity.class);
                 //.withBackgroundResource(R.drawable.background_splaschscreen);
-                //.withSplashTimeOut(2000);*/
+                //.withSplashTimeOut(2000);
 
 
-        View splashView = getWindow().getDecorView();
-        splashView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_FULLSCREEN
-        );
+        //View splashView = getWindow().getDecorView();
+        //splashView.setSystemUiVisibility(
+        //        View.SYSTEM_UI_FLAG_FULLSCREEN
+        //);
        // View view = config.create();
 
         //setContentView(view);
@@ -68,8 +69,9 @@ public class SplashScreen extends AppCompatActivity {
                 sleep(2000);
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
 
 
                 finish();
