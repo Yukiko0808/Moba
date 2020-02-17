@@ -225,7 +225,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String tempZodiacsignText = displayedContact.getZodiacsign();
+                String tempZodiacsignText = CalculateStarSign();
 
                 Intent intent = new Intent (getApplicationContext(), ZodiacsignActivity.class);
                 Bundle bundle = new Bundle();
