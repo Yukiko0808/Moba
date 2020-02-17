@@ -42,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     Contactdata displayedContact;
 
-
+    boolean profilerstellen;
 
 
 
@@ -53,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         db = new MySQLHelper(this);
 
-        boolean profilerstellen = false;
+        profilerstellen = false;
 
         //Prüfen ob schon ein Profil erstellt wurde
         List<Contactdata> contacts = db.getAllContacts();
@@ -65,6 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
                 displayedContact = contacts.get(i);
                 Log.d("YOU CONTACT", contacts.get(i).name);
                 Log.d("Boolean pofilerstellen in schleife: ", Boolean.toString(profilerstellen));
+               break;
 
             }
             else{
@@ -78,6 +79,8 @@ public class ProfileActivity extends AppCompatActivity {
             Toolbar toolbar = findViewById(R.id.toolbar_02);
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
 
             /*
             you.setIsYou(1);
@@ -121,6 +124,26 @@ public class ProfileActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();/*
+        List<Contactdata> contacts = db.getAllContacts();
+        for (int i =0; i < contacts.size(); i++){
+            Log.d("On Resume - YOU CONTACT NAME: ", contacts.get(i).getName() + "CONTACT ID: " + Integer.toString(contacts.get(i).getId()) + " CONTACT ISYOU: " +Boolean.toString(contacts.get(i).isYou)  );
+            if(contacts.get(i).getName().equals("Me")){//(contacts.get(i).getId() == -1000){
+                profilerstellen = false;
+                displayedContact = contacts.get(i);
+                Log.d("on resueme - YOU CONTACT", contacts.get(i).name);
+                Log.d("on resume - Boolean pofilerstellen in schleife: ", Boolean.toString(profilerstellen));
+
+            }
+            else{
+                Log.d("YOU CONTACT", "Noch nicht erstellt");
+                profilerstellen = true;
+            }*/
+        //}
     }
 
     @Override

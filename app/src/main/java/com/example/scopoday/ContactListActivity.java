@@ -261,7 +261,7 @@ public class ContactListActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        Toast.makeText(this, "Selected Item: " +item.getTitle() + item.getGroupId(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Selected Item: " +item.getTitle() + item.getGroupId(), Toast.LENGTH_SHORT).show();
         if(item.getGroupId() == 0){
             //Löschen des Kontakts
             db.deleteContacts(contactList.get(tempPos));
