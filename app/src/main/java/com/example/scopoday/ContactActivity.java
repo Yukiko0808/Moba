@@ -192,7 +192,7 @@ public class ContactActivity extends AppCompatActivity {
         horoscopeCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Sternzeichen seite öffenen", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Sternzeichen seite öffenen", Toast.LENGTH_LONG).show();
 
                 String tempZodiacsignText = CalculateStarSign();
 
@@ -268,25 +268,25 @@ public class ContactActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.profil_settings){
-            Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Profil", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }
 
         if(id == R.id.contact_settings){
-            Toast.makeText(this, "contacts", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "contacts", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, ContactListActivity.class);
             startActivity(intent);
         }
 
         if(id == R.id.zodiacsign_settings){
-            Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "zodiacsigns", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, ZodiacsignsActivity.class);
             startActivity(intent);
         }
 
         if(id == R.id.calendar_settings){
-            Toast.makeText(this, "calendar", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "calendar", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
