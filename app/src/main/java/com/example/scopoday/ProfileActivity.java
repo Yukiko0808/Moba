@@ -200,18 +200,27 @@ public class ProfileActivity extends AppCompatActivity {
                 boolean handled = false;
                 if (i == EditorInfo.IME_ACTION_DONE) {
 
-                    Log.d("CONTACT_CHANGE_BIRTHDAY", "neuer geburtstag:" + contactBirthdayTV.getText().toString());
-                    // Namen in die Datenbank setzen In Liste Ändern und Alter aktualisieren
-                    db.updateContactbirthday(displayedContact, contactBirthdayTV.getText().toString());
-                    displayedContact.setBirthday(contactBirthdayTV.getText().toString());
-                    contactAge.setText(Integer.toString(CalculateAge((displayedContact.getBirthdayDate()))));
+                    int day = Integer.parseInt(contactBirthdayTV.getText().toString().split("[.]")[0]);
+                    int month =  Integer.parseInt(contactBirthdayTV.getText().toString().split("[.]")[1]);
 
-                    String zodiacsignTextNew = CalculateStarSign();
-                    horoscopeZodiacsignTitle.setText(zodiacsignTextNew);
+                    if(day > 31 || month > 12){
+                        Toast.makeText(getApplicationContext(), "Date is not possible", Toast.LENGTH_LONG).show();
+                        contactBirthdayTV.setText(displayedContact.getBirthday());
+                    }
+                    else{
+                        // Namen in die Datenbank setzen In Liste Ändern und Alter aktualisieren
+                        db.updateContactbirthday(displayedContact, contactBirthdayTV.getText().toString());
+                        displayedContact.setBirthday(contactBirthdayTV.getText().toString());
+                        contactAge.setText(Integer.toString(CalculateAge((displayedContact.getBirthdayDate()))));
 
-                    handled = true;
-                    InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(contactBirthdayTV.getWindowToken(), 0);
+                        String zodiacsignTextNew = CalculateStarSign();
+                        horoscopeZodiacsignTitle.setText(zodiacsignTextNew);
+
+                        handled = true;
+                        InputMethodManager imm = (InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(contactBirthdayTV.getWindowToken(), 0);
+                    }
+
                 }
                 return handled;
 
