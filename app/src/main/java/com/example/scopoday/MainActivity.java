@@ -273,17 +273,17 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.profil_settings){
-            Toast.makeText(MainActivity.this, "Profil", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(MainActivity.this, "Profil", Toast.LENGTH_SHORT).show();
             openProfile();
         }
 
         if(id == R.id.contact_settings){
-            Toast.makeText(MainActivity.this, "Contacts", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(MainActivity.this, "Contacts", Toast.LENGTH_SHORT).show();
             openContactListActivity();
         }
 
         if(id == R.id.zodiacsign_settings){
-            Toast.makeText(MainActivity.this, "Zodiacsigns", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(MainActivity.this, "Zodiacsigns", Toast.LENGTH_SHORT).show();
             openZodiacsigns();
         }
 
